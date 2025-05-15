@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+
+  
+
+@theme {
+    --breakpoint-ssm: 305px;
+    --breakpoint-st: 370px;
+    --breakpoint-sm: 558px;
+    --breakpoint-mi: 700px;
+    --breakpoint-md: 891px;
+    --breakpoint-lg: 976px;
+    --breakpoint-lx: 1175px;
+    --breakpoint-xl: 1440px;
+
+    --color-primary-bg-color: #121212;
+    --color-primary-text-color: #E2E8F0;
+
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Inconsolata', ui-monospace, monospace;
+}
+
+
+
