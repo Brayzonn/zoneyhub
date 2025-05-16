@@ -11,7 +11,10 @@ const Landing = () => {
         <nav className="w-full min-h-[40px] flex items-center justify-between">
           <p>Bray</p>
 
-          <Link className="font-mono " to="/hobbies">
+          <Link
+            className="font-mono text-[17px] text-primary-text-color hover:text-gray-500"
+            to="/hobbies"
+          >
             Hobbies
           </Link>
         </nav>

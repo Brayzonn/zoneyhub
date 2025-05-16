@@ -30,9 +30,10 @@ const Footer = () => {
           Let&apos;s Connect
         </h2>
         <p className="text-gray-300 sans tracking-wide text-left font-[400] text-[15px] mt-1 max-w-[650px]">
-          Any questions, proposals, or collaborations? Feel free to reach out.
-          I&apos;m always open to discussing new projects, creative ideas, or
-          opportunities to be part of your vision.
+          Interested in collaborating or hiring? I&apos;m always open to
+          exploring new projects, creative partnerships, or contributing to
+          meaningful work. Looking for a developer for your next project?
+          Let&apos;s talk about how I can help.
         </p>
       </div>
 
