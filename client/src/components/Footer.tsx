@@ -54,7 +54,7 @@ const Footer = () => {
 
       <div className="w-full mt-12 pt-6 border-t border-[#333333] flex flex-col md:flex-row justify-between items-start md:items-center">
         <p className="text-sm text-gray-400">
-          © {new Date().getFullYear()} Brayzonn. All rights reserved.
+          © {new Date().getFullYear()} Brayzoney. All rights reserved.
         </p>
       </div>
     </footer>
