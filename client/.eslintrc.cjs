@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, node: true },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -8,7 +8,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
@@ -16,9 +16,9 @@ module.exports = {
     ecmaFeatures: {
       jsx: true
     },
-    project: './tsconfig.json'  
+    project: require.resolve('./tsconfig.json')
   },
-  plugins: ['react-refresh', 'react', 'jsx-a11y'],
+  plugins: ['react-refresh', 'react', 'jsx-a11y', '@typescript-eslint', 'react-hooks'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',

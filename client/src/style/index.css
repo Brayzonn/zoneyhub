@@ -1,9 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
 
-
-  
-
 @theme {
     --breakpoint-ssm: 305px;
     --breakpoint-st: 370px;
