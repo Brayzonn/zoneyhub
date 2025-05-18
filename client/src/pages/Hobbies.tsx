@@ -5,7 +5,7 @@ const Hobbies = () => {
     {
       title: "Gaming",
       description:
-        "My EA SPORTS FC season ranking is definitely more consistent than my sleep schedule. Friendlies? Find me @sxven, just don't be that person who does a 30-second celebration dance for a tap-in goal",
+        "My EA SPORTS FC season ranking is definitely more consistent than my sleep schedule. Friendlies? Find me @sxvven, just don't be that person who does a 30-second celebration dance for a tap-in goal",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
