@@ -13,7 +13,7 @@ const Showcase = () => {
           A Full-stack web developer who loves turning complex problems into
           elegant solutions. I believe great software comes from understanding
           both the technical challenges and the human needs behind them. When
-          I&apos;m not coding, you&apos;ll find me mastering tactics in EA
+          I&apos;m not building, you&apos;ll find me mastering tactics in EA
           Sports FC.
         </p>
 
@@ -61,7 +61,7 @@ const Showcase = () => {
           <a
             target="blank"
             rel="noopener noreferrer"
-            href="https://twitter.com/sxven_szn"
+            href="https://twitter.com/brayzoney"
             aria-label="Twitter"
           >
             <svg
