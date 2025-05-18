@@ -33,5 +33,6 @@ lerna-debug.log*
 *.sw?
 
 server/
+server/
 
 
