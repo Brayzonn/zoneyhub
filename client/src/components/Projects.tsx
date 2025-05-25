@@ -28,7 +28,9 @@ const Projects = () => {
   return (
     <div className="py-[2rem] w-full min-h-[400px] flex flex-col items-start justify-start space-y-[0.30rem]">
       <div className="flex flex-col space-y-1">
-        <h2 className="font-mono text-left font-[500] text-[25px]">Projects</h2>
+        <h2 className="font-mono text-left font-[500] text-[25px]">
+          Featured Projects
+        </h2>
         <p className="sans text-gray-300 tracking-wide text-left font-[400] text-[15px] mt-1 max-w-[650px]">
           As a Full-stack developer, I&apos;ve built projects combining
           intuitive interfaces with robust backend systems, developing practical
