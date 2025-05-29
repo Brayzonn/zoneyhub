@@ -70,7 +70,7 @@ const Hobbies = () => {
       ),
     },
     {
-      title: "Music",
+      title: "Musi",
       description:
         "Self-proclaimed playlist architect. If we've shared more than two conversations, chances are I've already crafted you a playlist. Ask about my all-time favorite album and, I'll say NOTCW by Amir Obe. Curious about my sound? Check out some of my Spotify playlists",
       spotifyLink:
