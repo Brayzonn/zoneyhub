@@ -1,5 +1,7 @@
 import medhubimage from "../assets/images/medhubimage.webp";
 import linklyimage from "../assets/images/linklyimage.webp";
+import GithubWebhookDeployerImage from "../assets/images/deploymentflowchart.webp";
+import autoDeployerWebhookImage from "../assets/images/autodeployerwebhook.webp";
 
 const Projects = () => {
   const projects = [
@@ -22,6 +24,24 @@ const Projects = () => {
       link: "https://linklyy.vercel.app/",
       github: "https://github.com/Brayzonn/URL-Shortener-App.git",
       tech: ["React", "Tailwind", "Javascript", "MongoDB"],
+    },
+    {
+      id: 3,
+      title: "Github-Webhook-Deployer",
+      description:
+        "A comprehensive bash deployment script that automates the deployment of modern frontend applications and Node.js Express server applications.",
+      image: GithubWebhookDeployerImage,
+      github: "https://github.com/Brayzonn/github-webhook-deployer",
+      tech: ["Shell"],
+    },
+    {
+      id: 4,
+      title: "Auto-deploy-webhook",
+      description:
+        "A secure Node.js server that automates deployments from GitHub using webhooks",
+      image: autoDeployerWebhookImage,
+      github: "https://github.com/brayzonn/Auto-deploy-webhook",
+      tech: ["Node/Express.js", "MongoDB", "Javascript"],
     },
   ];
 
@@ -82,14 +102,16 @@ const Projects = () => {
 
               {/* Links  */}
               <div className="flex gap-3">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block font-mono text-sm py-2 px-4 bg-gradient-to-r from-[#2A2A2A] to-[#333333] text-white rounded-md hover:from-[#333333] hover:to-[#3A3A3A] transition-colors duration-300"
-                >
-                  Visit Site →
-                </a>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block font-mono text-sm py-2 px-4 bg-gradient-to-r from-[#2A2A2A] to-[#333333] text-white rounded-md hover:from-[#333333] hover:to-[#3A3A3A] transition-colors duration-300"
+                  >
+                    Visit Site →
+                  </a>
+                )}
 
                 <a
                   href={project.github}
