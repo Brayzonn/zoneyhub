@@ -10,11 +10,11 @@ const Showcase = () => {
 
       <div className="w-full flex flex-col items-start justify-center space-y-3">
         <p className="text-gray-300 sans tracking-wide text-left font-[400] text-[15px] mt-3 max-w-[650px]">
-          A Full-stack web developer who loves turning complex problems into
-          elegant solutions. I believe great software comes from understanding
-          both the technical challenges and the human needs behind them. When
-          I&apos;m not building, you&apos;ll find me mastering tactics in EA
-          Sports FC.
+          I transform complex business requirements into clean, scalable web
+          applications. I believe great software comes from understanding both
+          the technical challenges and the human needs behind them. Always
+          learning, I&apos;m currently exploring DevOps engineering and learning
+          how to better connect development and operations.
         </p>
 
         <div className="mt-[1rem] flex justify-start items-center space-x-[2rem]">

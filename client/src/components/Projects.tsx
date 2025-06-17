@@ -1,5 +1,6 @@
 import medhubimage from "../assets/images/medhubimage.webp";
 import linklyimage from "../assets/images/linklyimage.webp";
+import vpsInitImage from "../assets/images/VPSINIT.webp";
 import GithubWebhookDeployerImage from "../assets/images/deploymentflowchart.webp";
 import autoDeployerWebhookImage from "../assets/images/autodeployerwebhook.webp";
 
@@ -17,6 +18,15 @@ const Projects = () => {
     },
     {
       id: 2,
+      title: "VPS-INITIALIZATION-SCRIPT",
+      description:
+        "Automated VPS initialization script that sets up a fresh server with essential tools, security configurations, and development environment in minutes.",
+      image: vpsInitImage,
+      github: "https://github.com/Brayzonn/vps-init.git",
+      tech: ["Bash", "Linux", "Node.js", "Nginx", "PM2"],
+    },
+    {
+      id: 3,
       title: "LINKLY",
       description:
         "A URL shortener web application that provides a secure and seamless experience for shortening long URLs.",
@@ -26,16 +36,16 @@ const Projects = () => {
       tech: ["React", "Tailwind", "Javascript", "MongoDB"],
     },
     {
-      id: 3,
+      id: 4,
       title: "Github-Webhook-Deployer",
       description:
         "A comprehensive bash deployment script that automates the deployment of modern frontend applications and Node.js Express server applications.",
       image: GithubWebhookDeployerImage,
       github: "https://github.com/Brayzonn/github-webhook-deployer",
-      tech: ["Shell"],
+      tech: ["Bash", "Linux", "Node.js", "Nginx", "PM2"],
     },
     {
-      id: 4,
+      id: 5,
       title: "Auto-deploy-webhook",
       description:
         "A secure Node.js server that automates deployments from GitHub using webhooks",
