@@ -13,7 +13,7 @@ const Projects = () => {
       description:
         "A tailored real estate web application featuring interactive Google Maps integration for property visualization",
       image: Realestate,
-      link: "https://github.com/brayzonn/Auto-deploy-webhook",
+      link: "https://realestate-platform-alpha.vercel.app/",
       tech: ["TYPESCRIPT", "REACT", "VITE", "TAILWIND"],
     },
     {
