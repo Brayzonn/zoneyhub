@@ -11,7 +11,7 @@ const Projects = () => {
       id: 1,
       title: "REAL ESTATE PLATFORM",
       description:
-        "A tailored real estate web application built with React and Vite, featuring interactive Google Maps integration for property visualization",
+        "A tailored real estate web application featuring interactive Google Maps integration for property visualization",
       image: Realestate,
       link: "https://github.com/brayzonn/Auto-deploy-webhook",
       tech: ["TYPESCRIPT", "REACT", "VITE", "TAILWIND"],
