@@ -98,7 +98,7 @@ const Projects = () => {
 
             <div className="p-5 flex flex-col h-full justify-between">
               <div>
-                <h3 className="font-mono text-lg font-medium mb-2 text-white">
+                <h3 className="uppercase font-mono text-lg font-medium mb-2 text-white">
                   {project.title}
                 </h3>
                 <p className="text-sm mb-4 text-gray-300">
@@ -109,7 +109,7 @@ const Projects = () => {
                   {project.tech.map((tech) => (
                     <span
                       key={`${project.id}-${tech}`}
-                      className="px-2 py-1 bg-[#2A2A2A] rounded-md text-xs font-mono text-gray-300"
+                      className="uppercase px-2 py-1 bg-[#2A2A2A] rounded-md text-xs font-mono text-gray-300"
                     >
                       {tech}
                     </span>
