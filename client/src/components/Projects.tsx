@@ -3,11 +3,21 @@ import linklyimage from "../assets/images/linklyimage.webp";
 import vpsInitImage from "../assets/images/VPSINIT.webp";
 import GithubWebhookDeployerImage from "../assets/images/deploymentflowchart.webp";
 import autoDeployerWebhookImage from "../assets/images/autodeployerwebhook.webp";
+import Realestate from "../assets/images/Realestate.webp";
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
+      title: "REAL ESTATE PLATFORM",
+      description:
+        "A tailored real estate web application built with React and Vite, featuring interactive Google Maps integration for property visualization",
+      image: Realestate,
+      link: "https://github.com/brayzonn/Auto-deploy-webhook",
+      tech: ["TYPESCRIPT", "REACT", "VITE", "TAILWIND"],
+    },
+    {
+      id: 2,
       title: "MEDHUB",
       description:
         "A simple desktop web application designed to streamline the management of healthcare facilities.",
@@ -17,7 +27,7 @@ const Projects = () => {
       tech: ["React", "Node/Express.js", "MongoDB", "Typescript", "Tailwind"],
     },
     {
-      id: 2,
+      id: 3,
       title: "VPS-INITIALIZATION-SCRIPT",
       description:
         "Automated VPS initialization script that sets up a fresh server with essential tools, security configurations, and development environment in minutes.",
@@ -26,7 +36,7 @@ const Projects = () => {
       tech: ["Bash", "Linux", "Node.js", "Nginx", "PM2"],
     },
     {
-      id: 3,
+      id: 4,
       title: "LINKLY",
       description:
         "A URL shortener web application that provides a secure and seamless experience for shortening long URLs.",
@@ -36,7 +46,7 @@ const Projects = () => {
       tech: ["React", "Tailwind", "Javascript", "MongoDB"],
     },
     {
-      id: 4,
+      id: 5,
       title: "Github-Webhook-Deployer",
       description:
         "A comprehensive bash deployment script that automates the deployment of modern frontend applications and Node.js Express server applications.",
@@ -45,7 +55,7 @@ const Projects = () => {
       tech: ["Bash", "Linux", "Node.js", "Nginx", "PM2"],
     },
     {
-      id: 5,
+      id: 6,
       title: "Auto-deploy-webhook",
       description:
         "A secure Node.js server that automates deployments from GitHub using webhooks",
@@ -70,7 +80,6 @@ const Projects = () => {
         </p>
       </div>
 
-      {/* Projects grid */}
       <div className="w-full mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
@@ -87,7 +96,6 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Project content */}
             <div className="p-5 flex flex-col h-full justify-between">
               <div>
                 <h3 className="font-mono text-lg font-medium mb-2 text-white">
@@ -97,7 +105,6 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {/* Tech stack */}
                 <div className="flex flex-wrap gap-2 mb-2">
                   {project.tech.map((tech) => (
                     <span
@@ -110,7 +117,6 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Links  */}
               <div className="flex gap-3">
                 {project.link && (
                   <a
