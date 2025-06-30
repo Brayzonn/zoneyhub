@@ -113,7 +113,7 @@ const Footer = () => {
           Brayzonn. All rights reserved.
         </p>
 
-        <p className="pb-[5rem] text-xs text-gray-600 font-mono mt-2  md:pb-[3rem] md:mt-0">
+        <p className="pb-[2rem] text-xs text-gray-600 font-mono mt-2  md:pb-[3rem] md:mt-0">
           v2.0.0 • Built with React
         </p>
       </div>
