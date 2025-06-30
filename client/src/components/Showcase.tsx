@@ -21,9 +21,7 @@ const Showcase = () => {
         <div className="relative">
           <p className="text-gray-300 leading-relaxed font-sans tracking-wide text-left text-base mt-3 max-w-[650px] pl-4 border-l-2 border-gray-600">
             Building web applications that address both technical requirements
-            and user needs. I believe great software is built through a clear
-            understanding of both the engineering challenges and the human goals
-            behind them.
+            and user needs.
           </p>
         </div>
 
