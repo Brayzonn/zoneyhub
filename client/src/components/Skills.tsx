@@ -1,16 +1,4 @@
-import { useEffect, useState } from "react";
-
 const Skills = () => {
-  const [animationStarted, setAnimationStarted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimationStarted(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const skills = [
     {
       name: "TypeScript",
@@ -127,17 +115,12 @@ const Skills = () => {
 
   return (
     <div
-      className={`py-[2rem] w-full min-h-[400px] flex flex-col items-start justify-start space-y-[0.30rem] transition-all duration-1000 ease-out transform ${
-        animationStarted
-          ? "translate-x-0 opacity-100"
-          : "-translate-x-full opacity-0"
-      }`}
+      className={`py-[2rem] w-full min-h-[400px] flex flex-col items-start justify-start space-y-[0.30rem] transition-all duration-1000 ease-out transform`}
     >
       <div className="flex flex-col space-y-1">
         <h2 className="font-mono text-left font-[500] text-[25px]">Skills</h2>
       </div>
 
-      {/* Skills grid */}
       <div className="w-full mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 justify-items-start">
         {skills.map((skill) => (
           <div
