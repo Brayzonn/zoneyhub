@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import medhubimage from "../assets/images/medhubimage.webp";
 import linklyimage from "../assets/images/linklyimage.webp";
 import vpsInitImage from "../assets/images/VPSINIT.webp";
 import GithubWebhookDeployerImage from "../assets/images/deploymentflowchart.webp";
 import autoDeployerWebhookImage from "../assets/images/autodeployerwebhook.webp";
 import Realestate from "../assets/images/Realestate.webp";
+import { GithubIcon } from "./Icons";
 
 const Projects = () => {
   const projects = [
@@ -68,15 +70,15 @@ const Projects = () => {
   return (
     <div className="py-[2rem] w-full min-h-[400px] flex flex-col items-start justify-start space-y-[0.30rem]">
       <div className="flex flex-col space-y-1">
-        <h2 className="font-mono text-left font-[500] text-[25px]">
-          Featured Projects
-        </h2>
-        <p className="sans text-gray-300 tracking-wide text-left font-[400] text-[15px] mt-1 max-w-[650px]">
-          As a Full-stack developer, I&apos;ve built projects combining
-          intuitive interfaces with robust backend systems, developing practical
-          skills in web development and data management. I&apos;m constantly
-          expanding my capabilities and working on exciting new applications.
-          Here are some of the projects I&apos;ve worked on:
+        <div className="relative">
+          <h2 className="font-mono text-left font-[500] text-[25px] transform -skew-x-6 text-white">
+            Featured Projects
+          </h2>
+          <div className="absolute inset-0 blur-2xl opacity-10 bg-white -z-10" />
+        </div>
+
+        <p className="sans text-gray-300 tracking-wide text-left font-[400] text-[15px] mt-1 max-w-[650px] flex items-center">
+          Here are some of the projects I&apos;ve worked on
         </p>
       </div>
 
@@ -84,21 +86,25 @@ const Projects = () => {
         {projects.map((project) => (
           <div
             key={project.id}
-            className="w-full rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-gradient-to-br from-[#1A1A1A] to-[#252525] flex flex-col"
+            className="w-full rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-primary-card-bg flex flex-col border border-gray-800 hover:border-gray-600 relative group"
           >
+            <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
             <div className="w-full h-[250px] flex items-center justify-center p-3">
               <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-md">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105"
+                  className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
             </div>
 
             <div className="p-5 flex flex-col h-full justify-between">
               <div>
-                <h3 className="uppercase font-mono text-lg font-medium mb-2 text-white">
+                <h3 className="uppercase font-mono text-lg font-medium mb-2 text-white flex items-center">
+                  <span className="text-gray-500 mr-2">$</span>
                   {project.title}
                 </h3>
                 <p className="text-sm mb-4 text-gray-300">
@@ -109,9 +115,11 @@ const Projects = () => {
                   {project.tech.map((tech) => (
                     <span
                       key={`${project.id}-${tech}`}
-                      className="uppercase px-2 py-1 bg-[#2A2A2A] rounded-md text-xs font-mono text-gray-300"
+                      className="uppercase px-2 py-1 bg-primary-card-buttons-bg rounded-md text-xs font-mono text-gray-300 border border-gray-700"
                     >
+                      <span className="text-gray-500">[</span>
                       {tech}
+                      <span className="text-gray-500">]</span>
                     </span>
                   ))}
                 </div>
@@ -123,9 +131,10 @@ const Projects = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block font-mono text-sm py-2 px-4 bg-gradient-to-r from-[#2A2A2A] to-[#333333] text-white rounded-md hover:from-[#333333] hover:to-[#3A3A3A] transition-colors duration-300"
+                    className="inline-block font-mono text-sm py-2 px-4 bg-primary-card-buttons-bg text-white rounded-md hover:bg-primary-card-buttons-hover-bg transition-all duration-300 relative overflow-hidden group/btn"
                   >
-                    Visit Site →
+                    <span className="relative z-10">Visit Site →</span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300" />
                   </a>
                 )}
 
@@ -134,21 +143,13 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center font-mono text-sm py-2 px-4 bg-gradient-to-r from-[#2A2A2A] to-[#333333] text-white rounded-md hover:from-[#333333] hover:to-[#3A3A3A] transition-colors duration-300"
+                    className="inline-flex items-center space-x-1 font-mono text-sm py-2 px-4 bg-primary-card-buttons-bg text-white rounded-md hover:bg-primary-card-buttons-hover-bg transition-all duration-300 relative overflow-hidden group/btn"
                   >
-                    <svg
-                      className="w-4 h-4 mr-1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                    </svg>
-                    GitHub
+                    <span className="relative z-10 flex items-center space-x-1">
+                      {GithubIcon}
+                      <p>Github</p>
+                    </span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-300" />
                   </a>
                 )}
               </div>

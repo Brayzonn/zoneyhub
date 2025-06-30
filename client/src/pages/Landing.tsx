@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Projects from "../components/Projects";
 import Showcase from "../components/Showcase";
-import Skills from "../components/Skills";
 import Footer from "../components/Footer";
 
 import logoWhite from "../assets/images/logowhite.svg";
@@ -24,7 +23,7 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="inconsolata absolute bg-primary-bg-color text-primary-text-color min-h-[100vh] w-full flex flex-col justify-start items-start overflow-hidden">
+    <div className="py-[2rem] bg-primary-bg-color text-primary-text-color min-h-[100vh] w-full flex flex-col justify-start items-start overflow-hidden">
       <div className="relative h-full w-full overflow-hidden flex flex-col justify-start items-start">
         <nav
           className={`fixed top-0 left-0 right-0 z-50 w-full min-h-[40px] flex items-center justify-between px-[1rem] sm:px-[3rem] py-4 border-b transition-all duration-300 ${
@@ -45,7 +44,6 @@ const Landing = () => {
 
         <div className="w-full px-[1rem] sm:px-[3rem] pt-[80px]">
           <Showcase />
-          <Skills />
           <Projects />
           <Footer />
         </div>

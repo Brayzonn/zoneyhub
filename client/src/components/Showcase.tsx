@@ -1,80 +1,64 @@
+import { TwitterIcon, GithubIcon, LinkedInIcon } from "./Icons";
+
 const Showcase = () => {
   return (
-    <div className="py-[2rem] w-full min-h-[500px] flex flex-col items-start justify-center space-y-[0.30rem]">
-      <h1 className="font-mono tracking-tight text-left font-[600] text-[39px]">
-        Eyinda Bright
-      </h1>
-      <h3 className="font-mono text-gray-500 text-left font-[500] text-[20px]">
+    <div className="py-8 w-full min-h-[500px] flex flex-col items-start justify-center space-y-2 relative">
+      <div className="relative">
+        <h1 className=" tracking-tight text-left font-semibold text-5xl md:text-6xl transform -skew-x-6 text-white select-none">
+          Eyinda Bright
+        </h1>
+        <div className="absolute inset-0 blur-3xl opacity-10 bg-white -z-10" />
+      </div>
+
+      <h3 className=" text-gray-400 text-left font-medium text-xl md:text-2xl flex items-center">
+        <span className="text-gray-300">&lt;</span>
         Web Developer
+        <span className="text-gray-300">/&gt;</span>
+        <span className="inline-block w-0.5 h-5 bg-gray-300 ml-1 animate-pulse" />
       </h3>
 
-      <div className="w-full flex flex-col items-start justify-center space-y-3">
-        <p className="text-gray-300 sans tracking-wide text-left font-[400] text-[15px] mt-3 max-w-[650px]">
-          Building web applications that meet both technical and user needs. I
-          believe good software comes from understanding both the technical
-          challenges and the human needs behind them. Always learning, I&apos;m
-          currently exploring DevOps engineering and learning how to better
-          connect development and operations.
-        </p>
+      <div className="w-full flex flex-col items-start justify-center space-y-6 mt-4">
+        <div className="relative">
+          <p className="text-gray-300 leading-relaxed font-sans tracking-wide text-left text-base mt-3 max-w-[650px] pl-4 border-l-2 border-gray-600">
+            Building web applications that address both technical requirements
+            and user needs. I believe great software is built through a clear
+            understanding of both the engineering challenges and the human goals
+            behind them.
+          </p>
+        </div>
 
-        <div className="mt-[1rem] flex justify-start items-center space-x-[2rem]">
+        <div className="mt-6 flex justify-start items-center space-x-8">
           <a
-            target="blank"
+            target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/Brayzonn"
             aria-label="GitHub"
+            className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 relative group"
           >
-            <svg
-              className="w-6 h-6 text-gray-500 hover:text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
+            {GithubIcon}
+            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           </a>
 
           <a
-            target="blank"
+            target="_blank"
             rel="noopener noreferrer"
             href="https://linkedin.com/in/eyinda-bright-b299961a1"
             aria-label="LinkedIn"
+            className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 relative group"
           >
-            <svg
-              className="w-6 h-6 text-gray-500 hover:text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-              <rect x="2" y="9" width="4" height="12" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
+            {LinkedInIcon}
+            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           </a>
 
           <a
-            target="blank"
+            target="_blank"
             rel="noopener noreferrer"
             href="https://twitter.com/brayzoney"
             aria-label="Twitter"
+            className="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 relative group"
           >
-            <svg
-              className="w-6 h-6 text-gray-500 hover:text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-            </svg>
+            {TwitterIcon}
+            <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           </a>
         </div>
       </div>
