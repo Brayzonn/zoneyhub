@@ -5,6 +5,7 @@ import {
   SpotifyIcon,
   BackArrowIcon,
 } from "../components/Icons";
+import { Link } from "react-router-dom";
 
 const Hobbies = () => {
   const hobbies = [
@@ -33,13 +34,13 @@ const Hobbies = () => {
   return (
     <div className="bg-primary-bg-color py-[3rem] text-white min-h-screen w-full flex flex-col justify-start items-start overflow-hidden font-mono">
       <div className="relative h-full w-full overflow-hidden flex flex-col justify-start items-start p-4 sm:px-8 lg:px-12 max-w-7xl mx-auto">
-        <button
-          onClick={() => window.history.back()}
+        <Link
+          to="/"
           className="pt-8 flex items-center font-mono text-sm mb-6 hover:text-gray-400 transition-colors group"
         >
           <BackArrowIcon />
           Back to Home
-        </button>
+        </Link>
 
         <div className="py-8 w-full pb-16">
           <h2 className="font-mono text-left font-medium text-2xl mb-4">

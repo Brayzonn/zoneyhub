@@ -59,7 +59,7 @@ const Footer = () => {
     <footer className="w-full my-24 mb-8 flex flex-col items-start justify-start">
       <div className="flex flex-col space-y-1 mb-6">
         <div className="relative">
-          <h2 className="font-mono text-left font-[500] text-[25px] tracking-tight transform -skew-x-6 text-white">
+          <h2 className="text-left font-[500] text-[25px] tracking-tight transform -skew-x-6 text-white">
             Let&apos;s Connect
           </h2>
           <div className="absolute inset-0 blur-2xl opacity-10 bg-white -z-10" />

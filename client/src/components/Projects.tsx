@@ -71,7 +71,7 @@ const Projects = () => {
     <div className="py-[2rem] w-full min-h-[400px] flex flex-col items-start justify-start space-y-[0.30rem]">
       <div className="flex flex-col space-y-1">
         <div className="relative">
-          <h2 className="font-mono text-left font-[500] text-[25px] transform -skew-x-6 text-white">
+          <h2 className=" text-left font-[500] text-[25px] transform -skew-x-6 text-white">
             Featured Projects
           </h2>
           <div className="absolute inset-0 blur-2xl opacity-10 bg-white -z-10" />
