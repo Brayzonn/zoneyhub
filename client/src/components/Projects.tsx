@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
 import medhubimage from "../assets/images/medhubimage.webp";
 import linklyimage from "../assets/images/linklyimage.webp";
 import vpsInitImage from "../assets/images/VPSINIT.webp";

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Projects from "../components/Projects";
 import Showcase from "../components/Showcase";
+import Skills from "../components/Skills";
 import Footer from "../components/Footer";
 
 import logoWhite from "../assets/images/logowhite.svg";
@@ -44,6 +45,7 @@ const Landing = () => {
 
         <div className="w-full px-[1rem] sm:px-[3rem] pt-[80px]">
           <Showcase />
+          <Skills />
           <Projects />
           <Footer />
         </div>

@@ -7,7 +7,6 @@ import {
   ExpressIcon,
   MongoDBIcon,
   PostgreSQLIcon,
-  DockerIcon,
 } from "./Icons";
 const Skills = () => {
   const skills = [
@@ -43,10 +42,6 @@ const Skills = () => {
     {
       name: "PostgreSQL",
       icon: PostgreSQLIcon,
-    },
-    {
-      name: "Docker",
-      icon: DockerIcon,
     },
   ];
 
