@@ -11,12 +11,61 @@
   --breakpoint-lx: 1175px;
   --breakpoint-xl: 1440px;
 
-  --color-primary-bg-color: #0f172a;
+  --color-primary-bg-color: #0c0f15;
+  --color-surface-bg: #11151d;
   --color-primary-text-color: #e2e8f0;
-  --color-primary-card-bg: #1e293b;
-  --color-primary-card-buttons-bg: #334155;
-  --color-primary-card-buttons-hover-bg: #475569;
+  --color-muted-text: #94a3b8;
+  --color-subtle-text: #64748b;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-card-bg: rgba(255, 255, 255, 0.03);
+  --color-card-hover-bg: rgba(255, 255, 255, 0.06);
+  --color-tag-bg: rgba(255, 255, 255, 0.05);
+  --color-tag-hover-bg: rgba(255, 255, 255, 0.1);
 
-  --font-sans: "Manrope", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-accent: #0284c7;
+  --color-accent-hover: #0ea5e9;
+
+  --color-accent-gradient: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+  --color-success: #22c55e;
+  --color-success-faint: rgba(34, 197, 94, 0.15);
+
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.25);
+
+  --font-sans: "Inter", "Manrope", "Inter var", ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono: "Inconsolata", ui-monospace, monospace;
+}
+
+:root[data-theme="light"] {
+  --color-primary-bg-color: #ffffff;
+  --color-surface-bg: #f8fafc;
+  --color-primary-text-color: #0f172a;
+  --color-muted-text: #475569;
+  --color-subtle-text: #64748b;
+  --color-border: rgba(15, 23, 42, 0.08);
+  --color-border-hover: rgba(15, 23, 42, 0.15);
+  --color-card-bg: rgba(15, 23, 42, 0.02);
+  --color-card-hover-bg: rgba(15, 23, 42, 0.05);
+  --color-tag-bg: rgba(15, 23, 42, 0.06);
+  --color-tag-hover-bg: rgba(15, 23, 42, 0.12);
+
+  --color-accent: #0284c7;
+  --color-accent-hover: #0ea5e9;
+
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+body {
+  overscroll-behavior: none;
+  font-family: var(--font-sans);
+  background-color: var(--color-primary-bg-color);
+  color: var(--color-primary-text-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
