@@ -7,6 +7,7 @@ import {
 } from "../components/Icons";
 import logoWhite from "../assets/images/logowhite.svg";
 import logoBlack from "../assets/images/logoblack.svg";
+import { initGA, logPageView, logEvent } from "../utils/analytics";
 
 const Landing = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,6 +15,11 @@ const Landing = () => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme ? savedTheme === "dark" : true;
   });
+
+  useEffect(() => {
+    initGA();
+    logPageView();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 100);
@@ -129,6 +135,7 @@ const Landing = () => {
             href="https://github.com/brayzonn"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => logEvent("Social", "Click", "GitHub - Nav")}
             className="text-[var(--color-muted-text)] hover:text-[var(--color-primary-text-color)] transition"
             aria-label="GitHub"
           >
@@ -138,6 +145,7 @@ const Landing = () => {
             href="https://x.com/brayzoney"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => logEvent("Social", "Click", "Twitter - Nav")}
             className="text-[var(--color-muted-text)] hover:text-[var(--color-primary-text-color)] transition hidden sm:flex"
             aria-label="Twitter"
           >
@@ -147,6 +155,7 @@ const Landing = () => {
             href="https://linkedin.com/in/eyinda-bright"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => logEvent("Social", "Click", "LinkedIn - Nav")}
             className="text-[var(--color-muted-text)] hover:text-[var(--color-primary-text-color)] transition hidden sm:flex"
             aria-label="LinkedIn"
           >
@@ -166,6 +175,9 @@ const Landing = () => {
           </p>
           <a
             href="mailto:brayzoney@gmail.com"
+            onClick={() =>
+              logEvent("Contact", "Click", "Available for work button")
+            }
             className="mt-4 inline-flex items-center gap-2 px-5 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-card-hover-bg)] transition"
           >
             <span className="relative flex h-2 w-2">
@@ -205,6 +217,7 @@ const Landing = () => {
             </span>{" "}
             roles. You can reach me at{" "}
             <a
+              onClick={() => logEvent("Contact", "Click", "Email Link")}
               href="mailto:brayzoney@gmail.com"
               className="inline-flex items-center gap-1 group transition text-[var(--color-primary-text-color)]"
             >
@@ -222,6 +235,9 @@ const Landing = () => {
             Outside work, I enjoy curating{" "}
             <a
               href="https://spotify.link/TmIHSnEFGXb"
+              onClick={() =>
+                logEvent("External Link", "Click", "Spotify Playlist")
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 group transition text-[var(--color-primary-text-color)]"
@@ -297,6 +313,7 @@ const Landing = () => {
                   <h3 className="text-lg font-medium text-[var(--color-primary-text-color)] flex items-center gap-2">
                     <a
                       href={proj.link}
+                      onClick={() => logEvent("Project", "Click", proj.name)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-b border-[var(--color-border)] pb-1 transition-all group-hover:text-[var(--color-accent)]"
@@ -348,6 +365,7 @@ const Landing = () => {
                   <h3 className="text-lg font-medium text-[var(--color-primary-text-color)] flex items-center gap-2">
                     <a
                       href={repo.link}
+                      onClick={() => logEvent("Repository", "Click", repo.name)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-b border-[var(--color-border)] pb-1 transition-all group-hover:text-[var(--color-accent)]"
