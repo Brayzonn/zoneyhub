@@ -7,7 +7,11 @@ interface EventParams {
 }
 
 export const initGA = (): void => {
-  ReactGA.initialize("G-02YZV44RB1");
+  ReactGA.initialize("G-02YZV44RB1", {
+    gaOptions: {
+      debug_mode: true,
+    },
+  });
 };
 
 export const logPageView = (): void => {
