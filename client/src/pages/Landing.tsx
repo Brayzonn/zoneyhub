@@ -13,6 +13,7 @@ const Landing = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
+    logEvent("theme_toggle", { mode: isDarkMode ? "light" : "dark" });
     return savedTheme ? savedTheme === "dark" : true;
   });
 
@@ -135,7 +136,9 @@ const Landing = () => {
             href="https://github.com/brayzonn"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => logEvent("Social", "Click", "GitHub - Nav")}
+            onClick={() =>
+              logEvent("social_click", { platform: "GitHub", location: "nav" })
+            }
             className="text-[var(--color-muted-text)] hover:text-[var(--color-primary-text-color)] transition"
             aria-label="GitHub"
           >
@@ -145,7 +148,9 @@ const Landing = () => {
             href="https://x.com/brayzoney"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => logEvent("Social", "Click", "Twitter - Nav")}
+            onClick={() =>
+              logEvent("social_click", { platform: "Twitter", location: "nav" })
+            }
             className="text-[var(--color-muted-text)] hover:text-[var(--color-primary-text-color)] transition hidden sm:flex"
             aria-label="Twitter"
           >
@@ -155,7 +160,12 @@ const Landing = () => {
             href="https://linkedin.com/in/eyinda-bright"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => logEvent("Social", "Click", "LinkedIn - Nav")}
+            onClick={() =>
+              logEvent("social_click", {
+                platform: "LinkedIn",
+                location: "nav",
+              })
+            }
             className="text-[var(--color-muted-text)] hover:text-[var(--color-primary-text-color)] transition hidden sm:flex"
             aria-label="LinkedIn"
           >
@@ -176,7 +186,10 @@ const Landing = () => {
           <a
             href="mailto:brayzoney@gmail.com"
             onClick={() =>
-              logEvent("Contact", "Click", "Available for work button")
+              logEvent("contact_click", {
+                type: "available_for_work",
+                location: "hero",
+              })
             }
             className="mt-4 inline-flex items-center gap-2 px-5 py-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-card-hover-bg)] transition"
           >
@@ -217,7 +230,7 @@ const Landing = () => {
             </span>{" "}
             roles. You can reach me at{" "}
             <a
-              onClick={() => logEvent("Contact", "Click", "Email Link")}
+              onClick={() => logEvent("email_click", { location: "intro" })}
               href="mailto:brayzoney@gmail.com"
               className="inline-flex items-center gap-1 group transition text-[var(--color-primary-text-color)]"
             >
@@ -235,9 +248,7 @@ const Landing = () => {
             Outside work, I enjoy curating{" "}
             <a
               href="https://spotify.link/TmIHSnEFGXb"
-              onClick={() =>
-                logEvent("External Link", "Click", "Spotify Playlist")
-              }
+              onClick={() => logEvent("spotify_click", { location: "intro" })}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 group transition text-[var(--color-primary-text-color)]"
@@ -313,7 +324,9 @@ const Landing = () => {
                   <h3 className="text-lg font-medium text-[var(--color-primary-text-color)] flex items-center gap-2">
                     <a
                       href={proj.link}
-                      onClick={() => logEvent("Project", "Click", proj.name)}
+                      onClick={() =>
+                        logEvent("project_click", { project_name: proj.name })
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-b border-[var(--color-border)] pb-1 transition-all group-hover:text-[var(--color-accent)]"
@@ -365,7 +378,9 @@ const Landing = () => {
                   <h3 className="text-lg font-medium text-[var(--color-primary-text-color)] flex items-center gap-2">
                     <a
                       href={repo.link}
-                      onClick={() => logEvent("Repository", "Click", repo.name)}
+                      onClick={() =>
+                        logEvent("repo_click", { repo_name: repo.name })
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-b border-[var(--color-border)] pb-1 transition-all group-hover:text-[var(--color-accent)]"
@@ -393,18 +408,31 @@ const Landing = () => {
           <div className="space-x-6">
             <a
               href="https://github.com/brayzonn"
+              onClick={() =>
+                logEvent("social_click", {
+                  platform: "GitHub",
+                  location: "footer",
+                })
+              }
               className="hover:text-[var(--color-primary-text-color)]"
             >
               GitHub
             </a>
             <a
               href="https://linkedin.com/in/eyinda-bright"
+              onClick={() =>
+                logEvent("social_click", {
+                  platform: "LinkedIn",
+                  location: "footer",
+                })
+              }
               className="hover:text-[var(--color-primary-text-color)]"
             >
               LinkedIn
             </a>
             <a
               href="mailto:brayzoney@gmail.com"
+              onClick={() => logEvent("email_click", { location: "footer" })}
               className="hover:text-[var(--color-primary-text-color)]"
             >
               Mail
