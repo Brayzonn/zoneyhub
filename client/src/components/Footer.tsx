@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       {/* Footer */}
-      <footer className="text-center text-[var(--color-subtle-text)] pb-10">
+      <footer className="text-center text-white pb-10">
         <div className="space-x-6">
           <a
             href="https://github.com/brayzonn"
