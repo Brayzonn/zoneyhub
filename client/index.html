@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- <script>
+    <script>
       (function () {
         const t = localStorage.getItem("theme");
         document.documentElement.setAttribute(
@@ -12,7 +12,7 @@
           t === "dark" || !t ? "dark" : "light"
         );
       })();
-    </script> -->
+    </script>
 
     <!-- Favicons and fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,6 +20,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@200..900&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -114,6 +116,10 @@
     <script type="module" src="/src/main.tsx"></script>
 
     <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200..900&display=swap"
+        rel="stylesheet"
+      />
       <p>Please enable JavaScript to view this website.</p>
     </noscript>
   </body>

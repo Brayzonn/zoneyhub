@@ -11,7 +11,7 @@ export const usePageSetup = () => {
     const gaTimer = setTimeout(() => {
       initGA();
       logPageView();
-    }, 2000);
+    }, 5000);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
