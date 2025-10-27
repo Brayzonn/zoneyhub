@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <>
       {/* Hero */}
-      <section className="flex flex-col items-center text-center py-20">
+      <section className="flex flex-col items-center text-center py-10">
         <h1 className="text-4xl sm:text-6xl font-bold text-[var(--color-primary-text-color)]">
           Eyinda Bright
         </h1>

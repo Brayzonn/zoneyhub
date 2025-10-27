@@ -2,8 +2,8 @@ import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import { usePageSetup } from "../hooks/usePageSetup";
 import { useTheme } from "../hooks/useTheme";
-import { lazy, Suspense } from "react";
-const StackAndProjects = lazy(() => import("../components/StackAndProjects"));
+import { lazy } from "react";
+import StackAndProjects from "../components/StackAndProjects";
 const GitRepos = lazy(() => import("../components/GitRepos"));
 const Footer = lazy(() => import("../components/Footer"));
 
@@ -22,11 +22,9 @@ const Landing = () => {
       <main className="pt-[120px] px-[1rem] sm:px-[3rem]">
         <Hero />
 
-        <Suspense fallback={<div className="h-20" />}>
-          <StackAndProjects />
-          <GitRepos />
-          <Footer />
-        </Suspense>
+        <StackAndProjects />
+        <GitRepos />
+        <Footer />
       </main>
     </div>
   );

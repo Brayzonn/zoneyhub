@@ -6,6 +6,14 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: "/",
   build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          utils: ["./src/utils/analytics.ts"],
+        },
+      },
+    },
     outDir: "dist",
     target: "es2015",
   },
