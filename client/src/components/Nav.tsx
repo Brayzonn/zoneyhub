@@ -12,7 +12,6 @@ interface NavProps {
 const Nav = ({ isScrolled, isDarkMode, onThemeToggle }: NavProps) => {
   return (
     <>
-      {/* Navbar */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[1rem] sm:px-[3rem] py-6 border-b transition-all duration-300 ${
           isScrolled

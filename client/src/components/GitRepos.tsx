@@ -9,6 +9,17 @@ const GitRepos = () => {
       link: "https://github.com/Brayzonn/vps-init",
     },
     {
+      name: "NestJS Starter Template",
+      desc: "NestJS-TypeScript boilerplate with JWT auth, Prisma ORM, Redis, and session management.",
+      link: "https://github.com/Brayzonn/NestJS-Starter",
+    },
+
+    {
+      name: "Image Upload & Optimization API",
+      desc: "NestJS microservice for image processing with Sharp, WebP conversion, multi-size generation, and Cloudinary CDN integration.",
+      link: "https://github.com/Brayzonn/image-upload-service",
+    },
+    {
       name: "GitHub Webhook Deployer",
       desc: "Automated deployment tool for Node.js and frontend apps powered by GitHub webhooks.",
       link: "https://github.com/Brayzonn/github-webhook-deployer",
@@ -16,7 +27,6 @@ const GitRepos = () => {
   ];
   return (
     <>
-      {/* Highlighted Repos */}
       <section className="max-w-5xl mx-auto mb-28">
         <div className="mb-8 ">
           <h2 className="inline-block text-2xl font-semibold text-[var(--color-primary-text-color)] tracking-tight border-b-3 border-[var(--color-border)] pb-1">

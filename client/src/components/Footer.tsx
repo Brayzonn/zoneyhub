@@ -3,7 +3,6 @@ import { logEvent } from "../utils/analytics";
 const Footer = () => {
   return (
     <>
-      {/* Footer */}
       <footer className="text-center text-white pb-10">
         <div className="space-x-6">
           <a
