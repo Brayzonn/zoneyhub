@@ -28,13 +28,13 @@ const MusicRoom = () => {
         <div
           onMouseEnter={() => setIsUtilityMenuExpanded(true)}
           onMouseLeave={() => setIsUtilityMenuExpanded(false)}
-          className={`px-2 py-1 bg-white border-2 border-[#94BDE6] rounded-2xl flex gap-2 shadow-[0_1px_1px_-0.5px_rgba(0,0,0,0.04),0_3px_3px_-1.5px_rgba(0,0,0,0.04),0_12px_12px_-6px_rgba(0,0,0,0.04),0_0_0_1px_rgba(148,189,230,0.1)] transition-all duration-300 ease-in-out ${
+          className={`absolute px-2 py-1  border-2 border-[#94BDE6] rounded-2xl flex gap-2 shadow-[0_1px_1px_-0.5px_rgba(0,0,0,0.04),0_3px_3px_-1.5px_rgba(0,0,0,0.04),0_12px_12px_-6px_rgba(0,0,0,0.04),0_0_0_1px_rgba(148,189,230,0.1)] transition-all duration-300 ease-in-out ${
             isUtilityMenuExpanded ? "max-h-34" : "h-fit"
           }`}
         >
           {/* Theme Toggle */}
           <button
-            className="cursor-pointer shrink-0 aspect-square w-10 h-10 rounded-xl flex items-center justify-center text-gray-600 hover:text-white hover:bg-[#6d9bca] hover:bg-opacity-100 border border-transparent hover:border-[#94BDE6] transition-all"
+            className="cursor-pointer shrink-0 aspect-square w-10 h-10 rounded-xl flex items-center justify-center text-gray-600 hover:text-white hover:bg-[#6d9bca] hover:bg-opacity-100 border border-[#94BDE6] hover:border-[#94BDE6] transition-all"
             aria-label="Toggle Theme"
           >
             <svg
@@ -57,7 +57,7 @@ const MusicRoom = () => {
 
           {/* Audio Toggle */}
           <button
-            className="cursor-pointer  shrink-0 aspect-square w-10 h-10 rounded-xl flex items-center justify-center text-gray-600 hover:text-white hover:bg-[#6d9bca] hover:bg-opacity-100 border border-transparent hover:border-[#94BDE6] transition-all"
+            className="cursor-pointer  shrink-0 aspect-square w-10 h-10 rounded-xl flex items-center justify-center text-gray-600 hover:text-white hover:bg-[#6d9bca] hover:bg-opacity-100 border border-[#94BDE6] transition-all"
             aria-label="Toggle Audio"
           >
             <svg
@@ -88,7 +88,7 @@ const MusicRoom = () => {
       </div>
 
       {/* Music Gallery - Center Content */}
-      <div className="relative z-10 flex items-start justify-center h-full overflow-auto">
+      <div className="relative z-10 flex h-full overflow-auto">
         <MusicGallery />
       </div>
     </div>
