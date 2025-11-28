@@ -21,13 +21,10 @@ const VinylDisc = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
-      className="relative flex flex-col items-center justify-center cursor-pointer group"
-      onClick={onClick}
+    <div
+      className="relative flex flex-col items-center justify-center"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-      }}
+      onMouseLeave={() => setIsHovered(false)}
       style={{ transform: `rotate(${rotation}deg)` }}
     >
       {/* Vinyl Container */}
@@ -37,18 +34,18 @@ const VinylDisc = ({
           className="absolute left-1 top-1 w-30 h-30 rounded-full bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-[0_8px_16px_rgba(0,0,0,0.3),0_0_0_3px_rgba(0,0,0,0.8),0_0_0_4px_rgba(50,50,50,0.6)]"
           animate={{
             rotateZ: isPlaying ? 360 : 0,
-            x: isPlaying ? 60 : 0,
           }}
           transition={{
-            rotateZ: {
-              duration: 3,
-              repeat: isPlaying ? Infinity : 0,
-              ease: "linear",
-            },
-            x: {
-              duration: 0.5,
-              ease: "easeOut",
-            },
+            rotateZ: isPlaying
+              ? {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                }
+              : {
+                  duration: 0.5,
+                  ease: "easeOut",
+                },
           }}
         >
           <div className="absolute inset-2 rounded-full border border-gray-700/30" />
@@ -85,11 +82,12 @@ const VinylDisc = ({
           </div>
         </motion.div>
 
-        {/* Album Cover */}
-        <motion.div
-          className="absolute inset-0 shadow-[0_10px_20px_rgba(0,0,0,0.3)] overflow-hidden rounded-sm"
+        {/* Album Cover - Clickable */}
+        <motion.button
+          onClick={onClick}
+          className="absolute inset-0 shadow-[0_10px_20px_rgba(0,0,0,0.3)] overflow-hidden rounded-sm cursor-pointer"
           animate={{
-            x: 0,
+            x: isPlaying ? 60 : 0,
           }}
           transition={{
             duration: 0.5,
@@ -120,12 +118,12 @@ const VinylDisc = ({
               </svg>
             </div>
           )}
-        </motion.div>
+        </motion.button>
       </div>
 
       {/* Track Info  */}
       <motion.div
-        className="mt-6 text-center"
+        className="mt-3 text-center"
         animate={{
           opacity: isHovered ? 1 : 0,
           y: isHovered ? 0 : 4,
@@ -133,71 +131,17 @@ const VinylDisc = ({
         }}
         transition={{ duration: 0.3 }}
       >
-        <div className="relative inline-block px-6 py-3">
-          <svg
-            className="absolute inset-0 w-full h-full -left-2 -right-2"
-            style={{
-              width: "calc(100% + 16px)",
-              height: "calc(100% + 8px)",
-              left: "-8px",
-              top: "-4px",
-            }}
-            viewBox="0 0 240 80"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <filter id="cloud-shadow">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-                <feOffset dx="0" dy="2" result="offsetblur" />
-                <feComponentTransfer>
-                  <feFuncA type="linear" slope="0.3" />
-                </feComponentTransfer>
-                <feMerge>
-                  <feMergeNode />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <ellipse
-              cx="120"
-              cy="45"
-              rx="90"
-              ry="25"
-              fill="rgba(255, 255, 255, 0.95)"
-              filter="url(#cloud-shadow)"
-            />
-            <circle cx="50" cy="35" r="20" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="80" cy="28" r="24" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="115" cy="22" r="28" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="150" cy="25" r="26" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="180" cy="32" r="22" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="60" cy="52" r="18" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="95" cy="55" r="20" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="135" cy="56" r="22" fill="rgba(255, 255, 255, 0.95)" />
-            <circle cx="170" cy="53" r="19" fill="rgba(255, 255, 255, 0.95)" />
-            <ellipse
-              cx="120"
-              cy="45"
-              rx="90"
-              ry="25"
-              fill="none"
-              stroke="rgba(148, 189, 230, 0.2)"
-              strokeWidth="1"
-            />
-          </svg>
-
-          <div className="relative z-10">
-            <h3 className="text-sm font-semibold text-gray-800 whitespace-nowrap">
-              {trackName}
-            </h3>
-            <p className="text-xs text-gray-500 whitespace-nowrap">
-              {artistName}
-            </p>
-          </div>
+        <div
+          className="bg-white rounded-sm shadow-lg px-1 py-2 w-32 flex flex-col items-center justify-center"
+          style={{ transform: `rotate(${rotation}deg)` }}
+        >
+          <h3 className="text-[13px] font-semibold text-gray-900 text-center">
+            {trackName}
+          </h3>
+          <p className="text-[11px] text-gray-600 text-center">{artistName}</p>
         </div>
       </motion.div>
-    </button>
+    </div>
   );
 };
 
