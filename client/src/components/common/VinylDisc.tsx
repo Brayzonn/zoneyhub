@@ -28,10 +28,10 @@ const VinylDisc = ({
       style={{ transform: `rotate(${rotation}deg)` }}
     >
       {/* Vinyl Container */}
-      <div className="relative w-32 h-32">
+      <div className="relative w-40 h-40">
         {/* Vinyl Disc */}
         <motion.div
-          className="absolute left-1 top-1 w-30 h-30 rounded-full bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-[0_8px_16px_rgba(0,0,0,0.3),0_0_0_3px_rgba(0,0,0,0.8),0_0_0_4px_rgba(50,50,50,0.6)]"
+          className="absolute left-1 top-1 w-38 h-38 rounded-full bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-[0_8px_16px_rgba(0,0,0,0.3),0_0_0_3px_rgba(0,0,0,0.8),0_0_0_4px_rgba(50,50,50,0.6)]"
           animate={{
             rotateZ: isPlaying ? 360 : 0,
           }}
@@ -58,7 +58,7 @@ const VinylDisc = ({
           <div className="absolute inset-9 rounded-full border border-gray-700/5" />
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative w-14 h-14 rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_2px_4px_rgba(0,0,0,0.3)] border-2 border-gray-800">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_2px_4px_rgba(0,0,0,0.3)] border-2 border-gray-800">
               {albumArt ? (
                 <>
                   <img
@@ -82,12 +82,12 @@ const VinylDisc = ({
           </div>
         </motion.div>
 
-        {/* Album Cover - Clickable */}
+        {/* Album Cover  */}
         <motion.button
           onClick={onClick}
-          className="absolute inset-0 shadow-[0_10px_20px_rgba(0,0,0,0.3)] overflow-hidden rounded-sm cursor-pointer"
+          className="absolute inset-0 shadow-[0_10px_20px_rgba(0,0,0,0.3)] overflow-hidden rounded-lg cursor-pointer"
           animate={{
-            x: isPlaying ? 60 : 0,
+            x: isPlaying ? 75 : 0,
           }}
           transition={{
             duration: 0.5,
@@ -104,8 +104,8 @@ const VinylDisc = ({
             <div className="w-full h-full bg-gradient-to-br from-[#6d9bca] to-[#5a8ab8] flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="48"
+                height="48"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="white"
@@ -132,13 +132,15 @@ const VinylDisc = ({
         transition={{ duration: 0.3 }}
       >
         <div
-          className="bg-white rounded-sm shadow-lg px-1 py-2 w-32 flex flex-col items-center justify-center"
+          className="bg-white rounded-sm shadow-lg px-1 py-2 w-36 flex flex-col items-center justify-center"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
-          <h3 className="text-[13px] font-semibold text-gray-900 text-center">
+          <h3 className="text-xs font-semibold text-gray-900 text-center truncate w-full">
             {trackName}
           </h3>
-          <p className="text-[11px] text-gray-600 text-center">{artistName}</p>
+          <p className="text-[10px] text-gray-600 text-center truncate w-full">
+            {artistName}
+          </p>
         </div>
       </motion.div>
     </div>

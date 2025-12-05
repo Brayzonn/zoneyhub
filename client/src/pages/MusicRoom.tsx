@@ -1,12 +1,14 @@
 import { useState, useRef, MouseEvent, useEffect } from "react";
-import FloatingSideMenu from "../components/common/FloatingSideMenu";
+import FloatingSideMenu from "../components/common/FloatingMenu";
 import MusicGallery from "../components/common/MusicGallery";
+import { useAudioPlayer } from "../hooks/useAudioPlayer";
 
 interface CurrentTrack {
   id: string;
   name: string;
   artist: string;
   albumArt?: string;
+  audioUrl?: string;
 }
 
 const MusicRoom = () => {
@@ -18,12 +20,20 @@ const MusicRoom = () => {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [scrollStart, setScrollStart] = useState({ left: 0, top: 0 });
 
+  const { play, stop, setVolume } = useAudioPlayer({
+    onTrackEnd: () => setCurrentTrack(null),
+  });
+
+  useEffect(() => {
+    setVolume(isSoundOn ? 1 : 0);
+  }, [isSoundOn, setVolume]);
+
   // Center the scroll position on mount
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const canvasWidth = 3200;
+    const canvasWidth = 2400;
     const canvasHeight = 2760;
 
     const centerX = (canvasWidth - container.clientWidth) / 2;
@@ -109,10 +119,14 @@ const MusicRoom = () => {
   };
 
   const handleTrackPlay = (track: CurrentTrack) => {
+    if (track.audioUrl) {
+      play(track.audioUrl);
+    }
     setCurrentTrack(track);
   };
 
   const handleTrackStop = () => {
+    stop();
     setCurrentTrack(null);
   };
 
@@ -132,7 +146,7 @@ const MusicRoom = () => {
           msOverflowStyle: "none",
         }}
       >
-        <div className="relative w-[3200px] h-[2760px]">
+        <div className="relative w-[2400px] h-[2760px]">
           <MatTexture />
 
           <div className="relative z-10 flex h-full">

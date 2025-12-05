@@ -17,7 +17,7 @@ interface UseAudioPlayerReturn {
 
 export const useAudioPlayer = ({
   onTrackEnd,
-}: UseAudioPlayerProps = {}): UseAudioPlayerReturn => {
+}: UseAudioPlayerProps): UseAudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const onTrackEndRef = useRef(onTrackEnd);
   onTrackEndRef.current = onTrackEnd;

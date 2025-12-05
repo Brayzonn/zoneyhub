@@ -5,6 +5,7 @@ interface Track {
   name: string;
   artist: string;
   albumArt?: string;
+  audioUrl: string;
   rotation: number;
   x: number;
   y: number;
@@ -16,6 +17,7 @@ interface MusicGalleryProps {
     name: string;
     artist: string;
     albumArt?: string;
+    audioUrl: string;
   }) => void;
   onTrackStop: () => void;
   playingTrackId: string | null;
@@ -29,71 +31,57 @@ const MusicGallery = ({
   const tracks: Track[] = [
     {
       id: "1",
-      name: "Midnight Dreams",
-      artist: "The Wanderers",
+      name: "Dancing Queen",
+      artist: "ABBA",
       albumArt:
-        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+        "https://res.cloudinary.com/dxbkwrhyc/image/upload/v1764946174/R-441165-1479753865-1804_wiegr6.jpg",
       rotation: -3,
-      x: 200,
-      y: 300,
+      audioUrl:
+        "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947249/abba_dancingqueen_vj557l.mp3",
+      x: 700,
+      y: 1050,
     },
     {
       id: "2",
-      name: "Ocean Waves",
-      artist: "Coastal Sounds",
+      name: "Islands",
+      artist: "Young The Giant",
       albumArt:
-        "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+        "https://res.cloudinary.com/dxbkwrhyc/image/upload/v1764946174/R-3141155-1740149992-7587_wtqanw.jpg",
       rotation: 5,
-      x: 600,
-      y: 450,
+      audioUrl:
+        "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947137/island_ytg_aqpipb.mp3",
+      x: 1350,
+      y: 1330,
     },
+
     {
       id: "3",
-      name: "City Lights",
-      artist: "Urban Echo",
+      name: "Forever ",
+      artist: "Shania Twain",
       albumArt:
-        "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop",
-      rotation: -7,
-      x: 1100,
-      y: 280,
+        "https://res.cloudinary.com/dxbkwrhyc/image/upload/v1764832842/R-428475-1628120629-2814_kahkwh.jpg",
+      rotation: 4,
+      audioUrl:
+        "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947257/foreverandalways_shania_sl6dso.mp3",
+      x: 700,
+      y: 1350,
     },
     {
       id: "4",
-      name: "Mountain High",
-      artist: "Alpine Beats",
+      name: "NATURALLY",
+      artist: "Amir Obe",
       albumArt:
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
-      rotation: 4,
-      x: 350,
-      y: 800,
-    },
-    {
-      id: "5",
-      name: "Desert Sun",
-      artist: "Nomad Vibes",
-      albumArt:
-        "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop",
+        "https://res.cloudinary.com/dxbkwrhyc/image/upload/v1764835908/R-10169188-1683272299-4074_wrw9ka.jpg",
       rotation: -2,
-      x: 850,
-      y: 700,
-    },
-    {
-      id: "6",
-      name: "Forest Rain",
-      artist: "Nature Sounds",
-      albumArt:
-        "https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop",
-      rotation: 6,
+      audioUrl:
+        "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947260/naturally_amirobe_bmqpnl.mp3",
       x: 1400,
-      y: 550,
+      y: 1000,
     },
   ];
 
-  const handleTrackClick = (trackId: string) => {
-    const track = tracks.find((t) => t.id === trackId);
-    if (!track) return;
-
-    if (playingTrackId === trackId) {
+  const handleTrackClick = (track: Track) => {
+    if (playingTrackId === track.id) {
       onTrackStop();
     } else {
       onTrackPlay({
@@ -101,6 +89,7 @@ const MusicGallery = ({
         name: track.name,
         artist: track.artist,
         albumArt: track.albumArt,
+        audioUrl: track.audioUrl,
       });
     }
   };
@@ -121,7 +110,7 @@ const MusicGallery = ({
             artistName={track.artist}
             albumArt={track.albumArt}
             isPlaying={playingTrackId === track.id}
-            onClick={() => handleTrackClick(track.id)}
+            onClick={() => handleTrackClick(track)}
             rotation={track.rotation}
           />
         </div>
