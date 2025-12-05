@@ -1,4 +1,3 @@
-// hooks/useAudioPlayer.ts
 import { useRef, useState, useEffect, useCallback } from "react";
 
 interface UseAudioPlayerProps {
@@ -26,12 +25,10 @@ export const useAudioPlayer = ({
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
 
-  // Keep callback ref updated
   useEffect(() => {
     onTrackEndRef.current = onTrackEnd;
   }, [onTrackEnd]);
 
-  // Initialize audio only once
   useEffect(() => {
     const audio = new Audio();
     audioRef.current = audio;
@@ -54,7 +51,7 @@ export const useAudioPlayer = ({
       audio.removeEventListener("ended", handleEnded);
       audio.pause();
     };
-  }, []); // Empty dependency - only runs once
+  }, []);
 
   const play = useCallback((url: string) => {
     const audio = audioRef.current;
