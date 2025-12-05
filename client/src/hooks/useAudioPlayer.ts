@@ -20,14 +20,12 @@ export const useAudioPlayer = ({
 }: UseAudioPlayerProps = {}): UseAudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const onTrackEndRef = useRef(onTrackEnd);
+  onTrackEndRef.current = onTrackEnd;
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
-
-  useEffect(() => {
-    onTrackEndRef.current = onTrackEnd;
-  }, [onTrackEnd]);
 
   useEffect(() => {
     const audio = new Audio();
@@ -50,13 +48,13 @@ export const useAudioPlayer = ({
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
       audio.removeEventListener("ended", handleEnded);
       audio.pause();
+      audioRef.current = null;
     };
   }, []);
 
   const play = useCallback((url: string) => {
     const audio = audioRef.current;
     if (!audio) return;
-
     audio.src = url;
     audio.play().catch(console.error);
     setIsPlaying(true);
@@ -65,7 +63,6 @@ export const useAudioPlayer = ({
   const stop = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
     audio.pause();
     audio.currentTime = 0;
     setIsPlaying(false);
