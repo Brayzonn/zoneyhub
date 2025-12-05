@@ -15,7 +15,7 @@ const MusicPlayer = ({
   onStop,
 }: MusicPlayerProps) => {
   return (
-    <div className="flex h-[48px] w-[200px] items-center justify-center gap-3  px-3">
+    <div className="flex h-[48px] w-[200px] items-center justify-center gap-3 px-3">
       {/* Album Art */}
       <motion.div
         className="w-7 h-7 rounded-md overflow-hidden flex-shrink-0 shadow-sm"
@@ -64,17 +64,50 @@ const MusicPlayer = ({
         </p>
       </motion.div>
 
-      {/* Stop Button*/}
-      <motion.button
-        onClick={onStop}
-        className="cursor-pointer w-5 h-5 rounded-full bg-white flex items-center justify-center flex-shrink-0 hover:bg-gray-200 transition-colors"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.2 }}
-        aria-label="Stop"
-      >
-        <div className="w-2 h-2 bg-[#121418] rounded-[1px]" />
-      </motion.button>
+      {/* Stop Button */}
+      <div className="relative flex items-center justify-center flex-shrink-0">
+        {/* Rotating ring */}
+        <div className="absolute w-7 h-7 animate-[spin_1.5s_linear_infinite]">
+          <svg viewBox="0 0 28 28" className="w-full h-full">
+            <defs>
+              <linearGradient
+                id="ringGradient"
+                gradientUnits="userSpaceOnUse"
+                x1="14"
+                y1="2"
+                x2="14"
+                y2="26"
+              >
+                <stop offset="0%" stopColor="#9ca3af" stopOpacity="1" />
+                <stop offset="100%" stopColor="#6b7280" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <circle
+              cx="14"
+              cy="14"
+              r="12"
+              fill="none"
+              stroke="url(#ringGradient)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+
+        {/* Stop button */}
+        <motion.button
+          onClick={onStop}
+          className="cursor-pointer w-5 h-5 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-colors z-10"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.2 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Stop"
+        >
+          <div className="w-2 h-2 bg-[#121418] rounded-[1px]" />
+        </motion.button>
+      </div>
     </div>
   );
 };
