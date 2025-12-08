@@ -5,9 +5,8 @@ import InfoCard from "./InfoCard";
 import MusicPlayer from "./Musicplayer";
 import {
   HomeIcon,
-  MusicIcon,
   ProjectsIcon,
-  BlogIcon,
+  // BlogIcon,
   PlaygroundIcon,
   SoundOnIcon,
   SoundOffIcon,
@@ -63,23 +62,17 @@ const FloatingMenu = ({
       icon: <HomeIcon />,
     },
     {
-      path: "/music-room",
-      label: "Music",
-      id: "music",
-      icon: <MusicIcon />,
-    },
-    {
       path: "/repos",
       label: "Projects",
       id: "projects",
       icon: <ProjectsIcon />,
     },
-    {
-      path: "/blog",
-      label: "Blog",
-      id: "blog",
-      icon: <BlogIcon />,
-    },
+    // {
+    //   path: "/blog",
+    //   label: "Blog",
+    //   id: "blog",
+    //   icon: <BlogIcon />,
+    // },
     {
       path: "/playground",
       label: "Playground",
@@ -127,10 +120,10 @@ const FloatingMenu = ({
                 x: 200,
                 transition: { duration: 0.9, ease: [0.2, 0, 0.4, 1] },
               }}
-              style={{ marginRight: "5px" }}
+              style={{ marginRight: "9px" }}
             >
               <div
-                className={`h-full rounded-[9px] overflow-hidden border ${
+                className={`h-full rounded-[12px] overflow-hidden border ${
                   isDark
                     ? "bg-white border-gray-200"
                     : "bg-[#121418] border-[#121418]"
@@ -151,7 +144,7 @@ const FloatingMenu = ({
 
         {/* Navigation Menu */}
         <div
-          className={`relative z-10 flex items-center rounded-[9px] border ${
+          className={`relative z-10 flex items-center rounded-[12px] border ${
             isDark
               ? "bg-white border-gray-200"
               : "bg-[#121418] border-[#121418]"

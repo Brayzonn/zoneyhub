@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
-import MusicRoom from "./pages/MusicRoom";
+import Playground from "./pages/Playground";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/music-room" element={<MusicRoom />} />
+        <Route path="/Playground" element={<Playground />} />
         <Route path="*" element={<Landing />} />
       </Routes>
     </Router>

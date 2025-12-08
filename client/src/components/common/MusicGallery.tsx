@@ -51,7 +51,7 @@ const MusicGallery = ({
       audioUrl:
         "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947137/island_ytg_aqpipb.mp3",
       x: 1350,
-      y: 1330,
+      y: 1630,
     },
 
     {
@@ -64,7 +64,7 @@ const MusicGallery = ({
       audioUrl:
         "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947257/foreverandalways_shania_sl6dso.mp3",
       x: 700,
-      y: 1350,
+      y: 1650,
     },
     {
       id: "4",
