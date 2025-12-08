@@ -43,14 +43,14 @@ const Hero = ({ isDark }: HeroProps) => {
       <section className="flex justify-between items-center">
         <div className="">
           <h1
-            className={`text-[1.2rem] font-bold ${
+            className={`tracking-wide text-[16px] font-bold ${
               isDark ? "text-gray-900" : "text-white"
             }`}
           >
             Eyinda Bright
           </h1>
           <p
-            className={` text-[14px] ${
+            className={`font-switzer tracking-wide text-[14px] ${
               isDark ? "text-gray-500" : "text-gray-400"
             }`}
           >
@@ -66,18 +66,17 @@ const Hero = ({ isDark }: HeroProps) => {
               location: "hero",
             })
           }
-          className={`text-[12px] inline-flex items-center gap-2 px-3 py-2 rounded-full transition ${
+          className={`tracking-[0.020em] text-[12px] inline-flex items-center gap-2 px-3 py-2 rounded-full transition ${
             isDark
               ? "border border-gray-200 hover:bg-gray-100"
               : "border border-[#2a2d35] hover:bg-[#1f2228]"
           }`}
         >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-          </span>
           <span className={isDark ? "text-gray-900" : "text-white"}>
-            Available for work
+            Available for work{" "}
+            <span className="inline-block group-hover:translate-x-0.5 transition-transform">
+              ↗
+            </span>
           </span>
         </a>
       </section>
@@ -88,7 +87,7 @@ const Hero = ({ isDark }: HeroProps) => {
       {/* Intro */}
       <section className="text-center">
         <p
-          className={`text-[14px] text-left leading-relaxed ${
+          className={`tracking-[0.020em] text-[14px] text-left leading-relaxed ${
             isDark ? "text-gray-600" : "text-gray-400"
           }`}
         >
@@ -107,7 +106,7 @@ const Hero = ({ isDark }: HeroProps) => {
         </p>
 
         <p
-          className={`text-[14px] text-left   leading-relaxed mt-4 ${
+          className={`tracking-[0.020em] text-[14px] text-left   leading-relaxed mt-4 ${
             isDark ? "text-gray-600" : "text-gray-400"
           }`}
         >
@@ -154,7 +153,7 @@ const Hero = ({ isDark }: HeroProps) => {
         </p>
 
         <p
-          className={`text-left  text-[14px]  leading-relaxed mt-4 ${
+          className={`tracking-[0.020em] text-left  text-[14px]  leading-relaxed mt-4 ${
             isDark ? "text-gray-600" : "text-gray-400"
           }`}
         >

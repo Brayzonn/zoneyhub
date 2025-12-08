@@ -62,7 +62,7 @@ const FloatingMenu = ({
       icon: <HomeIcon />,
     },
     {
-      path: "/repos",
+      path: "/projects",
       label: "Projects",
       id: "projects",
       icon: <ProjectsIcon />,
