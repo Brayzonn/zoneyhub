@@ -20,6 +20,24 @@ const Playground = () => {
     setVolume(isSoundOn ? 1 : 0);
   }, [isSoundOn, setVolume]);
 
+  const handleSoundToggle = () => {
+    setIsSoundOn((prev) => !prev);
+  };
+
+  const handleTrackPlay = (track: {
+    id: string;
+    name: string;
+    artist: string;
+    albumArt?: string;
+    audioUrl: string;
+  }) => {
+    play(track);
+  };
+
+  const handleTrackStop = () => {
+    stop();
+  };
+
   // Center the scroll position on mount
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -104,24 +122,6 @@ const Playground = () => {
   const handleDragEnd = () => {
     setIsDragging(false);
     updateCursor("grab");
-  };
-
-  const handleSoundToggle = () => {
-    setIsSoundOn((prev) => !prev);
-  };
-
-  const handleTrackPlay = (track: {
-    id: string;
-    name: string;
-    artist: string;
-    albumArt?: string;
-    audioUrl: string;
-  }) => {
-    play(track);
-  };
-
-  const handleTrackStop = () => {
-    stop();
   };
 
   return (
