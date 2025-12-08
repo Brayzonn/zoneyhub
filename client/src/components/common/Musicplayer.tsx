@@ -6,6 +6,7 @@ interface MusicPlayerProps {
   artistName: string;
   albumArt?: string;
   onStop: () => void;
+  isDark: boolean;
 }
 
 const MusicPlayer = ({
@@ -13,6 +14,7 @@ const MusicPlayer = ({
   artistName,
   albumArt,
   onStop,
+  isDark,
 }: MusicPlayerProps) => {
   return (
     <div className="flex h-[48px] w-[200px] items-center justify-center gap-3 px-3">
@@ -56,10 +58,18 @@ const MusicPlayer = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.2 }}
       >
-        <h3 className="text-[13px] font-medium text-[#e1e1e1] truncate max-w-[120px]">
+        <h3
+          className={`text-[13px] font-medium truncate max-w-[120px] ${
+            isDark ? "text-gray-900" : "text-[#e1e1e1]"
+          }`}
+        >
           {trackName}
         </h3>
-        <p className="text-[11px] text-[#c5c5c5] truncate max-w-[120px]">
+        <p
+          className={`text-[11px] truncate max-w-[120px] ${
+            isDark ? "text-gray-500" : "text-[#c5c5c5]"
+          }`}
+        >
           {artistName}
         </p>
       </motion.div>
@@ -78,8 +88,16 @@ const MusicPlayer = ({
                 x2="14"
                 y2="26"
               >
-                <stop offset="0%" stopColor="#9ca3af" stopOpacity="1" />
-                <stop offset="100%" stopColor="#6b7280" stopOpacity="0" />
+                <stop
+                  offset="0%"
+                  stopColor={isDark ? "#374151" : "#9ca3af"}
+                  stopOpacity="1"
+                />
+                <stop
+                  offset="100%"
+                  stopColor={isDark ? "#9ca3af" : "#6b7280"}
+                  stopOpacity="0"
+                />
               </linearGradient>
             </defs>
             <circle
@@ -97,7 +115,11 @@ const MusicPlayer = ({
         {/* Stop button */}
         <motion.button
           onClick={onStop}
-          className="cursor-pointer w-5 h-5 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-colors z-10"
+          className={`cursor-pointer w-5 h-5 rounded-full flex items-center justify-center transition-colors z-10 ${
+            isDark
+              ? "bg-gray-900 hover:bg-gray-700"
+              : "bg-white hover:bg-gray-200"
+          }`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.2 }}
@@ -105,7 +127,11 @@ const MusicPlayer = ({
           whileTap={{ scale: 0.95 }}
           aria-label="Stop"
         >
-          <div className="w-2 h-2 bg-[#121418] rounded-[1px]" />
+          <div
+            className={`w-2 h-2 rounded-[1px] ${
+              isDark ? "bg-white" : "bg-[#121418]"
+            }`}
+          />
         </motion.button>
       </div>
     </div>

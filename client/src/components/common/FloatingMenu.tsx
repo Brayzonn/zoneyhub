@@ -11,6 +11,8 @@ import {
   PlaygroundIcon,
   SoundOnIcon,
   SoundOffIcon,
+  SunIcon,
+  MoonIcon,
 } from "../../assets/icons";
 
 interface MenuItem {
@@ -27,23 +29,27 @@ interface CurrentTrack {
   albumArt?: string;
 }
 
-interface FloatingSideMenuProps {
+interface FloatingMenuProps {
   onInfoClick: () => void;
   isInfoOpen: boolean;
   isSoundOn: boolean;
   onSoundToggle: () => void;
   currentTrack?: CurrentTrack | null;
   onStopTrack: () => void;
+  isDark: boolean;
+  onThemeToggle: () => void;
 }
 
-const FloatingSideMenu = ({
+const FloatingMenu = ({
   onInfoClick,
   isInfoOpen,
   isSoundOn,
   onSoundToggle,
   currentTrack,
   onStopTrack,
-}: FloatingSideMenuProps) => {
+  isDark,
+  onThemeToggle,
+}: FloatingMenuProps) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
 
@@ -83,7 +89,7 @@ const FloatingSideMenu = ({
   ];
 
   return (
-    <div className="relative flex items-center ">
+    <div className="relative flex items-center">
       {/* Info Card */}
       <div
         className={`absolute right-full top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out ${
@@ -92,46 +98,65 @@ const FloatingSideMenu = ({
             : "opacity-0 -translate-x-4 mr-0 pointer-events-none"
         }`}
       >
-        <div className="px-2 py-1 bg-[#121418] border-2 border-[#121418] rounded-[9px]">
+        <div
+          className={`px-2 py-1 rounded-[9px] border ${
+            isDark
+              ? "bg-white border-gray-200"
+              : "bg-[#121418] border-[#121418]"
+          }`}
+        >
           <InfoCard isOpen={isInfoOpen} onClose={() => onInfoClick()} />
         </div>
       </div>
 
       {/* Main Menu Container */}
       <div className="relative flex items-center">
-        {/* Music Player  */}
+        {/* Music Player */}
         <AnimatePresence>
           {currentTrack && (
             <motion.div
-              className="absolute right-full top-0 flex items-center"
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
-              transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
-              style={{ marginRight: "4px" }}
+              className="absolute right-full top-0 flex items-center overflow-hidden"
+              initial={{ width: 0, x: 200 }}
+              animate={{
+                width: 208,
+                x: 0,
+                transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
+              }}
+              exit={{
+                width: 0,
+                x: 200,
+                transition: { duration: 0.9, ease: [0.2, 0, 0.4, 1] },
+              }}
+              style={{ marginRight: "5px" }}
             >
-              <div className="h-full bg-[#121418] border-2 border-[#121418] rounded-[9px] overflow-hidden">
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: 0.25, duration: 0.2 }}
-                >
-                  <MusicPlayer
-                    trackId={currentTrack.id}
-                    trackName={currentTrack.name}
-                    artistName={currentTrack.artist}
-                    albumArt={currentTrack.albumArt}
-                    onStop={onStopTrack}
-                  />
-                </motion.div>
+              <div
+                className={`h-full rounded-[9px] overflow-hidden border ${
+                  isDark
+                    ? "bg-white border-gray-200"
+                    : "bg-[#121418] border-[#121418]"
+                }`}
+              >
+                <MusicPlayer
+                  trackId={currentTrack.id}
+                  trackName={currentTrack.name}
+                  artistName={currentTrack.artist}
+                  albumArt={currentTrack.albumArt}
+                  onStop={onStopTrack}
+                  isDark={isDark}
+                />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Navigation Menu */}
-        <div className="relative z-10 flex items-center bg-[#121418] border-2 border-[#121418] rounded-[9px]">
+        <div
+          className={`relative z-10 flex items-center rounded-[9px] border ${
+            isDark
+              ? "bg-white border-gray-200"
+              : "bg-[#121418] border-[#121418]"
+          }`}
+        >
           {/* Menu Items Container */}
           <div className="h-[48px] px-2 py-1 flex flex-row gap-2">
             {menuItems.map((item) => (
@@ -143,25 +168,25 @@ const FloatingSideMenu = ({
                   to={item.path}
                   onMouseEnter={() => setHoveredItem(item.id)}
                   onMouseLeave={() => setHoveredItem(null)}
-                  className={`shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all group ${
+                  className={`shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all group border ${
                     isActive(item.path)
-                      ? "bg-[#1f2228] border border-[#1f2228] hover:bg-[#1f2228] hover:bg-opacity-100"
-                      : "text-gray-600 hover:text-white hover:bg-[#1f2228] hover:bg-opacity-100 border border-transparent hover:border-[#1f2228]"
+                      ? isDark
+                        ? "bg-gray-100 border-gray-200 text-gray-900"
+                        : "bg-[#1f2228] border-[#1f2228] text-white"
+                      : isDark
+                      ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
+                      : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
                   }`}
                 >
-                  <div
-                    className={`${
-                      isActive(item.path)
-                        ? "text-white group-hover:text-white"
-                        : ""
-                    }`}
-                  >
-                    {item.icon}
-                  </div>
+                  <div>{item.icon}</div>
                 </Link>
-                {/* Label tooltip  */}
+                {/* Label tooltip */}
                 <div
-                  className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#121418] border-2 border-[#121418] rounded-[7px] transition-all duration-300 ${
+                  className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
+                    isDark
+                      ? "bg-white border-gray-200"
+                      : "bg-[#121418] border-[#121418]"
+                  } ${
                     hoveredItem === item.id
                       ? "opacity-100 translate-y-0"
                       : "opacity-0 translate-y-2 pointer-events-none"
@@ -169,7 +194,7 @@ const FloatingSideMenu = ({
                 >
                   <h1
                     className={`text-sm font-medium whitespace-nowrap ${
-                      isActive(item.path) ? "text-[#e1e1e1]" : "text-[#c5c5c5]"
+                      isDark ? "text-gray-900" : "text-[#e1e1e1]"
                     }`}
                   >
                     {item.label}
@@ -178,8 +203,12 @@ const FloatingSideMenu = ({
               </div>
             ))}
 
-            {/* Divider  */}
-            <div className="shrink-0 bg-[#515151] w-[0.30px] my-1.5" />
+            {/* Divider */}
+            <div
+              className={`shrink-0 w-[1px] my-1.5 ${
+                isDark ? "bg-gray-200" : "bg-[#515151]"
+              }`}
+            />
 
             {/* Sound Toggle Button */}
             <div className="relative flex items-center">
@@ -187,7 +216,11 @@ const FloatingSideMenu = ({
                 onMouseEnter={() => setHoveredItem("sound")}
                 onMouseLeave={() => setHoveredItem(null)}
                 onClick={onSoundToggle}
-                className="cursor-pointer shrink-0 w-8 h-8 rounded-xl flex items-center justify-center transition-all border text-gray-600 hover:text-white hover:bg-[#1f2228] hover:bg-opacity-100 border-transparent hover:border-[#1f2228]"
+                className={`cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
+                  isDark
+                    ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
+                    : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
+                }`}
                 aria-label={isSoundOn ? "Mute Sound" : "Unmute Sound"}
               >
                 {isSoundOn ? <SoundOnIcon /> : <SoundOffIcon />}
@@ -195,14 +228,60 @@ const FloatingSideMenu = ({
 
               {/* Label tooltip */}
               <div
-                className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#121418] border-2 border-[#121418] rounded-[7px] transition-all duration-300 ${
+                className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
+                  isDark
+                    ? "bg-white border-gray-200"
+                    : "bg-[#121418] border-[#121418]"
+                } ${
                   hoveredItem === "sound"
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-2 pointer-events-none"
                 }`}
               >
-                <h1 className="text-sm font-medium whitespace-nowrap text-[#c5c5c5]">
+                <h1
+                  className={`text-sm font-medium whitespace-nowrap ${
+                    isDark ? "text-gray-900" : "text-[#c5c5c5]"
+                  }`}
+                >
                   {isSoundOn ? "Mute" : "Unmute"}
+                </h1>
+              </div>
+            </div>
+
+            {/* Theme Toggle Button */}
+            <div className="relative flex items-center">
+              <button
+                onMouseEnter={() => setHoveredItem("theme")}
+                onMouseLeave={() => setHoveredItem(null)}
+                onClick={onThemeToggle}
+                className={`cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
+                  isDark
+                    ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
+                    : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
+                }`}
+                aria-label={isDark ? "Light Mode" : "Dark Mode"}
+              >
+                {isDark ? <SunIcon /> : <MoonIcon />}
+              </button>
+
+              {/* Label tooltip */}
+              <div
+                className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
+                  isDark
+                    ? "bg-white border-gray-200"
+                    : "bg-[#121418] border-[#121418]"
+                } ${
+                  hoveredItem === "theme"
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-2 pointer-events-none"
+                }`}
+              >
+                <h1
+                  className={`text-sm font-medium whitespace-nowrap ${
+                    isDark ? "text-gray-900" : "text-[#c5c5c5]"
+                  }`}
+                >
+                  {isDark ? "Light" : "Dark"}
                 </h1>
               </div>
             </div>
@@ -213,4 +292,4 @@ const FloatingSideMenu = ({
   );
 };
 
-export default FloatingSideMenu;
+export default FloatingMenu;

@@ -2,6 +2,7 @@ import { useState, useRef, MouseEvent, useEffect } from "react";
 import FloatingSideMenu from "../components/common/FloatingMenu";
 import MusicGallery from "../components/common/MusicGallery";
 import { useAudioPlayer } from "../hooks/useAudioPlayer";
+import { useTheme } from "../hooks/useTheme";
 
 interface CurrentTrack {
   id: string;
@@ -23,6 +24,7 @@ const MusicRoom = () => {
   const { play, stop, setVolume } = useAudioPlayer({
     onTrackEnd: () => setCurrentTrack(null),
   });
+  const { isDarkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -147,7 +149,7 @@ const MusicRoom = () => {
         }}
       >
         <div className="relative w-[2400px] h-[2760px]">
-          <MatTexture />
+          <MatTexture isDark={isDarkMode} />
 
           <div className="relative z-10 flex h-full">
             <MusicGallery
@@ -168,28 +170,31 @@ const MusicRoom = () => {
           onSoundToggle={handleSoundToggle}
           currentTrack={currentTrack}
           onStopTrack={handleTrackStop}
+          isDark={isDarkMode}
+          onThemeToggle={toggleTheme}
         />
       </div>
     </div>
   );
 };
 
-const MatTexture = () => (
+const MatTexture = ({ isDark }: { isDark: boolean }) => (
   <div
     id="mat-texture"
-    className="absolute overflow-hidden rounded-lg border-4 border-[#94BDE6] bg-[#2A6DB0] w-full h-full shadow-lg"
+    className="absolute overflow-hidden rounded-lg border border-border w-full h-full shadow-lg bg-surface-bg"
     style={{
-      backgroundImage: `
-        linear-gradient(to right, rgb(255 255 255 / 0.12) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(255 255 255 / 0.12) 1px, transparent 1px),
-        linear-gradient(to right, rgb(255 255 255 / 0.18) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(255 255 255 / 0.18) 1px, transparent 1px),
+      backgroundImage: isDark
+        ? `
+        linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+        linear-gradient(to right, rgb(255 255 255 / 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(255 255 255 / 0.1) 1px, transparent 1px),
         linear-gradient(
           45deg,
           transparent 0,
           transparent calc(50% - 0.5px),
-          rgb(255 255 255 / 0.18) calc(50% - 0.5px),
-          rgb(255 255 255 / 0.18) calc(50% + 0.5px),
+          rgb(255 255 255 / 0.08) calc(50% - 0.5px),
+          rgb(255 255 255 / 0.08) calc(50% + 0.5px),
           transparent calc(50% + 0.5px),
           transparent 100%
         ),
@@ -197,8 +202,32 @@ const MatTexture = () => (
           -45deg,
           transparent 0,
           transparent calc(50% - 0.5px),
-          rgb(255 255 255 / 0.18) calc(50% - 0.5px),
-          rgb(255 255 255 / 0.18) calc(50% + 0.5px),
+          rgb(255 255 255 / 0.08) calc(50% - 0.5px),
+          rgb(255 255 255 / 0.08) calc(50% + 0.5px),
+          transparent calc(50% + 0.5px),
+          transparent 100%
+        )
+      `
+        : `
+        linear-gradient(to right, rgb(0 0 0 / 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(0 0 0 / 0.06) 1px, transparent 1px),
+        linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px),
+        linear-gradient(
+          45deg,
+          transparent 0,
+          transparent calc(50% - 0.5px),
+          rgb(0 0 0 / 0.08) calc(50% - 0.5px),
+          rgb(0 0 0 / 0.08) calc(50% + 0.5px),
+          transparent calc(50% + 0.5px),
+          transparent 100%
+        ),
+        linear-gradient(
+          -45deg,
+          transparent 0,
+          transparent calc(50% - 0.5px),
+          rgb(0 0 0 / 0.08) calc(50% - 0.5px),
+          rgb(0 0 0 / 0.08) calc(50% + 0.5px),
           transparent calc(50% + 0.5px),
           transparent 100%
         )
@@ -207,12 +236,6 @@ const MatTexture = () => (
         "16px 16px, 16px 16px, 80px 80px, 80px 80px, 80px 80px, 80px 80px",
       backgroundPosition: "0 0, 0 0, 0 0, 0 0, 0 0, 0 0",
     }}
-  >
-    <div
-      id="window"
-      className="z-10 opacity-60 absolute w-full h-full bg-cover bg-[url(/about-me/Layer-window.png)]"
-    />
-  </div>
+  />
 );
-
 export default MusicRoom;

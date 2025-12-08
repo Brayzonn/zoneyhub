@@ -36,14 +36,6 @@
   /* Typography */
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Grid Patterns */
-  --grid-line-sm: rgb(255 255 255 / 0.08);
-  --grid-line-lg: rgb(255 255 255 / 0.15);
-  --grid-diagonal: rgb(255 255 255 / 0.1);
-  --grid-dot: rgb(255 255 255 / 0.12);
-  --grid-circuit: rgb(255 255 255 / 0.1);
-  --grid-circuit-dot: rgb(255 255 255 / 0.15);
-
   /* Animation durations */
   --duration-spin-slow: 3s;
   --duration-spin-fast: 0.5s;
