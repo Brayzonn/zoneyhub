@@ -88,8 +88,8 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                   key={tech}
                   className={`px-2 py-[3px] text-[11px] rounded-md transition ${
                     isDark
-                      ? "bg-gray-900 border border-gray-700 text-gray-300 "
-                      : "bg-gray-100 border border-gray-300 text-gray-700 "
+                      ? "bg-[#1a1c20] border border-[#2a2d33] text-gray-300"
+                      : "bg-gray-100 border border-gray-300 text-gray-700"
                   }`}
                 >
                   {tech}

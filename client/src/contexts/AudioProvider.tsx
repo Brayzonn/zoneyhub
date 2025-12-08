@@ -1,28 +1,10 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, ReactNode } from "react";
+import { AudioContext, CurrentTrack } from "./AudioContext";
 
-interface UseAudioPlayerProps {
-  onTrackEnd?: () => void;
-}
-
-interface UseAudioPlayerReturn {
-  play: (url: string) => void;
-  stop: () => void;
-  isPlaying: boolean;
-  currentTime: number;
-  duration: number;
-  setVolume: (volume: number) => void;
-  isMuted: boolean;
-  toggleMute: () => void;
-}
-
-export const useAudioPlayer = ({
-  onTrackEnd,
-}: UseAudioPlayerProps): UseAudioPlayerReturn => {
+export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const onTrackEndRef = useRef(onTrackEnd);
-  onTrackEndRef.current = onTrackEnd;
-
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -36,7 +18,7 @@ export const useAudioPlayer = ({
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
-      onTrackEndRef.current?.();
+      setCurrentTrack(null);
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
@@ -52,21 +34,25 @@ export const useAudioPlayer = ({
     };
   }, []);
 
-  const play = useCallback((url: string) => {
+  const play = useCallback((track: CurrentTrack) => {
     const audio = audioRef.current;
     if (!audio) return;
-    audio.src = url;
+
+    audio.src = track.audioUrl;
     audio.play().catch(console.error);
     setIsPlaying(true);
+    setCurrentTrack(track);
   }, []);
 
   const stop = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
+
     audio.pause();
     audio.currentTime = 0;
     setIsPlaying(false);
     setCurrentTime(0);
+    setCurrentTrack(null);
   }, []);
 
   const setVolume = useCallback((volume: number) => {
@@ -80,14 +66,21 @@ export const useAudioPlayer = ({
     setIsMuted(audioRef.current.muted);
   }, []);
 
-  return {
-    play,
-    stop,
-    isPlaying,
-    currentTime,
-    duration,
-    setVolume,
-    isMuted,
-    toggleMute,
-  };
+  return (
+    <AudioContext.Provider
+      value={{
+        play,
+        stop,
+        isPlaying,
+        currentTrack,
+        currentTime,
+        duration,
+        setVolume,
+        isMuted,
+        toggleMute,
+      }}
+    >
+      {children}
+    </AudioContext.Provider>
+  );
 };

@@ -1,30 +1,19 @@
 import { useState, useRef, MouseEvent, useEffect } from "react";
 import FloatingMenu from "../components/common/FloatingMenu";
 import MusicGallery from "../components/common/MusicGallery";
-import { useAudioPlayer } from "../hooks/useAudioPlayer";
+import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import { useTheme } from "../hooks/useTheme";
 import MatTexture from "../components/common/MatTexture";
-
-interface CurrentTrack {
-  id: string;
-  name: string;
-  artist: string;
-  albumArt?: string;
-  audioUrl?: string;
-}
 
 const Playground = () => {
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(true);
-  const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [scrollStart, setScrollStart] = useState({ left: 0, top: 0 });
 
-  const { play, stop, setVolume } = useAudioPlayer({
-    onTrackEnd: () => setCurrentTrack(null),
-  });
+  const { play, stop, setVolume, currentTrack } = useGlobalAudio();
   const { isDarkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -121,16 +110,18 @@ const Playground = () => {
     setIsSoundOn((prev) => !prev);
   };
 
-  const handleTrackPlay = (track: CurrentTrack) => {
-    if (track.audioUrl) {
-      play(track.audioUrl);
-    }
-    setCurrentTrack(track);
+  const handleTrackPlay = (track: {
+    id: string;
+    name: string;
+    artist: string;
+    albumArt?: string;
+    audioUrl: string;
+  }) => {
+    play(track);
   };
 
   const handleTrackStop = () => {
     stop();
-    setCurrentTrack(null);
   };
 
   return (
