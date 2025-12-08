@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import InfoCard from "./InfoCard";
 import MusicPlayer from "./Musicplayer";
+import { useSoundEffects } from "../../hooks/useSoundEffects";
 import {
   HomeIcon,
   ProjectsIcon,
@@ -51,6 +52,8 @@ const FloatingMenu = ({
 }: FloatingMenuProps) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
+
+  const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -159,6 +162,7 @@ const FloatingMenu = ({
               >
                 <Link
                   to={item.path}
+                  onClick={playClick}
                   onMouseEnter={() => setHoveredItem(item.id)}
                   onMouseLeave={() => setHoveredItem(null)}
                   className={`shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all group border ${
@@ -208,7 +212,12 @@ const FloatingMenu = ({
               <button
                 onMouseEnter={() => setHoveredItem("sound")}
                 onMouseLeave={() => setHoveredItem(null)}
-                onClick={onSoundToggle}
+                onClick={() => {
+                  onSoundToggle?.();
+                  if (!isSoundOn) {
+                    setTimeout(() => playClick(), 50);
+                  }
+                }}
                 className={`cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
                   isDark
                     ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
@@ -246,7 +255,10 @@ const FloatingMenu = ({
               <button
                 onMouseEnter={() => setHoveredItem("theme")}
                 onMouseLeave={() => setHoveredItem(null)}
-                onClick={onThemeToggle}
+                onClick={() => {
+                  playClick();
+                  onThemeToggle();
+                }}
                 className={`cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
                   isDark
                     ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"

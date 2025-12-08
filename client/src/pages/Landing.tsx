@@ -4,9 +4,10 @@ import Hero from "../components/Hero";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import { useTheme } from "../hooks/useTheme";
 import { useState, useEffect } from "react";
+import { useSound } from "../hooks/useSound";
 
 const Landing = () => {
-  const [isSoundOn, setIsSoundOn] = useState(true);
+  const { isSoundOn, toggleSound } = useSound();
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
 
   const { stop, currentTrack, setVolume } = useGlobalAudio();
@@ -15,10 +16,6 @@ const Landing = () => {
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
   }, [isSoundOn, setVolume]);
-
-  const handleSoundToggle = () => {
-    setIsSoundOn((prev) => !prev);
-  };
 
   const handleTrackStop = () => {
     stop();
@@ -34,7 +31,7 @@ const Landing = () => {
           onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
           isInfoOpen={isInfoCardOpen}
           isSoundOn={isSoundOn}
-          onSoundToggle={handleSoundToggle}
+          onSoundToggle={toggleSound}
           currentTrack={currentTrack}
           onStopTrack={handleTrackStop}
           isDark={isDarkMode}

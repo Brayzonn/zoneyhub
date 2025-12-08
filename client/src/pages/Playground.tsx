@@ -4,10 +4,12 @@ import MusicGallery from "../components/common/MusicGallery";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import { useTheme } from "../hooks/useTheme";
 import MatTexture from "../components/common/MatTexture";
+import { useSound } from "../hooks/useSound";
 
 const Playground = () => {
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
-  const [isSoundOn, setIsSoundOn] = useState(true);
+  const { isSoundOn, toggleSound } = useSound();
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -19,10 +21,6 @@ const Playground = () => {
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
   }, [isSoundOn, setVolume]);
-
-  const handleSoundToggle = () => {
-    setIsSoundOn((prev) => !prev);
-  };
 
   const handleTrackPlay = (track: {
     id: string;
@@ -162,7 +160,7 @@ const Playground = () => {
           onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
           isInfoOpen={isInfoCardOpen}
           isSoundOn={isSoundOn}
-          onSoundToggle={handleSoundToggle}
+          onSoundToggle={toggleSound}
           currentTrack={currentTrack}
           onStopTrack={handleTrackStop}
           isDark={isDarkMode}

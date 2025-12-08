@@ -3,9 +3,11 @@ import FloatingMenu from "../components/common/FloatingMenu";
 import { useTheme } from "../hooks/useTheme";
 import ProjectsComponent from "../components/ProjectsComponent";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
+import { useSound } from "../hooks/useSound";
 
 const Projects = () => {
-  const [isSoundOn, setIsSoundOn] = useState(true);
+  const { isSoundOn, toggleSound } = useSound();
+
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
 
   const { stop, currentTrack, setVolume } = useGlobalAudio();
@@ -14,10 +16,6 @@ const Projects = () => {
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
   }, [isSoundOn, setVolume]);
-
-  const handleSoundToggle = () => {
-    setIsSoundOn((prev) => !prev);
-  };
 
   const handleTrackStop = () => {
     stop();
@@ -31,7 +29,7 @@ const Projects = () => {
           onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
           isInfoOpen={isInfoCardOpen}
           isSoundOn={isSoundOn}
-          onSoundToggle={handleSoundToggle}
+          onSoundToggle={toggleSound}
           currentTrack={currentTrack}
           onStopTrack={handleTrackStop}
           isDark={isDarkMode}
