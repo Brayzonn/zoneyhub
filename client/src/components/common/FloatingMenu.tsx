@@ -29,12 +29,12 @@ interface CurrentTrack {
 }
 
 interface FloatingMenuProps {
-  onInfoClick: () => void;
-  isInfoOpen: boolean;
-  isSoundOn: boolean;
-  onSoundToggle: () => void;
+  onInfoClick?: () => void;
+  isInfoOpen?: boolean;
+  isSoundOn?: boolean;
+  onSoundToggle?: () => void;
   currentTrack?: CurrentTrack | null;
-  onStopTrack: () => void;
+  onStopTrack?: () => void;
   isDark: boolean;
   onThemeToggle: () => void;
 }
@@ -98,7 +98,7 @@ const FloatingMenu = ({
               : "bg-[#121418] border-[#121418]"
           }`}
         >
-          <InfoCard isOpen={isInfoOpen} onClose={() => onInfoClick()} />
+          <InfoCard isOpen={!!isInfoOpen} onClose={onInfoClick ?? (() => {})} />
         </div>
       </div>
 
@@ -134,7 +134,7 @@ const FloatingMenu = ({
                   trackName={currentTrack.name}
                   artistName={currentTrack.artist}
                   albumArt={currentTrack.albumArt}
-                  onStop={onStopTrack}
+                  onStop={onStopTrack ?? (() => {})}
                   isDark={isDark}
                 />
               </div>

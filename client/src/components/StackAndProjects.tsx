@@ -1,17 +1,11 @@
 import { WebsiteIcon } from "../components/Icons";
 import { logEvent } from "../utils/analytics";
 
-const StackAndProjects = () => {
-  const frontendTech = ["React", "TypeScript", "Tailwind CSS", "JavaScript"];
-  const backendTech = [
-    "NestJS",
-    "Node.js",
-    "PostgreSQL",
-    "MongoDB",
-    "TypeORM",
-    "Express.jS",
-  ];
+interface StackAndProjectsProps {
+  isDark: boolean;
+}
 
+const StackAndProjects = ({ isDark }: StackAndProjectsProps) => {
   const projects = [
     {
       name: "Weeklies",
@@ -38,66 +32,46 @@ const StackAndProjects = () => {
       stack: ["React", "Typescript", "MongoDB", "ExpressJS"],
     },
   ];
+
   return (
     <>
-      {/* Tech Stack */}
-      <section className="max-w-5xl mx-auto mb-20">
-        <div className="mb-8">
-          <h2 className="inline-block text-2xl font-semibold text-[var(--color-primary-text-color)] tracking-tight border-b-3 border-[var(--color-border)] pb-1">
-            Tech Stack
-          </h2>
-          <span className="block text-sm text-[var(--color-subtle-text)] mt-1">
-            Tools & frameworks I use
-          </span>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { title: "Frontend", items: frontendTech },
-            { title: "Backend", items: backendTech },
-            {
-              title: "Tools & Workflow",
-              items: ["Docker", "Vercel", "Git", "Postman", "Bash"],
-            },
-          ].map((cat) => (
-            <div
-              key={cat.title}
-              className="group bg-[var(--color-card-hover-bg)] border border-[var(--color-border)] rounded-2xl p-4 hover:border-[var(--color-border-hover)] transition-all"
-            >
-              <h3 className="text-[var(--color-primary-text-color)] font-medium text-lg mb-4">
-                {cat.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {cat.items.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[13px] px-3 py-1.5 rounded-lg bg-[var(--color-tag-bg)] text-[var(--color-muted-text)] group-hover:bg-[var(--color-tag-hover-bg)] transition"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Projects */}
-      <section className="max-w-5xl mx-auto mb-28">
-        <div className="mb-8 ">
-          <h2 className="inline-block text-2xl font-semibold text-[var(--color-primary-text-color)] tracking-tight border-b-3 border-[var(--color-border)] pb-1">
+      <section
+        className={`max-w-5xl mx-auto mb-28 rounded-lg shadow-lg p-6 sm:p-8 transition-colors duration-300 ${
+          isDark
+            ? "bg-white border border-gray-200"
+            : "bg-[#121418] border border-[#2a2d35]"
+        }`}
+      >
+        <div className="mb-8">
+          <h2
+            className={`inline-block text-2xl font-semibold tracking-tight pb-1 ${
+              isDark
+                ? "text-gray-900 border-b-3 border-gray-200"
+                : "text-white border-b-3 border-[#2a2d35]"
+            }`}
+          >
             Featured Projects
           </h2>
-          <span className="block mt-1 text-sm text-[var(--color-subtle-text)]">
+          <span className={`block mt-1 text-sm text-gray-500`}>
             Here are some of my projects
           </span>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((proj) => (
-            <div key={proj.name} className="group block transition">
+            <div
+              key={proj.name}
+              className={`group block transition p-4 rounded-xl ${
+                isDark ? "hover:bg-gray-50" : "hover:bg-[#1f2228]"
+              }`}
+            >
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-medium text-[var(--color-primary-text-color)] flex items-center gap-2">
+                <h3
+                  className={`text-lg font-medium flex items-center gap-2 ${
+                    isDark ? "text-gray-900" : "text-white"
+                  }`}
+                >
                   <a
                     href={proj.link}
                     onClick={() =>
@@ -105,26 +79,53 @@ const StackAndProjects = () => {
                     }
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border-b border-[var(--color-border)] pb-1 transition-all group-hover:text-[var(--color-accent)]"
+                    className={`pb-1 transition-all ${
+                      isDark
+                        ? "border-b border-gray-200 group-hover:text-blue-600"
+                        : "border-b border-[#2a2d35] group-hover:text-blue-400"
+                    }`}
                   >
                     {proj.name}
                   </a>
-                  <span className="text-xs text-[var(--color-muted-text)] group-hover:text-[var(--color-accent)] transition">
+                  <span
+                    className={`text-xs transition ${
+                      isDark
+                        ? "text-gray-500 group-hover:text-blue-600"
+                        : "text-gray-500 group-hover:text-blue-400"
+                    }`}
+                  >
                     ↗
                   </span>
                 </h3>
-                <span className="text-[var(--color-muted-text)] group-hover:text-[var(--color-accent)] transition">
+
+                <span
+                  className={`transition ${
+                    isDark
+                      ? "text-gray-500 group-hover:text-blue-600"
+                      : "text-gray-500 group-hover:text-blue-400"
+                  }`}
+                >
                   {WebsiteIcon}
                 </span>
               </div>
-              <p className="text-sm text-[var(--color-muted-text)] mb-4">
+
+              <p
+                className={`text-sm mb-4 ${
+                  isDark ? "text-gray-600" : "text-gray-400"
+                }`}
+              >
                 {proj.desc}
               </p>
+
               <div className="flex flex-wrap gap-2">
                 {proj.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 text-xs bg-[var(--color-tag-bg)] border border-[var(--color-border)] rounded-full text-[var(--color-muted-text)]"
+                    className={`px-3 py-1 text-xs rounded-full ${
+                      isDark
+                        ? "bg-gray-100 border border-gray-200 text-gray-600"
+                        : "bg-[#1f2228] border border-[#2a2d35] text-gray-400"
+                    }`}
                   >
                     {tech}
                   </span>

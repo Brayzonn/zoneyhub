@@ -1,8 +1,9 @@
 import { useState, useRef, MouseEvent, useEffect } from "react";
-import FloatingSideMenu from "../components/common/FloatingMenu";
+import FloatingMenu from "../components/common/FloatingMenu";
 import MusicGallery from "../components/common/MusicGallery";
 import { useAudioPlayer } from "../hooks/useAudioPlayer";
 import { useTheme } from "../hooks/useTheme";
+import MatTexture from "../components/common/MatTexture";
 
 interface CurrentTrack {
   id: string;
@@ -166,7 +167,7 @@ const Playground = () => {
 
       {/* Navigation Menu */}
       <div className="fixed z-20 bottom-0 left-1/2 -translate-x-1/2 pb-4">
-        <FloatingSideMenu
+        <FloatingMenu
           onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
           isInfoOpen={isInfoCardOpen}
           isSoundOn={isSoundOn}
@@ -279,67 +280,6 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
       </div>
     </div>
   </div>
-);
-
-const MatTexture = ({ isDark }: { isDark: boolean }) => (
-  <div
-    id="mat-texture"
-    className="absolute overflow-hidden rounded-lg border border-border w-full h-full shadow-lg bg-surface-bg"
-    style={{
-      backgroundImage: isDark
-        ? `
-        linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px),
-        linear-gradient(to right, rgb(255 255 255 / 0.1) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(255 255 255 / 0.1) 1px, transparent 1px),
-        linear-gradient(
-          45deg,
-          transparent 0,
-          transparent calc(50% - 0.5px),
-          rgb(255 255 255 / 0.08) calc(50% - 0.5px),
-          rgb(255 255 255 / 0.08) calc(50% + 0.5px),
-          transparent calc(50% + 0.5px),
-          transparent 100%
-        ),
-        linear-gradient(
-          -45deg,
-          transparent 0,
-          transparent calc(50% - 0.5px),
-          rgb(255 255 255 / 0.08) calc(50% - 0.5px),
-          rgb(255 255 255 / 0.08) calc(50% + 0.5px),
-          transparent calc(50% + 0.5px),
-          transparent 100%
-        )
-      `
-        : `
-        linear-gradient(to right, rgb(0 0 0 / 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(0 0 0 / 0.06) 1px, transparent 1px),
-        linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px),
-        linear-gradient(
-          45deg,
-          transparent 0,
-          transparent calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% + 0.5px),
-          transparent calc(50% + 0.5px),
-          transparent 100%
-        ),
-        linear-gradient(
-          -45deg,
-          transparent 0,
-          transparent calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% + 0.5px),
-          transparent calc(50% + 0.5px),
-          transparent 100%
-        )
-      `,
-      backgroundSize:
-        "16px 16px, 16px 16px, 80px 80px, 80px 80px, 80px 80px, 80px 80px",
-      backgroundPosition: "0 0, 0 0, 0 0, 0 0, 0 0, 0 0",
-    }}
-  />
 );
 
 export default Playground;

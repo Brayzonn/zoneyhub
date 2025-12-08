@@ -1,30 +1,34 @@
-import Nav from "../components/Nav";
+import FloatingMenu from "../components/common/FloatingMenu";
+import MatTexture from "../components/common/MatTexture";
 import Hero from "../components/Hero";
-import { usePageSetup } from "../hooks/usePageSetup";
 import { useTheme } from "../hooks/useTheme";
-import { lazy } from "react";
-import StackAndProjects from "../components/StackAndProjects";
-const GitRepos = lazy(() => import("../components/GitRepos"));
-const Footer = lazy(() => import("../components/Footer"));
+import { useState } from "react";
 
 const Landing = () => {
-  const { isScrolled } = usePageSetup();
+  const [isSoundOn, setIsSoundOn] = useState(true);
+
+  const handleSoundToggle = () => {
+    setIsSoundOn((prev) => !prev);
+  };
+
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <div className="bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full overflow-hidden">
-      <Nav
-        isScrolled={isScrolled}
-        isDarkMode={isDarkMode}
-        onThemeToggle={toggleTheme}
-      />
+    <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full overflow-hidden">
+      <MatTexture isDark={isDarkMode} />
 
-      <main className="pt-[120px] px-[1rem] sm:px-[3rem]">
-        <Hero />
+      {/* Navigation Menu */}
+      <div className="fixed z-20 bottom-0 left-1/2 -translate-x-1/2 pb-4">
+        <FloatingMenu
+          isSoundOn={isSoundOn}
+          onSoundToggle={handleSoundToggle}
+          isDark={isDarkMode}
+          onThemeToggle={toggleTheme}
+        />
+      </div>
 
-        <StackAndProjects />
-        <GitRepos />
-        <Footer />
+      <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-center z-10">
+        <Hero isDark={isDarkMode} />
       </main>
     </div>
   );
