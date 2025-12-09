@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
 import FloatingMenu from "../components/common/FloatingMenu";
-import { useTheme } from "../hooks/useTheme";
+import MatTexture from "../components/common/MatTexture";
 import ProjectsComponent from "../components/ProjectsComponent";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
+import { useTheme } from "../hooks/useTheme";
+import { useState, useEffect } from "react";
 import { useSound } from "../hooks/useSound";
 
 const Projects = () => {
   const { isSoundOn, toggleSound } = useSound();
-
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
 
   const { stop, currentTrack, setVolume } = useGlobalAudio();
@@ -23,6 +23,8 @@ const Projects = () => {
 
   return (
     <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full overflow-hidden">
+      <MatTexture isDark={isDarkMode} />
+
       {/* Navigation Menu */}
       <div className="fixed z-20 bottom-0 left-1/2 -translate-x-1/2 pb-4">
         <FloatingMenu
@@ -37,7 +39,7 @@ const Projects = () => {
         />
       </div>
 
-      <main className="px-3 py-[2rem] relative min-h-screen w-full flex flex-col  z-10">
+      <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-center z-10">
         <ProjectsComponent isDark={isDarkMode} />
       </main>
     </div>
