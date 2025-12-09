@@ -25,7 +25,7 @@ const Projects = () => {
     <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full ">
       <MatTexture isDark={isDarkMode} />
 
-      <main className="px-3 py-[8rem] relative min-h-screen w-full flex justify-center items-center z-10">
+      <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-center z-10">
         <ProjectsComponent isDark={isDarkMode} />
       </main>
 
