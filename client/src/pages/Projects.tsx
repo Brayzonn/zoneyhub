@@ -22,8 +22,12 @@ const Projects = () => {
   };
 
   return (
-    <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full overflow-hidden">
+    <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full ">
       <MatTexture isDark={isDarkMode} />
+
+      <main className="px-3 py-[8rem] relative min-h-screen w-full flex justify-center items-center z-10">
+        <ProjectsComponent isDark={isDarkMode} />
+      </main>
 
       {/* Navigation Menu */}
       <div className="fixed z-20 bottom-0 left-1/2 -translate-x-1/2 pb-2">
@@ -38,10 +42,6 @@ const Projects = () => {
           onThemeToggle={toggleTheme}
         />
       </div>
-
-      <main className="px-3 py-[8rem] relative min-h-screen w-full flex justify-center items-center z-10">
-        <ProjectsComponent isDark={isDarkMode} />
-      </main>
     </div>
   );
 };
