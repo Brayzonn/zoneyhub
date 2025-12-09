@@ -141,6 +141,21 @@ const Playground = () => {
         <div className="relative w-[2400px] h-[2760px]">
           <MatTexture isDark={isDarkMode} />
 
+          {/* Canvas Border */}
+          <div className="pointer-events-none absolute inset-0 z-30">
+            {/* Top border */}
+            <div className="absolute top-0 left-0 right-0 h-[5px] bg-sky-200" />
+
+            {/* Bottom border */}
+            <div className="absolute bottom-0 left-0 right-0 h-[5px] bg-sky-200" />
+
+            {/* Left border */}
+            <div className="absolute top-0 left-0 bottom-0 w-[5px] bg-sky-200" />
+
+            {/* Right border */}
+            <div className="absolute top-0 right-0 bottom-0 w-[5px] bg-sky-200" />
+          </div>
+
           {/* Playground Header  */}
           <PlaygroundHeader isDark={isDarkMode} />
 
@@ -213,7 +228,7 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
         <div className="flex flex-1 flex-col">
           <div className="flex items-center gap-2">
             <h1
-              className={`text-base sm:text-lg font-semibold ${
+              className={`text-base   ${
                 isDark ? "text-gray-900" : "text-white"
               }`}
             >
