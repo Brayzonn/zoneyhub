@@ -55,10 +55,23 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     setCurrentTrack(null);
   }, []);
 
-  const setVolume = useCallback((volume: number) => {
-    if (!audioRef.current) return;
-    audioRef.current.volume = Math.max(0, Math.min(1, volume));
-  }, []);
+  const setVolume = useCallback(
+    (volume: number) => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      if (volume === 0 && isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else if (volume > 0 && !isPlaying && currentTrack) {
+        audio.play().catch(console.error);
+        setIsPlaying(true);
+      }
+
+      audio.volume = Math.max(0, Math.min(1, volume));
+    },
+    [currentTrack, isPlaying]
+  );
 
   const toggleMute = useCallback(() => {
     if (!audioRef.current) return;
