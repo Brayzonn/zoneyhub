@@ -26,7 +26,7 @@ const Projects = () => {
       <MatTexture isDark={isDarkMode} />
 
       {/* Navigation Menu */}
-      <div className="fixed z-20 bottom-0 left-1/2 -translate-x-1/2 pb-4">
+      <div className="fixed z-20 bottom-0 left-1/2 -translate-x-1/2 pb-2">
         <FloatingMenu
           onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
           isInfoOpen={isInfoCardOpen}
@@ -39,7 +39,7 @@ const Projects = () => {
         />
       </div>
 
-      <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-center z-10">
+      <main className="px-3 py-[8rem] relative min-h-screen w-full flex justify-center items-center z-10">
         <ProjectsComponent isDark={isDarkMode} />
       </main>
     </div>
