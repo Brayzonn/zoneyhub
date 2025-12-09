@@ -30,7 +30,7 @@ const Landing = () => {
       </main>
 
       {/* Navigation Menu*/}
-      <div className="fixed z-50 bottom-4 left-1/2 -translate-x-1/2">
+      <div className="fixed z-50 top-2 left-1/2 -translate-x-1/2">
         <FloatingMenu
           onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
           isInfoOpen={isInfoCardOpen}

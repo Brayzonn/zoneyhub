@@ -7,7 +7,6 @@ import { useSoundEffects } from "../../hooks/useSoundEffects";
 import {
   HomeIcon,
   ProjectsIcon,
-  // BlogIcon,
   PlaygroundIcon,
   SoundOnIcon,
   SoundOffIcon,
@@ -38,6 +37,7 @@ interface FloatingMenuProps {
   onStopTrack?: () => void;
   isDark: boolean;
   onThemeToggle: () => void;
+  labelPosition?: "top" | "bottom";
 }
 
 const FloatingMenu = ({
@@ -49,6 +49,7 @@ const FloatingMenu = ({
   onStopTrack,
   isDark,
   onThemeToggle,
+  labelPosition = "bottom",
 }: FloatingMenuProps) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
@@ -56,6 +57,29 @@ const FloatingMenu = ({
   const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
 
   const isActive = (path: string) => location.pathname === path;
+
+  const getLabelClasses = () => {
+    const baseClasses = `absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
+      isDark ? "bg-white border-gray-200" : "bg-[#121418] border-[#121418]"
+    }`;
+
+    const positionClasses =
+      labelPosition === "top" ? "bottom-full mb-2" : "top-full mt-2";
+
+    return `${baseClasses} ${positionClasses}`;
+  };
+
+  const getLabelVisibilityClasses = (isHovered: boolean) => {
+    if (labelPosition === "top") {
+      return isHovered
+        ? "opacity-100 translate-y-0"
+        : "opacity-0 translate-y-2 pointer-events-none";
+    } else {
+      return isHovered
+        ? "opacity-100 translate-y-0"
+        : "opacity-0 -translate-y-2 pointer-events-none";
+    }
+  };
 
   const menuItems: MenuItem[] = [
     {
@@ -70,12 +94,6 @@ const FloatingMenu = ({
       id: "projects",
       icon: <ProjectsIcon />,
     },
-    // {
-    //   path: "/blog",
-    //   label: "Blog",
-    //   id: "blog",
-    //   icon: <BlogIcon />,
-    // },
     {
       path: "/playground",
       label: "Playground",
@@ -86,7 +104,6 @@ const FloatingMenu = ({
 
   return (
     <div className="relative flex items-center">
-      {/* Info Card */}
       <div
         className={`absolute right-full top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out ${
           isInfoOpen
@@ -105,9 +122,7 @@ const FloatingMenu = ({
         </div>
       </div>
 
-      {/* Main Menu Container */}
       <div className="relative flex items-center">
-        {/* Music Player */}
         <AnimatePresence>
           {currentTrack && (
             <motion.div
@@ -145,7 +160,6 @@ const FloatingMenu = ({
           )}
         </AnimatePresence>
 
-        {/* Navigation Menu */}
         <div
           className={`relative z-10 flex items-center rounded-[12px] border ${
             isDark
@@ -153,7 +167,6 @@ const FloatingMenu = ({
               : "bg-[#121418] border-[#121418]"
           }`}
         >
-          {/* Menu Items Container */}
           <div className="h-[48px] px-2 py-1 flex flex-row gap-2">
             {menuItems.map((item) => (
               <div
@@ -177,17 +190,10 @@ const FloatingMenu = ({
                 >
                   <div>{item.icon}</div>
                 </Link>
-                {/* Label tooltip */}
                 <div
-                  className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
-                    isDark
-                      ? "bg-white border-gray-200"
-                      : "bg-[#121418] border-[#121418]"
-                  } ${
+                  className={`${getLabelClasses()} ${getLabelVisibilityClasses(
                     hoveredItem === item.id
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-2 pointer-events-none"
-                  }`}
+                  )}`}
                 >
                   <h1
                     className={`text-sm font-medium whitespace-nowrap ${
@@ -200,14 +206,12 @@ const FloatingMenu = ({
               </div>
             ))}
 
-            {/* Divider */}
             <div
               className={`shrink-0 w-[1px] my-1.5 ${
                 isDark ? "bg-gray-200" : "bg-[#515151]"
               }`}
             />
 
-            {/* Sound Toggle Button */}
             <div className="relative flex items-center">
               <button
                 onMouseEnter={() => setHoveredItem("sound")}
@@ -228,17 +232,10 @@ const FloatingMenu = ({
                 {isSoundOn ? <SoundOnIcon /> : <SoundOffIcon />}
               </button>
 
-              {/* Label tooltip */}
               <div
-                className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
-                  isDark
-                    ? "bg-white border-gray-200"
-                    : "bg-[#121418] border-[#121418]"
-                } ${
+                className={`${getLabelClasses()} ${getLabelVisibilityClasses(
                   hoveredItem === "sound"
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-2 pointer-events-none"
-                }`}
+                )}`}
               >
                 <h1
                   className={`text-sm font-medium whitespace-nowrap ${
@@ -250,7 +247,6 @@ const FloatingMenu = ({
               </div>
             </div>
 
-            {/* Theme Toggle Button */}
             <div className="relative flex items-center">
               <button
                 onMouseEnter={() => setHoveredItem("theme")}
@@ -269,17 +265,10 @@ const FloatingMenu = ({
                 {isDark ? <SunIcon /> : <MoonIcon />}
               </button>
 
-              {/* Label tooltip */}
               <div
-                className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
-                  isDark
-                    ? "bg-white border-gray-200"
-                    : "bg-[#121418] border-[#121418]"
-                } ${
+                className={`${getLabelClasses()} ${getLabelVisibilityClasses(
                   hoveredItem === "theme"
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-2 pointer-events-none"
-                }`}
+                )}`}
               >
                 <h1
                   className={`text-sm font-medium whitespace-nowrap ${
