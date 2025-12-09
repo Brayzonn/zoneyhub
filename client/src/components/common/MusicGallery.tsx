@@ -51,7 +51,7 @@ const MusicGallery = ({
       audioUrl:
         "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947137/island_ytg_aqpipb.mp3",
       x: 1350,
-      y: 1630,
+      y: 1430,
     },
 
     {
@@ -64,7 +64,7 @@ const MusicGallery = ({
       audioUrl:
         "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947257/foreverandalways_shania_sl6dso.mp3",
       x: 700,
-      y: 1650,
+      y: 1450,
     },
     {
       id: "4",
@@ -75,7 +75,7 @@ const MusicGallery = ({
       rotation: -2,
       audioUrl:
         "https://res.cloudinary.com/dxbkwrhyc/video/upload/v1764947260/naturally_amirobe_bmqpnl.mp3",
-      x: 1400,
+      x: 1500,
       y: 1000,
     },
   ];

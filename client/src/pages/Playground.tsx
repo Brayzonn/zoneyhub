@@ -42,7 +42,7 @@ const Playground = () => {
     if (!container) return;
 
     const canvasWidth = 2400;
-    const canvasHeight = 2760;
+    const canvasHeight = 2400;
 
     const centerX = (canvasWidth - container.clientWidth) / 2;
     const centerY = (canvasHeight - container.clientHeight) / 2;
@@ -138,7 +138,7 @@ const Playground = () => {
           msOverflowStyle: "none",
         }}
       >
-        <div className="relative w-[2400px] h-[2760px]">
+        <div className="relative w-[2400px] h-[2400px]">
           <MatTexture isDark={isDarkMode} />
 
           {/* Canvas Border */}
