@@ -5,6 +5,7 @@ import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import { useTheme } from "../hooks/useTheme";
 import MatTexture from "../components/common/MatTexture";
 import { useSound } from "../hooks/useSound";
+import PlaygroundLoadingCard from "../components/common/PlaygroundLoadingCard";
 
 const Playground = () => {
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
@@ -158,6 +159,10 @@ const Playground = () => {
 
           {/* Playground Header  */}
           <PlaygroundHeader isDark={isDarkMode} />
+
+          <div className="absolute top-[400px] left-[400px] z-20">
+            <PlaygroundLoadingCard isDark={isDarkMode} />
+          </div>
 
           <div className="relative z-10 flex h-full">
             <MusicGallery
