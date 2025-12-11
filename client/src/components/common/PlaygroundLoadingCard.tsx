@@ -54,7 +54,7 @@ const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
 };
 
 const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
-  const targetWord = "BRAiY";
+  const targetWord = "WELCOME";
   const [displayChars, setDisplayChars] = useState(
     Array(targetWord.length)
       .fill("")
