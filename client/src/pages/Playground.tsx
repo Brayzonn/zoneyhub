@@ -228,7 +228,7 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
         <div className="flex flex-1 flex-col">
           <div className="flex items-center gap-2">
             <h1
-              className={`text-base   ${
+              className={`text-base space-mono-regular  ${
                 isDark ? "text-gray-900" : "text-white"
               }`}
             >
