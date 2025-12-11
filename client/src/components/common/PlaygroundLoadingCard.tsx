@@ -10,7 +10,7 @@ const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
 
   return (
     <motion.div
-      className={`relative w-[300px] h-[300px] rounded-lg overflow-hidden border ${
+      className={`relative w-[200px] h-[200px] rounded-lg overflow-hidden border ${
         isDark ? "bg-white border-gray-200" : "bg-[#121418] border-[#2a2d35]"
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -54,7 +54,7 @@ const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
 };
 
 const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
-  const targetWord = "ZONEYHUB";
+  const targetWord = "BRAiY";
   const [displayChars, setDisplayChars] = useState(
     Array(targetWord.length)
       .fill("")
@@ -113,15 +113,15 @@ const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className={`absolute inset-0 flex items-center justify-center ${
+      className={`absolute inset-0 flex items-center justify-center px-2 ${
         isDark ? "bg-[#f5f5f5]" : "bg-[#0f1115]"
       }`}
     >
-      <div className="flex gap-1 text-2xl font-extrabold tracking-wide">
+      <div className="flex gap-0.5 text-sm font-extrabold tracking-tight">
         {displayChars.map((charObj) => (
           <motion.span
             key={charObj.id}
-            className={`inline-block w-[20px] relative ${
+            className={`inline-block w-[12px] relative text-center ${
               !isAnimating
                 ? isDark
                   ? "text-black"
@@ -130,7 +130,7 @@ const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
                 ? "text-gray-600"
                 : "text-gray-400"
             }`}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 5 }}
             animate={{
               opacity: !isAnimating ? [1, 0, 1, 0, 1] : 1,
               y: 0,

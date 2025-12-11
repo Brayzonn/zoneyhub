@@ -84,19 +84,19 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
       animate={{ opacity: isFadingOut ? 0 : 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="relative">
-        <div className="flex gap-2   text-4xl font-extrabold tracking-wide overflow-hidden">
+      <div className="relative px-4">
+        <div className="flex gap-1 ssm:gap-1.5 st:gap-2 text-2xl ssm:text-3xl st:text-4xl font-extrabold tracking-wide overflow-hidden">
           {displayChars.map((charObj) => (
             <motion.span
               key={charObj.id}
-              className={` inline-block w-[40px] no-underline relative ${
+              className={`inline-block w-[20px] ssm:w-[28px] st:w-[40px] no-underline relative text-center ${
                 !isAnimating
                   ? isDark
-                    ? "text-black"
+                    ? "text-white"
                     : "text-black"
                   : isDark
-                  ? "text-gray-600"
-                  : "text-gray-400"
+                  ? "text-gray-400"
+                  : "text-gray-600"
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{
@@ -117,7 +117,6 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
             >
               {charObj.char || ""}
 
-              {/* TV turn-off effect - top half */}
               <motion.div
                 className={`absolute inset-0 ${
                   isDark ? "bg-[#0f1115]" : "bg-[#f5f5f5]"
@@ -132,7 +131,6 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
                 }}
               />
 
-              {/* TV turn-off effect - bottom half */}
               <motion.div
                 className={`absolute inset-0 ${
                   isDark ? "bg-[#0f1115]" : "bg-[#f5f5f5]"
@@ -150,7 +148,6 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
           ))}
         </div>
 
-        {/* Glitch effect overlay */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           animate={{
