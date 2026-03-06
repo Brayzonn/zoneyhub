@@ -16,7 +16,7 @@ const Landing = () => {
   });
 
   const { stop, currentTrack, setVolume } = useGlobalAudio();
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -36,7 +36,6 @@ const Landing = () => {
       <AnimatePresence mode="wait">
         {isPageLoading ? (
           <LoadingScreen
-            isDark={isDarkMode}
             onComplete={handleLoadingComplete}
           />
         ) : (
@@ -45,7 +44,7 @@ const Landing = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full"
+            className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-svh w-full"
           >
             <MatTexture isDark={isDarkMode} />
 
@@ -61,8 +60,6 @@ const Landing = () => {
                 onSoundToggle={toggleSound}
                 currentTrack={currentTrack}
                 onStopTrack={handleTrackStop}
-                isDark={isDarkMode}
-                onThemeToggle={toggleTheme}
               />
             </div>
           </motion.div>

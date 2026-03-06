@@ -17,7 +17,7 @@ const Playground = () => {
   const [scrollStart, setScrollStart] = useState({ left: 0, top: 0 });
 
   const { play, stop, setVolume, currentTrack } = useGlobalAudio();
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -183,8 +183,6 @@ const Playground = () => {
           onSoundToggle={toggleSound}
           currentTrack={currentTrack}
           onStopTrack={handleTrackStop}
-          isDark={isDarkMode}
-          onThemeToggle={toggleTheme}
         />
       </div>
     </div>

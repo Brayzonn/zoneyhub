@@ -11,7 +11,7 @@ const Projects = () => {
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
 
   const { stop, currentTrack, setVolume } = useGlobalAudio();
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -38,8 +38,6 @@ const Projects = () => {
           onSoundToggle={toggleSound}
           currentTrack={currentTrack}
           onStopTrack={handleTrackStop}
-          isDark={isDarkMode}
-          onThemeToggle={toggleTheme}
         />
       </div>
     </div>

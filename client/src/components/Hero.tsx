@@ -99,10 +99,42 @@ const Hero = ({ isDark }: HeroProps) => {
           >
             Eyinda Bright
           </span>
-          , a software developer focused on building reliable backend systems
-          and frontend infrastructure. Lately, I&apos;ve been exploring more
-          backend technologies, refining API performance, optimizing database
-          interactions, and improving deployment pipelines.
+          , a software developer with experience in building reliable backend
+          systems and frontend infrastructure, from designing APIs to shipping
+          and maintaining them in production.
+        </p>
+
+        <p
+          className={`tracking-[0.020em] text-[14px] text-left leading-relaxed mt-3 ${
+            isDark ? "text-gray-600" : "text-gray-400"
+          }`}
+        >
+          I write code for a living and apparently can&apos;t stop doing it for
+          fun either. Most recently that&apos;s meant building{" "}
+          <a
+            href="https://notifykit.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => logEvent("notifykit_click", { location: "intro" })}
+            className={`inline-flex items-center gap-1 group transition ${
+              isDark ? "text-gray-900" : "text-white"
+            }`}
+          >
+            <span
+              className={`underline ${
+                isDark
+                  ? "decoration-gray-400 group-hover:decoration-gray-900"
+                  : "decoration-gray-500 group-hover:decoration-white"
+              } transition-colors`}
+            >
+              NotifyKit
+            </span>
+            <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+              ↗
+            </span>
+          </a>
+          , a notification infrastructure service that started as a side project
+          and hasn&apos;t stopped growing since.
         </p>
 
         <p

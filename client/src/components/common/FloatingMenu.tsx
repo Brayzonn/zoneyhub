@@ -4,14 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import InfoCard from "./InfoCard";
 import MusicPlayer from "./Musicplayer";
 import { useSoundEffects } from "../../hooks/useSoundEffects";
+import { useTheme } from "../../hooks/useTheme";
 import {
   HomeIcon,
   ProjectsIcon,
   PlaygroundIcon,
   SoundOnIcon,
   SoundOffIcon,
-  SunIcon,
-  MoonIcon,
 } from "../../assets/icons";
 
 interface MenuItem {
@@ -35,8 +34,6 @@ interface FloatingMenuProps {
   onSoundToggle?: () => void;
   currentTrack?: CurrentTrack | null;
   onStopTrack?: () => void;
-  isDark: boolean;
-  onThemeToggle: () => void;
   labelPosition?: "top" | "bottom";
 }
 
@@ -47,10 +44,9 @@ const FloatingMenu = ({
   onSoundToggle,
   currentTrack,
   onStopTrack,
-  isDark,
-  onThemeToggle,
   labelPosition = "bottom",
 }: FloatingMenuProps) => {
+  const { isDarkMode: isDark } = useTheme();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
 
@@ -112,7 +108,7 @@ const FloatingMenu = ({
         }`}
       >
         <div
-          className={`px-2 py-1 rounded-[9px] border ${
+          className={`px-2 py-1 rounded-[9px] border transition-colors duration-300 ${
             isDark
               ? "bg-white border-gray-200"
               : "bg-[#121418] border-[#121418]"
@@ -141,7 +137,7 @@ const FloatingMenu = ({
               style={{ marginRight: "9px" }}
             >
               <div
-                className={`h-full rounded-[12px] overflow-hidden border ${
+                className={`h-full rounded-[12px] overflow-hidden border transition-colors duration-300 ${
                   isDark
                     ? "bg-white border-gray-200"
                     : "bg-[#121418] border-[#121418]"
@@ -161,7 +157,7 @@ const FloatingMenu = ({
         </AnimatePresence>
 
         <div
-          className={`relative z-10 flex items-center rounded-[12px] border ${
+          className={`relative z-10 flex items-center rounded-[12px] border transition-colors duration-300 ${
             isDark
               ? "bg-white border-gray-200"
               : "bg-[#121418] border-[#121418]"
@@ -247,38 +243,6 @@ const FloatingMenu = ({
               </div>
             </div>
 
-            <div className="relative flex items-center">
-              <button
-                onMouseEnter={() => setHoveredItem("theme")}
-                onMouseLeave={() => setHoveredItem(null)}
-                onClick={() => {
-                  playClick();
-                  onThemeToggle();
-                }}
-                className={`cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
-                  isDark
-                    ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
-                    : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
-                }`}
-                aria-label={isDark ? "Light Mode" : "Dark Mode"}
-              >
-                {isDark ? <SunIcon /> : <MoonIcon />}
-              </button>
-
-              <div
-                className={`${getLabelClasses()} ${getLabelVisibilityClasses(
-                  hoveredItem === "theme"
-                )}`}
-              >
-                <h1
-                  className={`text-sm font-medium whitespace-nowrap ${
-                    isDark ? "text-gray-900" : "text-[#c5c5c5]"
-                  }`}
-                >
-                  {isDark ? "Light" : "Dark"}
-                </h1>
-              </div>
-            </div>
           </div>
         </div>
       </div>

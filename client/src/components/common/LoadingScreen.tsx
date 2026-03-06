@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 interface LoadingScreenProps {
-  isDark?: boolean;
   onComplete?: () => void;
 }
 
@@ -12,7 +11,7 @@ interface CharDisplay {
   position: number;
 }
 
-const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
+const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const targetWord = "ZONEYHUB";
   const [displayChars, setDisplayChars] = useState<CharDisplay[]>(
     Array(targetWord.length)
@@ -27,7 +26,7 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
 
   useEffect(() => {
     let iterations = 0;
-    const maxIterations = 12;
+    const maxIterations = 6;
 
     const interval = setInterval(() => {
       if (iterations < maxIterations) {
@@ -52,8 +51,8 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
         setIsAnimating(false);
         clearInterval(interval);
 
-        const blinkDuration = 200;
-        const bounceDuration = 600;
+        const blinkDuration = 100;
+        const bounceDuration = 200;
 
         setTimeout(() => {
           setIsClosing(true);
@@ -64,10 +63,10 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
             setTimeout(() => {
               setIsFadingOut(true);
               if (onComplete) {
-                setTimeout(onComplete, 800);
+                setTimeout(onComplete, 400);
               }
-            }, 500);
-          }, 400);
+            }, 200);
+          }, 200);
         }, blinkDuration + bounceDuration);
       }
     }, 50);
@@ -77,12 +76,10 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
 
   return (
     <motion.div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden ${
-        isDark ? "bg-[#0f1115]" : "bg-[#f5f5f5]"
-      }`}
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-white"
       initial={{ opacity: 1 }}
       animate={{ opacity: isFadingOut ? 0 : 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <div className="relative px-4">
         <div className="flex gap-1 ssm:gap-1.5 st:gap-2 text-2xl ssm:text-3xl st:text-4xl font-extrabold tracking-wide overflow-hidden">
@@ -90,13 +87,7 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
             <motion.span
               key={charObj.id}
               className={`inline-block w-[20px] ssm:w-[28px] st:w-[40px] no-underline relative text-center ${
-                !isAnimating
-                  ? isDark
-                    ? "text-white"
-                    : "text-black"
-                  : isDark
-                  ? "text-gray-400"
-                  : "text-gray-600"
+                !isAnimating ? "text-black" : "text-gray-400"
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{
@@ -118,9 +109,7 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
               {charObj.char || ""}
 
               <motion.div
-                className={`absolute inset-0 ${
-                  isDark ? "bg-[#0f1115]" : "bg-[#f5f5f5]"
-                } origin-top`}
+                className="absolute inset-0 bg-white origin-top"
                 initial={{ scaleY: 0 }}
                 animate={{
                   scaleY: isClosing ? 0.5 : 0,
@@ -132,9 +121,7 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
               />
 
               <motion.div
-                className={`absolute inset-0 ${
-                  isDark ? "bg-[#0f1115]" : "bg-[#f5f5f5]"
-                } origin-bottom`}
+                className="absolute inset-0 bg-white origin-bottom"
                 initial={{ scaleY: 0 }}
                 animate={{
                   scaleY: isClosing ? 0.5 : 0,
@@ -159,11 +146,7 @@ const LoadingScreen = ({ isDark = false, onComplete }: LoadingScreenProps) => {
             repeatDelay: 0.8,
           }}
         >
-          <div
-            className={`w-full h-full ${
-              isDark ? "bg-white" : "bg-black"
-            } mix-blend-screen`}
-          />
+          <div className="w-full h-full bg-black mix-blend-screen" />
         </motion.div>
       </div>
     </motion.div>
