@@ -19,6 +19,8 @@ const VinylDisc = ({
   rotation = 0,
 }: VinylDiscProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [coverLoaded, setCoverLoaded] = useState(false);
+  const [centerLoaded, setCenterLoaded] = useState(false);
 
   return (
     <div
@@ -61,10 +63,14 @@ const VinylDisc = ({
             <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_2px_4px_rgba(0,0,0,0.3)] border-2 border-gray-800">
               {albumArt ? (
                 <>
+                  {!centerLoaded && (
+                    <div className="absolute inset-0 bg-gray-800 animate-pulse rounded-full" />
+                  )}
                   <img
                     src={albumArt}
                     alt={trackName}
-                    className="w-full h-full object-cover"
+                    onLoad={() => setCenterLoaded(true)}
+                    className={`w-full h-full object-cover transition-opacity duration-300 ${centerLoaded ? "opacity-100" : "opacity-0"}`}
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-2.5 h-2.5 rounded-full bg-gray-900 shadow-[inset_0_1px_2px_rgba(0,0,0,0.8)]" />
@@ -95,11 +101,17 @@ const VinylDisc = ({
           }}
         >
           {albumArt ? (
-            <img
-              src={albumArt}
-              alt={trackName}
-              className="w-full h-full object-cover"
-            />
+            <>
+              {!coverLoaded && (
+                <div className="absolute inset-0 bg-gray-700 animate-pulse" />
+              )}
+              <img
+                src={albumArt}
+                alt={trackName}
+                onLoad={() => setCoverLoaded(true)}
+                className={`w-full h-full object-cover transition-opacity duration-300 ${coverLoaded ? "opacity-100" : "opacity-0"}`}
+              />
+            </>
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[#6d9bca] to-[#5a8ab8] flex items-center justify-center">
               <svg

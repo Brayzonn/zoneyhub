@@ -160,7 +160,7 @@ const FloatingMenu = ({
           className={`relative z-10 flex items-center rounded-[12px] border transition-colors duration-300 ${
             isDark
               ? "bg-white border-gray-200"
-              : "bg-[#121418] border-[#121418]"
+              : "bg-[#121418] border-white/15"
           }`}
         >
           <div className="h-[48px] px-2 py-1 flex flex-row gap-2">

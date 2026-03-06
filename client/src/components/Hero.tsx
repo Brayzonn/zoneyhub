@@ -30,7 +30,7 @@ const Hero = ({ isDark }: HeroProps) => {
     { name: "Mail", link: "mailto:b.eyindaa@gmail.com", icon: MailIconSmall },
   ];
   const frontendTech = ["React", "TypeScript", "Tailwind CSS", "JavaScript"];
-  const backendTech = ["NestJS", "PostgreSQL", "MongoDB", "Express.js"];
+  const backendTech = ["NestJS", "Go", "PostgreSQL", "MongoDB", "Express.js"];
   return (
     <div
       className={`relative select-none rounded-lg max-w-[600px] mx-auto shadow-lg p-4 transition-colors duration-300 ${
