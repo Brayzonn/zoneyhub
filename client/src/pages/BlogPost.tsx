@@ -101,8 +101,8 @@ const BlogPost = () => {
                         ? "text-sky-600 bg-sky-50"
                         : "text-sky-400 bg-sky-400/10"
                       : isDark
-                      ? "text-amber-600 bg-amber-50"
-                      : "text-amber-400 bg-amber-400/10"
+                      ? "text-emerald-600 bg-emerald-50"
+                      : "text-emerald-400 bg-emerald-400/10"
                   }`}
                 >
                   {post.category === "technical" ? "Technical" : "Non-Technical"}
