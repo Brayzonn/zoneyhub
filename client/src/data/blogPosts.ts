@@ -32,6 +32,7 @@ export const blogPosts: BlogPost[] = [
       "Maybe everyone is guessing. I think everyone is, but sometimes I find no comfort in that knowledge.",
       "Maybe writing like this—\nmessy, unsure, unfinished—\nis just my way of reminding myself that I'm still here.",
       "Still trying.\nStill figuring it out one sentence at a time.",
+      "If you made it this far, thanks for reading.\nMaybe I'll try writing again tomorrow.",
     ],
   },
 ];
