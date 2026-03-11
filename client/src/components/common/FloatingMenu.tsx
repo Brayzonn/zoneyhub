@@ -9,6 +9,7 @@ import {
   HomeIcon,
   ProjectsIcon,
   PlaygroundIcon,
+  BlogIcon,
   SoundOnIcon,
   SoundOffIcon,
 } from "../../assets/icons";
@@ -95,6 +96,12 @@ const FloatingMenu = ({
       label: "Playground",
       id: "playground",
       icon: <PlaygroundIcon />,
+    },
+    {
+      path: "/blog",
+      label: "Blog",
+      id: "blog",
+      icon: <BlogIcon />,
     },
   ];
 
