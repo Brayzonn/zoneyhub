@@ -13,6 +13,12 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
       stack: ["NestJS", "PostgreSQL", "React", "Typescript"],
     },
     {
+      name: "Mines",
+      desc: "A provably fair browser-based mines game with real-time multiplayer leaderboards.",
+      link: "https://mines.zoneyhub.com",
+      stack: ["NestJS", "PostgreSQL", "React", "Redis", "Typescript"],
+    },
+    {
       name: "Weeklies",
       desc: "A personalized Spotify analytics app that tracks your weekly listening habits, top artists, and favorite genres with visual insights.",
       link: "https://weeklies.zoneyhub.com",
