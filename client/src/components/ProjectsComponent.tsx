@@ -8,13 +8,13 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
   const projects = [
     {
       name: "NotifyKit",
-      desc: "Simple, affordable notification infrastructure for indie developers, small teams, and startups. Handles email delivery and webhooks behind a clean API.",
+      desc: "A multi-provider notification infrastructure. ",
       link: "https://notifykit.dev",
       stack: ["NestJS", "PostgreSQL", "React", "Typescript"],
     },
     {
       name: "Mines",
-      desc: "A provably fair browser-based mines game with real-time multiplayer leaderboards.",
+      desc: "A browser-based mines game with real-time multiplayer leaderboards.",
       link: "https://mines.zoneyhub.com",
       stack: ["NestJS", "PostgreSQL", "React", "Redis", "Typescript"],
     },
@@ -95,66 +95,65 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="flex-1 min-w-0">
-            {/* Name */}
-            <a
-              href={proj.link}
-              onClick={() =>
-                logEvent("project_click", { project_name: proj.name })
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1.5 text-[14px] font-semibold group transition ${
-                isDark ? "text-gray-900" : "text-white"
-              }`}
-            >
-              {proj.name}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className={`shrink-0 transition-colors duration-200 ${
-                  isDark
-                    ? "text-gray-300 group-hover:text-gray-700"
-                    : "text-gray-600 group-hover:text-gray-300"
-                }`}
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-            </a>
-
-            {/* Description */}
-            <p
-              className={`mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] ${
-                isDark ? "text-gray-500" : "text-gray-400"
-              }`}
-            >
-              {proj.desc}
-            </p>
-
-            {/* Stack */}
-            <div className="flex flex-wrap gap-1.5 mt-2.5">
-              {proj.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className={`text-[11px] px-2 py-0.5 rounded-sm ${
-                    isDark
-                      ? "text-gray-600 bg-gray-100"
-                      : "text-gray-400 bg-[#1f2228]"
+                {/* Name */}
+                <a
+                  href={proj.link}
+                  onClick={() =>
+                    logEvent("project_click", { project_name: proj.name })
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-1.5 text-[14px] font-semibold group transition ${
+                    isDark ? "text-gray-900" : "text-white"
                   }`}
                 >
-                  {tech}
-                </span>
-              ))}
-            </div>
+                  {proj.name}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`shrink-0 transition-colors duration-200 ${
+                      isDark
+                        ? "text-gray-300 group-hover:text-gray-700"
+                        : "text-gray-600 group-hover:text-gray-300"
+                    }`}
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
 
+                {/* Description */}
+                <p
+                  className={`mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] ${
+                    isDark ? "text-gray-500" : "text-gray-400"
+                  }`}
+                >
+                  {proj.desc}
+                </p>
+
+                {/* Stack */}
+                <div className="flex flex-wrap gap-1.5 mt-2.5">
+                  {proj.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className={`text-[11px] px-2 py-0.5 rounded-sm ${
+                        isDark
+                          ? "text-gray-600 bg-gray-100"
+                          : "text-gray-400 bg-[#1f2228]"
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
