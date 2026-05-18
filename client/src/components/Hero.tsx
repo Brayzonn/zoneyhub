@@ -43,14 +43,14 @@ const Hero = ({ isDark }: HeroProps) => {
       <section className="flex justify-between items-center">
         <div className="">
           <h1
-            className={`tracking-wide text-[16px] font-bold ${
+            className={`tracking-wide text-[17px] font-bold ${
               isDark ? "text-gray-900" : "text-white"
             }`}
           >
             Eyinda Bright
           </h1>
           <p
-            className={`font-switzer tracking-wide text-[14px] ${
+            className={`font-editorial italic tracking-wide text-[16px] ${
               isDark ? "text-gray-500" : "text-gray-400"
             }`}
           >
@@ -59,7 +59,7 @@ const Hero = ({ isDark }: HeroProps) => {
         </div>
 
         <a
-          href="mailto:brayzoney@gmail.com"
+          href="mailto:b.eyindaa@gmail.com"
           onClick={() =>
             logEvent("contact_click", {
               type: "available_for_work",
@@ -212,7 +212,7 @@ const Hero = ({ isDark }: HeroProps) => {
               ↗
             </span>
           </a>
-          , gaming, and watching classic films.
+          , playing and building games, and watching classic films.
         </p>
       </section>
 

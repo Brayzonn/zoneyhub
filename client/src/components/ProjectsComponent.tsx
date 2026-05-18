@@ -103,7 +103,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 text-[14px] font-semibold group transition ${
+                  className={`font-display inline-flex items-center gap-1.5 text-[14px] font-semibold group transition ${
                     isDark ? "text-gray-900" : "text-white"
                   }`}
                 >

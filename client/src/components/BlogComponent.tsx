@@ -95,7 +95,7 @@ const BlogComponent = ({ isDark }: BlogComponentProps) => {
               <div className="flex-1 min-w-0">
                 <Link
                   to={`/blog/${post.slug}`}
-                  className={`text-[14px] font-semibold transition hover:underline underline-offset-2 ${
+                  className={`font-display text-[14px] font-semibold transition hover:underline underline-offset-2 ${
                     isDark
                       ? "text-gray-900 hover:text-gray-600"
                       : "text-white hover:text-gray-300"
