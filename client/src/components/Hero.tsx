@@ -212,7 +212,30 @@ const Hero = ({ isDark }: HeroProps) => {
               ↗
             </span>
           </a>
-          , playing and building games, and watching classic films.
+          , building and playing games like{" "}
+          <a
+            href="https://mines.zoneyhub.com"
+            onClick={() => logEvent("mines_click", { location: "intro" })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-1 group transition ${
+              isDark ? "text-gray-900" : "text-white"
+            }`}
+          >
+            <span
+              className={`underline ${
+                isDark
+                  ? "decoration-gray-400 group-hover:decoration-gray-900"
+                  : "decoration-gray-500 group-hover:decoration-white"
+              } transition-colors`}
+            >
+              Mines
+            </span>
+            <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+              ↗
+            </span>
+          </a>
+          , and watching classic films.
         </p>
       </section>
 
