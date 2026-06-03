@@ -241,7 +241,7 @@ GOOS=linux GOARCH=amd64 go build -o notifykit-db-backup .
 scp notifykit-db-backup user@your-vps:/tmp/
 
 # On the VPS, move it to /usr/local/bin/ 
-ssh user@your-vps 'sudo mv /tmp/notifykit-db-backup /usr/local/bin/ && sudo chmod +x /usr/local/bin/pg-backup'`,
+ssh user@your-vps 'sudo mv /tmp/notifykit-db-backup /usr/local/bin/ && sudo chmod +x /usr/local/bin/notifykit-db-backup'`,
       },
       "## Step 5 — Create the cloud bucket",
       "In your Cloudflare/Backblaze R2 dashboard, create a bucket — e.g. `notifykit-db-backups`. Then create an API token with Object Read & Write access and note your S3 endpoint URL. You'll need all three for the config file in the next step.",
@@ -286,19 +286,19 @@ HEALTHCHECK_URL=https://hc-ping.com/your-check-uuid`,
 
       "`RETENTION_*` controls how long backups are kept before being deleted. The values below keep daily backups for 14 days, weekly backups for 8 weeks, and monthly backups for roughly 6 months.",
 
-      "`ALERT_*` configures the NotifyKit API connection used to send failure alerts. ALERT_WEBHOOK_URL is the external destination webhook (e.g. Discord or Slack) where NotifyKit forwards the alert. HEALTHCHECK_URL is the ping URL from healthchecks.io used to detect missed backup runs.",
+      "`ALERT_*` on failure, the binary sends a backup_failed event to NotifyKit using NOTIFYKIT_API_URL and NOTIFYKIT_API_KEY. NotifyKit then logs and forwards the notification to ALERT_WEBHOOK_URL (Discord, Slack, etc.). HEALTHCHECK_URL is the ping URL from healthchecks.io used to detect missed backup runs.",
 
       "## Step 7 — Set up healthchecks.io",
       "Sign up free at healthchecks.io, click **Add Check**, and set Period = 1 day with a Grace period of 1 hour. Add an email or Slack integration so you know when it fires, then copy the ping URL into `HEALTHCHECK_URL` in your env file. The binary already knows to ping it on success and hit `/fail` on failure.",
 
       "## Step 8 — Test manually",
-      "Before trusting cron, run the backup once yourself. The first command loads the environment variables from `/etc/notifykit-backup.env` into your current shell session. The second command starts the backup.",
+      "Before trusting cron, run the backup once yourself. The first command loads the environment variables from `/etc/notifykit-backup.env` into your current shell session. The second command starts the backup. Since the env file is root-only `chmod 600`, run the command as root.",
 
       {
         type: "code",
         lang: "bash",
         label: "terminal",
-        code: `set -a; . /etc/notifykit-backup.env; set +a; notifykit-db-backup`,
+        code: `sudo bash -c 'set -a; . /etc/notifykit-backup.env; set +a; notifykit-db-backup'`,
       },
 
       "After it finishes, check that the terminal output ends with `backup OK`, a new backup file appears in your R2 bucket, and your healthchecks.io check reports a successful ping.",
@@ -308,7 +308,7 @@ HEALTHCHECK_URL=https://hc-ping.com/your-check-uuid`,
       {
         type: "code",
         lang: "bash",
-        label: "crontab -e",
+        label: "sudo crontab -e",
         code: `0 3 * * * bash -c 'set -a && source /etc/notifykit-backup.env && /usr/local/bin/notifykit-db-backup' >> /var/log/notifykit-backup.log 2>&1`,
       },
 
