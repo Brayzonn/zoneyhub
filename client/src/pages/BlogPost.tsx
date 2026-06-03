@@ -8,6 +8,117 @@ import MatTexture from "../components/common/MatTexture";
 import { blogPosts } from "../data/blogPosts";
 import { useState } from "react";
 
+const renderContent = (paragraph: string, isDark: boolean) => {
+  const lines = paragraph.split("\n");
+
+  const renderInline = (text: string) => {
+    const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
+    return parts.map((part) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return (
+          <strong
+            key={`${part}`}
+            className={
+              isDark
+                ? "text-gray-800 font-semibold"
+                : "text-gray-200 font-semibold"
+            }
+          >
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      if (part.startsWith("`") && part.endsWith("`")) {
+        return (
+          <code
+            key={`${part}`}
+            className={`text-[12px] px-1 py-0.5 rounded font-mono ${isDark ? "bg-gray-100 text-gray-700" : "bg-[#1f2228] text-sky-400"}`}
+          >
+            {part.slice(1, -1)}
+          </code>
+        );
+      }
+
+      if (part.match(/^\[.+\]\(.+\)$/)) {
+        const label = part.match(/\[(.+)\]/)?.[1];
+        const href = part.match(/\((.+)\)/)?.[1];
+        return (
+          <a
+            key={part}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={
+              isDark
+                ? "text-sky-600 underline underline-offset-2"
+                : "text-sky-400 underline underline-offset-2"
+            }
+          >
+            {label}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
+  if (paragraph.startsWith("## ")) {
+    return (
+      <h2
+        className={`text-[14px] font-semibold mt-2 ${isDark ? "text-gray-800" : "text-white"}`}
+      >
+        {paragraph.replace("## ", "")}
+      </h2>
+    );
+  }
+
+  const isList = lines.some((l) => l.trimStart().startsWith("- "));
+
+  if (isList) {
+    const items: { type: "text" | "item"; content: string }[] = [];
+    for (const line of lines) {
+      if (line.trimStart().startsWith("- ")) {
+        items.push({ type: "item", content: line.replace(/^-\s+/, "") });
+      } else if (line.trim()) {
+        items.push({ type: "text", content: line });
+      }
+    }
+    return (
+      <div className="space-y-2">
+        {items.map((item) =>
+          item.type === "text" ? (
+            <p
+              key={item.content}
+              className={`text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] ${isDark ? "text-gray-600" : "text-gray-400"}`}
+            >
+              {renderInline(item.content)}
+            </p>
+          ) : (
+            <div key={item.content} className="flex items-start gap-2">
+              <span
+                className={`mt-[6px] shrink-0 w-1 h-1 rounded-full ${isDark ? "bg-gray-400" : "bg-gray-500"}`}
+              />
+              <p
+                className={`text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] ${isDark ? "text-gray-600" : "text-gray-400"}`}
+              >
+                {renderInline(item.content)}
+              </p>
+            </div>
+          ),
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <p
+      className={`text-[14px] md:text-[15px] text-justify leading-normal tracking-[0.01em] whitespace-pre-line ${isDark ? "text-gray-600" : "text-gray-400"}`}
+    >
+      {renderInline(paragraph)}
+    </p>
+  );
+};
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { isDarkMode: isDark } = useTheme();
@@ -38,7 +149,7 @@ const BlogPost = () => {
               {/* Header */}
               <div className="mb-5">
                 <h1
-                  className={`text-[15px] font-semibold ${
+                  className={`text-[16px] md:text-[18px] font-semibold ${
                     isDark ? "text-gray-900" : "text-white"
                   }`}
                 >
@@ -46,14 +157,14 @@ const BlogPost = () => {
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
                   <span
-                    className={`text-[11px] ${
+                    className={`text-[11.50px] ${
                       isDark ? "text-gray-400" : "text-gray-500"
                     }`}
                   >
                     {post.date}
                   </span>
                   <span
-                    className={`text-[11px] ${
+                    className={`text-[11.50px] ${
                       isDark ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
@@ -77,19 +188,73 @@ const BlogPost = () => {
                     : "border-t border-dashed border-[#2a2d35]"
                 }`}
               />
-
               {/* Content */}
               <div className="space-y-4">
-                {post.content.map((paragraph) => (
-                  <p
-                    key={paragraph.slice(0, 40)}
-                    className={`text-[13px] leading-relaxed tracking-[0.015em] whitespace-pre-line ${
-                      isDark ? "text-gray-600" : "text-gray-400"
-                    }`}
-                  >
-                    {paragraph}
-                  </p>
-                ))}
+                {post.content.map((block) => {
+                  if (typeof block === "object" && block.type === "diagram") {
+                    return (
+                      <div
+                        key="diagram"
+                        className="my-4 rounded-md overflow-hidden"
+                      >
+                        <div dangerouslySetInnerHTML={{ __html: block.svg }} />
+                      </div>
+                    );
+                  }
+
+                  if (typeof block === "object" && block.type === "code") {
+                    return (
+                      <div
+                        key={block.label ?? block.code.slice(0, 40)}
+                        className={`rounded-md overflow-hidden border text-[12px] font-mono ${
+                          isDark
+                            ? "bg-gray-50 border-gray-200"
+                            : "bg-[#1a1d22] border-[#2a2d35]"
+                        }`}
+                      >
+                        {block.label && (
+                          <div
+                            className={`px-3 py-1.5 text-[11px] border-b ${
+                              isDark
+                                ? "text-gray-400 border-gray-200 bg-gray-100"
+                                : "text-gray-500 border-[#2a2d35] bg-[#22262e]"
+                            }`}
+                          >
+                            {block.label}
+                          </div>
+                        )}
+                        <pre className="p-3 overflow-x-auto leading-relaxed">
+                          <code
+                            className={
+                              isDark ? "text-gray-700" : "text-gray-300"
+                            }
+                          >
+                            {block.code}
+                          </code>
+                        </pre>
+                      </div>
+                    );
+                  }
+
+                  if (typeof block === "string" && block.startsWith("## ")) {
+                    return (
+                      <h2
+                        key={block}
+                        className={`text-[14px] font-semibold mt-2 ${
+                          isDark ? "text-gray-800" : "text-white"
+                        }`}
+                      >
+                        {block.replace("## ", "")}
+                      </h2>
+                    );
+                  }
+
+                  return (
+                    <div key={(block as string).slice(0, 40)}>
+                      {renderContent(block as string, isDark)}
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Tags */}
@@ -101,11 +266,13 @@ const BlogPost = () => {
                         ? "text-sky-600 bg-sky-50"
                         : "text-sky-400 bg-sky-400/10"
                       : isDark
-                      ? "text-emerald-600 bg-emerald-50"
-                      : "text-emerald-400 bg-emerald-400/10"
+                        ? "text-emerald-600 bg-emerald-50"
+                        : "text-emerald-400 bg-emerald-400/10"
                   }`}
                 >
-                  {post.category === "technical" ? "Technical" : "Non-Technical"}
+                  {post.category === "technical"
+                    ? "Technical"
+                    : "Non-Technical"}
                 </span>
                 {post.tags.map((tag) => (
                   <span
