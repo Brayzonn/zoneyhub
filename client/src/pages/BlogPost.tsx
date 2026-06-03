@@ -99,7 +99,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
                 className={`mt-[6px] shrink-0 w-1 h-1 rounded-full ${isDark ? "bg-gray-400" : "bg-gray-500"}`}
               />
               <p
-                className={`text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] ${isDark ? "text-gray-600" : "text-gray-400"}`}
+                className={`text-[14px]  md:text-[15px] leading-normal tracking-[0.01em] ${isDark ? "text-gray-600" : "text-gray-400"}`}
               >
                 {renderInline(item.content)}
               </p>
@@ -112,7 +112,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
 
   return (
     <p
-      className={`text-[14px] md:text-[15px] text-justify leading-normal tracking-[0.01em] whitespace-pre-line ${isDark ? "text-gray-600" : "text-gray-400"}`}
+      className={`text-[14px] md:text-[15px] leading-normal tracking-[0.01em] whitespace-pre-line ${isDark ? "text-gray-600" : "text-gray-400"}`}
     >
       {renderInline(paragraph)}
     </p>
