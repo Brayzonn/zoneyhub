@@ -1,5 +1,6 @@
 import React from "react";
 import App from "./App.tsx";
+import "./style/index.css";
 
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
