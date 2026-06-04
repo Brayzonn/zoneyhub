@@ -7,6 +7,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
+  description: string;
   date: string;
   readTime: string;
   category: "technical" | "non-technical";
@@ -143,6 +144,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "i-tried-writing-today",
     title: "I Tried Writing Today",
+    description: "I Tried Writing Today",
     excerpt:
       "I started writing with no idea what to write about, but I was sure I had a lot to share, a lot to let out, a lot to write.",
     date: "Mar 2026",
@@ -168,6 +170,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "automating-postgresql-backups-with-cloudflare-r2",
     title: "Automating PostgreSQL Backups with Docker and Cloudflare R2.",
+    description: "How I automated VPS backups using pg_dump, R2, and cron",
     excerpt:
       "A beginner-friendly walkthrough of how I built an automated backup system for my production PostgreSQL database.",
     date: "June 2026",

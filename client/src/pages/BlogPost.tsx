@@ -8,6 +8,7 @@ import { useSoundEffects } from "../hooks/useSoundEffects";
 import MatTexture from "../components/common/MatTexture";
 import { blogPosts } from "../data/blogPosts";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const renderContent = (paragraph: string, isDark: boolean) => {
   const lines = paragraph.split("\n");
@@ -141,236 +142,269 @@ const BlogPost = () => {
   }, [isSoundOn, setVolume]);
 
   const post = blogPosts.find((p) => p.slug === slug);
+  const url = `https://zoneyhub.com/blog/${slug}`;
 
   return (
-    <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">
-      <MatTexture isDark={isDark} />
+    <>
+      {post && (
+        <Helmet>
+          <title>{post.title} | Eyinda Bright</title>
 
-      <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-start z-10">
-        <div
-          className={`w-full max-w-[600px] mx-auto rounded-lg shadow-lg border p-5 transition-colors duration-300 ${
-            isDark
-              ? "bg-white border-gray-200"
-              : "bg-[#121418] border-[#2a2d35]"
-          }`}
-        >
-          {post ? (
-            <>
-              {/* Header */}
-              <div className="mb-5">
-                <h1
-                  className={`text-[16px] md:text-[18px] font-semibold ${
-                    isDark ? "text-gray-900" : "text-white"
-                  }`}
-                >
-                  {post.title}
-                </h1>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <span
-                    className={`text-[11.50px] ${
-                      isDark ? "text-gray-400" : "text-gray-500"
+          <meta name="description" content={post.description} />
+
+          {/* Open Graph */}
+          <meta property="og:title" content={post.title} />
+          <meta property="og:description" content={post.description} />
+          <meta
+            property="og:image"
+            content="https://zoneyhub.com/og-image.jpg"
+          />
+          <meta property="og:type" content="article" />
+
+          <meta property="og:url" content={url} />
+
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={post.title} />
+          <meta name="twitter:description" content={post.description} />
+          <meta
+            name="twitter:image"
+            content="https://zoneyhub.com/og-image.jpg"
+          />
+        </Helmet>
+      )}
+
+      <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">
+        <MatTexture isDark={isDark} />
+
+        <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-start z-10">
+          <div
+            className={`w-full max-w-[600px] mx-auto rounded-lg shadow-lg border p-5 transition-colors duration-300 ${
+              isDark
+                ? "bg-white border-gray-200"
+                : "bg-[#121418] border-[#2a2d35]"
+            }`}
+          >
+            {post ? (
+              <>
+                {/* Header */}
+                <div className="mb-5">
+                  <h1
+                    className={`text-[16px] md:text-[18px] font-semibold ${
+                      isDark ? "text-gray-900" : "text-white"
                     }`}
                   >
-                    {post.date}
-                  </span>
-                  <span
-                    className={`text-[11.50px] ${
-                      isDark ? "text-gray-300" : "text-gray-600"
-                    }`}
-                  >
-                    ·
-                  </span>
-                  <span
-                    className={`text-[11px] ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    {post.readTime}
-                  </span>
+                    {post.title}
+                  </h1>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span
+                      className={`text-[11.50px] ${
+                        isDark ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
+                      {post.date}
+                    </span>
+                    <span
+                      className={`text-[11.50px] ${
+                        isDark ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      ·
+                    </span>
+                    <span
+                      className={`text-[11px] ${
+                        isDark ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
+                      {post.readTime}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Divider */}
-              <div
-                className={`h-[1px] w-full mb-5 ${
-                  isDark
-                    ? "border-t border-dashed border-gray-200"
-                    : "border-t border-dashed border-[#2a2d35]"
-                }`}
-              />
+                {/* Divider */}
+                <div
+                  className={`h-[1px] w-full mb-5 ${
+                    isDark
+                      ? "border-t border-dashed border-gray-200"
+                      : "border-t border-dashed border-[#2a2d35]"
+                  }`}
+                />
 
-              {/* Content */}
-              <div className="space-y-4">
-                {post.content.map((block, i) => {
-                  if (typeof block === "object" && block.type === "diagram") {
-                    return (
-                      <div
-                        key="diagram"
-                        className="my-4 rounded-md overflow-hidden"
-                      >
-                        <div dangerouslySetInnerHTML={{ __html: block.svg }} />
-                      </div>
-                    );
-                  }
-
-                  if (typeof block === "object" && block.type === "code") {
-                    const blockKey = `${block.label ?? "code"}-${i}`;
-                    return (
-                      <div
-                        key={`${block.label ?? ""}-${block.code.slice(0, 20)}`}
-                        className={`rounded-md overflow-hidden border text-[12px] font-mono ${
-                          isDark
-                            ? "bg-gray-50 border-gray-200"
-                            : "bg-[#1a1d22] border-[#2a2d35]"
-                        }`}
-                      >
+                {/* Content */}
+                <div className="space-y-4">
+                  {post.content.map((block, i) => {
+                    if (typeof block === "object" && block.type === "diagram") {
+                      return (
                         <div
-                          className={`flex items-center justify-between px-3 py-1.5 text-[11px] border-b ${
+                          key="diagram"
+                          className="my-4 rounded-md overflow-hidden"
+                        >
+                          <div
+                            dangerouslySetInnerHTML={{ __html: block.svg }}
+                          />
+                        </div>
+                      );
+                    }
+
+                    if (typeof block === "object" && block.type === "code") {
+                      const blockKey = `${block.label ?? "code"}-${i}`;
+                      return (
+                        <div
+                          key={`${block.label ?? ""}-${block.code.slice(0, 20)}`}
+                          className={`rounded-md overflow-hidden border text-[12px] font-mono ${
                             isDark
-                              ? "text-gray-400 border-gray-200 bg-gray-100"
-                              : "text-gray-500 border-[#2a2d35] bg-[#22262e]"
+                              ? "bg-gray-50 border-gray-200"
+                              : "bg-[#1a1d22] border-[#2a2d35]"
                           }`}
                         >
-                          <span>{block.label ?? ""}</span>
-                          <button
-                            onClick={() => {
-                              handleCopy(block.code, blockKey);
-                              playClick();
-                            }}
-                            className={`cursor-pointer transition text-[10px] ${
+                          <div
+                            className={`flex items-center justify-between px-3 py-1.5 text-[11px] border-b ${
                               isDark
-                                ? "hover:text-gray-700"
-                                : "hover:text-white"
+                                ? "text-gray-400 border-gray-200 bg-gray-100"
+                                : "text-gray-500 border-[#2a2d35] bg-[#22262e]"
                             }`}
                           >
-                            {copiedKey === blockKey ? "Copied!" : "Copy"}
-                          </button>
+                            <span>{block.label ?? ""}</span>
+                            <button
+                              onClick={() => {
+                                handleCopy(block.code, blockKey);
+                                playClick();
+                              }}
+                              className={`cursor-pointer transition text-[10px] ${
+                                isDark
+                                  ? "hover:text-gray-700"
+                                  : "hover:text-white"
+                              }`}
+                            >
+                              {copiedKey === blockKey ? "Copied!" : "Copy"}
+                            </button>
+                          </div>
+                          <pre className="p-3 overflow-x-auto leading-relaxed">
+                            <code
+                              className={
+                                isDark ? "text-gray-700" : "text-gray-300"
+                              }
+                            >
+                              {block.code}
+                            </code>
+                          </pre>
                         </div>
-                        <pre className="p-3 overflow-x-auto leading-relaxed">
-                          <code
-                            className={
-                              isDark ? "text-gray-700" : "text-gray-300"
-                            }
-                          >
-                            {block.code}
-                          </code>
-                        </pre>
+                      );
+                    }
+
+                    if (typeof block === "string" && block.startsWith("## ")) {
+                      return (
+                        <h2
+                          key={block}
+                          className={`text-[14px] font-semibold mt-2 ${
+                            isDark ? "text-gray-800" : "text-white"
+                          }`}
+                        >
+                          {block.replace("## ", "")}
+                        </h2>
+                      );
+                    }
+
+                    return (
+                      <div key={(block as string).slice(0, 40)}>
+                        {renderContent(block as string, isDark)}
                       </div>
                     );
-                  }
+                  })}
+                </div>
 
-                  if (typeof block === "string" && block.startsWith("## ")) {
-                    return (
-                      <h2
-                        key={block}
-                        className={`text-[14px] font-semibold mt-2 ${
-                          isDark ? "text-gray-800" : "text-white"
-                        }`}
-                      >
-                        {block.replace("## ", "")}
-                      </h2>
-                    );
-                  }
-
-                  return (
-                    <div key={(block as string).slice(0, 40)}>
-                      {renderContent(block as string, isDark)}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 mt-6">
-                <span
-                  className={`text-[10px] px-2 py-0.5 rounded-sm font-medium ${
-                    post.category === "technical"
-                      ? isDark
-                        ? "text-sky-600 bg-sky-50"
-                        : "text-sky-400 bg-sky-400/10"
-                      : isDark
-                        ? "text-emerald-600 bg-emerald-50"
-                        : "text-emerald-400 bg-emerald-400/10"
-                  }`}
-                >
-                  {post.category === "technical"
-                    ? "Technical"
-                    : "Non-Technical"}
-                </span>
-                {post.tags.map((tag) => (
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 mt-6">
                   <span
-                    key={tag}
-                    className={`text-[11px] px-2 py-0.5 rounded-sm ${
-                      isDark
-                        ? "text-gray-600 bg-gray-100"
-                        : "text-gray-400 bg-[#1f2228]"
+                    className={`text-[10px] px-2 py-0.5 rounded-sm font-medium ${
+                      post.category === "technical"
+                        ? isDark
+                          ? "text-sky-600 bg-sky-50"
+                          : "text-sky-400 bg-sky-400/10"
+                        : isDark
+                          ? "text-emerald-600 bg-emerald-50"
+                          : "text-emerald-400 bg-emerald-400/10"
                     }`}
                   >
-                    {tag}
+                    {post.category === "technical"
+                      ? "Technical"
+                      : "Non-Technical"}
                   </span>
-                ))}
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`text-[11px] px-2 py-0.5 rounded-sm ${
+                        isDark
+                          ? "text-gray-600 bg-gray-100"
+                          : "text-gray-400 bg-[#1f2228]"
+                      }`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <div
+                  className={`h-[1px] w-full mt-5 mb-4 ${
+                    isDark
+                      ? "border-t border-dashed border-gray-200"
+                      : "border-t border-dashed border-[#2a2d35]"
+                  }`}
+                />
+
+                {/* Back link */}
+                <Link
+                  to="/blog"
+                  className={`inline-flex items-center gap-1 text-[12px] group transition ${
+                    isDark
+                      ? "text-gray-400 hover:text-gray-900"
+                      : "text-gray-500 hover:text-white"
+                  }`}
+                >
+                  <span className="inline-block group-hover:-translate-x-0.5 transition-transform">
+                    ←
+                  </span>
+                  <span>All posts</span>
+                </Link>
+              </>
+            ) : (
+              /* 404 state */
+              <div className="py-8 text-center">
+                <p
+                  className={`text-[13px] mb-4 ${
+                    isDark ? "text-gray-500" : "text-gray-400"
+                  }`}
+                >
+                  Post not found.
+                </p>
+                <Link
+                  to="/blog"
+                  className={`text-[12px] transition ${
+                    isDark
+                      ? "text-gray-400 hover:text-gray-900"
+                      : "text-gray-500 hover:text-white"
+                  }`}
+                >
+                  ← All posts
+                </Link>
               </div>
+            )}
+          </div>
+        </main>
 
-              {/* Divider */}
-              <div
-                className={`h-[1px] w-full mt-5 mb-4 ${
-                  isDark
-                    ? "border-t border-dashed border-gray-200"
-                    : "border-t border-dashed border-[#2a2d35]"
-                }`}
-              />
-
-              {/* Back link */}
-              <Link
-                to="/blog"
-                className={`inline-flex items-center gap-1 text-[12px] group transition ${
-                  isDark
-                    ? "text-gray-400 hover:text-gray-900"
-                    : "text-gray-500 hover:text-white"
-                }`}
-              >
-                <span className="inline-block group-hover:-translate-x-0.5 transition-transform">
-                  ←
-                </span>
-                <span>All posts</span>
-              </Link>
-            </>
-          ) : (
-            /* 404 state */
-            <div className="py-8 text-center">
-              <p
-                className={`text-[13px] mb-4 ${
-                  isDark ? "text-gray-500" : "text-gray-400"
-                }`}
-              >
-                Post not found.
-              </p>
-              <Link
-                to="/blog"
-                className={`text-[12px] transition ${
-                  isDark
-                    ? "text-gray-400 hover:text-gray-900"
-                    : "text-gray-500 hover:text-white"
-                }`}
-              >
-                ← All posts
-              </Link>
-            </div>
-          )}
+        <div className="fixed z-20 top-2 left-1/2 -translate-x-1/2">
+          <FloatingMenu
+            onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
+            isInfoOpen={isInfoCardOpen}
+            isSoundOn={isSoundOn}
+            onSoundToggle={toggleSound}
+            currentTrack={currentTrack}
+            onStopTrack={stop}
+          />
         </div>
-      </main>
-
-      <div className="fixed z-20 top-2 left-1/2 -translate-x-1/2">
-        <FloatingMenu
-          onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
-          isInfoOpen={isInfoCardOpen}
-          isSoundOn={isSoundOn}
-          onSoundToggle={toggleSound}
-          currentTrack={currentTrack}
-          onStopTrack={stop}
-        />
       </div>
-    </div>
+    </>
   );
 };
 
