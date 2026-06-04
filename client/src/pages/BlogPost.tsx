@@ -4,6 +4,7 @@ import { useTheme } from "../hooks/useTheme";
 import { useSound } from "../hooks/useSound";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import FloatingMenu from "../components/common/FloatingMenu";
+import { useSoundEffects } from "../hooks/useSoundEffects";
 import MatTexture from "../components/common/MatTexture";
 import { blogPosts } from "../data/blogPosts";
 import { useState } from "react";
@@ -120,9 +121,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
 };
 
 const BlogPost = () => {
-  // add at the top of BlogPost component
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
-
   const handleCopy = (code: string, key: string) => {
     navigator.clipboard.writeText(code);
     setCopiedKey(key);
@@ -134,6 +133,8 @@ const BlogPost = () => {
   const { isSoundOn, toggleSound } = useSound();
   const { stop, currentTrack, setVolume } = useGlobalAudio();
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
+
+  const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -232,7 +233,10 @@ const BlogPost = () => {
                         >
                           <span>{block.label ?? ""}</span>
                           <button
-                            onClick={() => handleCopy(block.code, blockKey)}
+                            onClick={() => {
+                              handleCopy(block.code, blockKey);
+                              playClick();
+                            }}
                             className={`cursor-pointer transition text-[10px] ${
                               isDark
                                 ? "hover:text-gray-700"
