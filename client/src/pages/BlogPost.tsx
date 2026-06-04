@@ -120,6 +120,15 @@ const renderContent = (paragraph: string, isDark: boolean) => {
 };
 
 const BlogPost = () => {
+  // add at the top of BlogPost component
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  const handleCopy = (code: string, key: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2000);
+  };
+
   const { slug } = useParams<{ slug: string }>();
   const { isDarkMode: isDark } = useTheme();
   const { isSoundOn, toggleSound } = useSound();
@@ -188,9 +197,10 @@ const BlogPost = () => {
                     : "border-t border-dashed border-[#2a2d35]"
                 }`}
               />
+
               {/* Content */}
               <div className="space-y-4">
-                {post.content.map((block) => {
+                {post.content.map((block, i) => {
                   if (typeof block === "object" && block.type === "diagram") {
                     return (
                       <div
@@ -203,26 +213,35 @@ const BlogPost = () => {
                   }
 
                   if (typeof block === "object" && block.type === "code") {
+                    const blockKey = `${block.label ?? "code"}-${i}`;
                     return (
                       <div
-                        key={block.label ?? block.code.slice(0, 40)}
+                        key={`${block.label ?? ""}-${block.code.slice(0, 20)}`}
                         className={`rounded-md overflow-hidden border text-[12px] font-mono ${
                           isDark
                             ? "bg-gray-50 border-gray-200"
                             : "bg-[#1a1d22] border-[#2a2d35]"
                         }`}
                       >
-                        {block.label && (
-                          <div
-                            className={`px-3 py-1.5 text-[11px] border-b ${
+                        <div
+                          className={`flex items-center justify-between px-3 py-1.5 text-[11px] border-b ${
+                            isDark
+                              ? "text-gray-400 border-gray-200 bg-gray-100"
+                              : "text-gray-500 border-[#2a2d35] bg-[#22262e]"
+                          }`}
+                        >
+                          <span>{block.label ?? ""}</span>
+                          <button
+                            onClick={() => handleCopy(block.code, blockKey)}
+                            className={`cursor-pointer transition text-[10px] ${
                               isDark
-                                ? "text-gray-400 border-gray-200 bg-gray-100"
-                                : "text-gray-500 border-[#2a2d35] bg-[#22262e]"
+                                ? "hover:text-gray-700"
+                                : "hover:text-white"
                             }`}
                           >
-                            {block.label}
-                          </div>
-                        )}
+                            {copiedKey === blockKey ? "Copied!" : "Copy"}
+                          </button>
+                        </div>
                         <pre className="p-3 overflow-x-auto leading-relaxed">
                           <code
                             className={
