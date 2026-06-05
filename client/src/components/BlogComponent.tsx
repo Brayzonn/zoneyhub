@@ -24,7 +24,7 @@ const BlogComponent = ({ isDark }: BlogComponentProps) => {
 
   return (
     <div
-      className={`relative select-none rounded-lg w-full max-w-[600px] mx-auto shadow-lg p-5 transition-colors duration-300 ${
+      className={`relative select-none rounded-lg w-full max-w-[500px] mx-auto shadow-lg p-5 transition-colors duration-300 ${
         isDark
           ? "bg-white border border-gray-200"
           : "bg-[#121418] border border-[#2a2d35]"
@@ -62,8 +62,8 @@ const BlogComponent = ({ isDark }: BlogComponentProps) => {
                   ? "bg-white text-gray-900 shadow-sm"
                   : "bg-[#2a2d35] text-white"
                 : isDark
-                ? "text-gray-400 hover:text-gray-700"
-                : "text-gray-500 hover:text-gray-300"
+                  ? "text-gray-400 hover:text-gray-700"
+                  : "text-gray-500 hover:text-gray-300"
             }`}
           >
             {f.label}
@@ -144,11 +144,13 @@ const BlogComponent = ({ isDark }: BlogComponentProps) => {
                           ? "text-sky-600 bg-sky-50"
                           : "text-sky-400 bg-sky-400/10"
                         : isDark
-                        ? "text-emerald-600 bg-emerald-50"
-                        : "text-emerald-400 bg-emerald-400/10"
+                          ? "text-emerald-600 bg-emerald-50"
+                          : "text-emerald-400 bg-emerald-400/10"
                     }`}
                   >
-                    {post.category === "technical" ? "Technical" : "Non-Technical"}
+                    {post.category === "technical"
+                      ? "Technical"
+                      : "Non-Technical"}
                   </span>
                   {post.tags.map((tag) => (
                     <span

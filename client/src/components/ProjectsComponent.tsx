@@ -40,7 +40,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
 
   return (
     <div
-      className={`relative select-none rounded-lg w-full max-w-[600px] mx-auto shadow-lg p-5 transition-colors duration-300 ${
+      className={`relative select-none rounded-lg w-full max-w-[500px] mx-auto shadow-lg p-5 transition-colors duration-300 ${
         isDark
           ? "bg-white border border-gray-200"
           : "bg-[#121418] border border-[#2a2d35]"

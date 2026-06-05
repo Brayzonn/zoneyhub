@@ -33,7 +33,7 @@ const Hero = ({ isDark }: HeroProps) => {
   const backendTech = ["NestJS", "Go", "PostgreSQL", "MongoDB", "Express.js"];
   return (
     <div
-      className={`relative select-none rounded-lg max-w-[600px] mx-auto shadow-lg p-4 transition-colors duration-300 ${
+      className={`relative select-none rounded-lg max-w-[500px] mx-auto shadow-lg p-4 transition-colors duration-300 ${
         isDark
           ? "bg-white border border-gray-200"
           : "bg-[#121418] border border-[#2a2d35]"
