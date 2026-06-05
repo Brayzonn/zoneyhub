@@ -8,13 +8,13 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
   const projects = [
     {
       name: "NotifyKit",
-      desc: "A multi-provider notification infrastructure. ",
+      desc: "A multi-provider notification infrastructure for emails and webhooks. ",
       link: "https://notifykit.dev",
       stack: ["NestJS", "PostgreSQL", "React", "Typescript"],
     },
     {
       name: "Mines",
-      desc: "A browser-based mines game with real-time multiplayer leaderboards.",
+      desc: "Multi-mode browser-based mines game with real-time multiplayer leaderboards.",
       link: "https://mines.zoneyhub.com",
       stack: ["NestJS", "PostgreSQL", "React", "Redis", "Typescript"],
     },
@@ -26,7 +26,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
     },
     {
       name: "B-Estates",
-      desc: "A real estate web app featuring interactive Google Maps integration for property visualization.",
+      desc: "Real estate web app featuring interactive Google Maps integration for property visualization.",
       link: "https://realestate-platform-alpha.vercel.app/",
       stack: ["React", "Tailwind CSS", "MongoDB", "Express"],
     },
