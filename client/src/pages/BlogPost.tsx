@@ -157,7 +157,7 @@ const BlogPost = () => {
           <meta property="og:description" content={post.description} />
           <meta
             property="og:image"
-            content="https://zoneyhub.com/og-image.jpg"
+            content="https://zoneyhub.com/og-image.webp"
           />
           <meta property="og:type" content="article" />
 
@@ -169,7 +169,7 @@ const BlogPost = () => {
           <meta name="twitter:description" content={post.description} />
           <meta
             name="twitter:image"
-            content="https://zoneyhub.com/og-image.jpg"
+            content="https://zoneyhub.com/og-image.webp"
           />
         </Helmet>
       )}
