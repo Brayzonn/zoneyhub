@@ -35,7 +35,8 @@
 
   /* Typography */
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cabinet Grotesk", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Cabinet Grotesk", "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-editorial: "Instrument Serif", ui-serif, Georgia, serif;
 
   /* Animation durations */
@@ -52,7 +53,6 @@
   scrollbar-width: none;
 }
 
-
 /* Global styles */
 body {
   overscroll-behavior: none;
@@ -63,9 +63,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
 }

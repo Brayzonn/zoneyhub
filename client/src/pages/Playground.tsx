@@ -263,7 +263,7 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
       {/* Description */}
       <p
         className={`text-sm leading-relaxed ${
-          isDark ? "text-gray-600" : "text-gray-400"
+          isDark ? "text-gray-600" : "text-gray-300"
         }`}
       >
         A space where I keep my <em>UI experiments</em>, interaction studies,

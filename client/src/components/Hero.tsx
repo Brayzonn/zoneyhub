@@ -51,7 +51,7 @@ const Hero = ({ isDark }: HeroProps) => {
           </h1>
           <p
             className={`font-editorial italic tracking-wide text-[16px] ${
-              isDark ? "text-gray-500" : "text-gray-400"
+              isDark ? "text-gray-500" : "text-gray-300"
             }`}
           >
             Software Developer
@@ -88,7 +88,7 @@ const Hero = ({ isDark }: HeroProps) => {
       <section className="text-center">
         <p
           className={`tracking-[0.020em] text-[14px] text-left leading-relaxed ${
-            isDark ? "text-gray-600" : "text-gray-400"
+            isDark ? "text-gray-600" : "text-gray-300"
           }`}
         >
           Hi! I&apos;m{" "}
@@ -106,7 +106,7 @@ const Hero = ({ isDark }: HeroProps) => {
 
         <p
           className={`tracking-[0.020em] text-[14px] text-left leading-relaxed mt-3 ${
-            isDark ? "text-gray-600" : "text-gray-400"
+            isDark ? "text-gray-600" : "text-gray-300"
           }`}
         >
           I write code for a living and apparently can&apos;t stop doing it for
@@ -139,7 +139,7 @@ const Hero = ({ isDark }: HeroProps) => {
 
         <p
           className={`tracking-[0.020em] text-[14px] text-left   leading-relaxed mt-4 ${
-            isDark ? "text-gray-600" : "text-gray-400"
+            isDark ? "text-gray-600" : "text-gray-300"
           }`}
         >
           I&apos;m open to{" "}
@@ -186,7 +186,7 @@ const Hero = ({ isDark }: HeroProps) => {
 
         <p
           className={`tracking-[0.020em] text-left  text-[14px]  leading-relaxed mt-4 ${
-            isDark ? "text-gray-600" : "text-gray-400"
+            isDark ? "text-gray-600" : "text-gray-300"
           }`}
         >
           Outside work, I enjoy curating{" "}

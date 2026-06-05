@@ -133,7 +133,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                 {/* Description */}
                 <p
                   className={`mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] ${
-                    isDark ? "text-gray-500" : "text-gray-400"
+                    isDark ? "text-gray-500" : "text-gray-300"
                   }`}
                 >
                   {proj.desc}
