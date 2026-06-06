@@ -8,7 +8,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
   const projects = [
     {
       name: "NotifyKit",
-      desc: "A multi-provider notification infrastructure for emails and webhooks. ",
+      desc: "A notification infrastructure service focused on reliable email and webhook delivery at scale.",
       link: "https://notifykit.dev",
       stack: ["NestJS", "PostgreSQL", "React", "Typescript"],
     },

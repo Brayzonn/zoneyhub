@@ -50,7 +50,7 @@ const Hero = ({ isDark }: HeroProps) => {
             Eyinda Bright
           </h1>
           <p
-            className={`font-editorial italic tracking-wide text-[16px] ${
+            className={`font-editorial italic tracking-wide text-[14px] ${
               isDark ? "text-gray-500" : "text-gray-300"
             }`}
           >
@@ -99,9 +99,9 @@ const Hero = ({ isDark }: HeroProps) => {
           >
             Eyinda Bright
           </span>
-          , a software developer with experience in building reliable backend
-          systems and frontend infrastructure, from designing APIs to shipping
-          and maintaining them in production.
+          , a software developer with experience building reliable backend
+          systems and frontend applications, taking products from design and
+          development through deployment and maintenance.
         </p>
 
         <p
@@ -133,8 +133,8 @@ const Hero = ({ isDark }: HeroProps) => {
               ↗
             </span>
           </a>
-          , a notification infrastructure service that started as a side project
-          and hasn&apos;t stopped growing since.
+          , a notification infrastructure service built to make email and
+          webhook delivery simple, reliable, and observable
         </p>
 
         <p
@@ -212,30 +212,7 @@ const Hero = ({ isDark }: HeroProps) => {
               ↗
             </span>
           </a>
-          , building and playing games like{" "}
-          <a
-            href="https://mines.zoneyhub.com"
-            onClick={() => logEvent("mines_click", { location: "intro" })}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1 group transition ${
-              isDark ? "text-gray-900" : "text-white"
-            }`}
-          >
-            <span
-              className={`underline ${
-                isDark
-                  ? "decoration-gray-400 group-hover:decoration-gray-900"
-                  : "decoration-gray-500 group-hover:decoration-white"
-              } transition-colors`}
-            >
-              Mines
-            </span>
-            <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-              ↗
-            </span>
-          </a>
-          , and watching classic films.
+          , building and playing games, and watching classic films.
         </p>
       </section>
 
