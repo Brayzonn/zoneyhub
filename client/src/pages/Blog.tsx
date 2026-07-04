@@ -2,7 +2,6 @@ import FloatingMenu from "../components/common/FloatingMenu";
 import MatTexture from "../components/common/MatTexture";
 import BlogComponent from "../components/BlogComponent";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
-import { useTheme } from "../hooks/useTheme";
 import { useState, useEffect } from "react";
 import { useSound } from "../hooks/useSound";
 
@@ -11,7 +10,6 @@ const Blog = () => {
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
 
   const { stop, currentTrack, setVolume } = useGlobalAudio();
-  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -23,10 +21,10 @@ const Blog = () => {
 
   return (
     <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">
-      <MatTexture isDark={isDarkMode} />
+      <MatTexture />
 
       <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-center z-10">
-        <BlogComponent isDark={isDarkMode} />
+        <BlogComponent />
       </main>
 
       {/* Navigation Menu */}

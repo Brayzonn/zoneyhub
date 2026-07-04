@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import InfoCard from "./InfoCard";
 import MusicPlayer from "./Musicplayer";
 import { useSoundEffects } from "../../hooks/useSoundEffects";
-import { useTheme } from "../../hooks/useTheme";
 import {
   HomeIcon,
   ProjectsIcon,
@@ -47,7 +46,6 @@ const FloatingMenu = ({
   onStopTrack,
   labelPosition = "bottom",
 }: FloatingMenuProps) => {
-  const { isDarkMode: isDark } = useTheme();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
 
@@ -56,9 +54,8 @@ const FloatingMenu = ({
   const isActive = (path: string) => location.pathname === path;
 
   const getLabelClasses = () => {
-    const baseClasses = `absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border ${
-      isDark ? "bg-white border-gray-200" : "bg-[#121418] border-[#121418]"
-    }`;
+    const baseClasses =
+      "absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border bg-[#121418] border-[#121418]";
 
     const positionClasses =
       labelPosition === "top" ? "bottom-full mb-2" : "top-full mt-2";
@@ -114,13 +111,7 @@ const FloatingMenu = ({
             : "opacity-0 -translate-x-4 mr-0 pointer-events-none"
         }`}
       >
-        <div
-          className={`px-2 py-1 rounded-[9px] border transition-colors duration-300 ${
-            isDark
-              ? "bg-white border-gray-200"
-              : "bg-[#121418] border-[#121418]"
-          }`}
-        >
+        <div className="px-2 py-1 rounded-[9px] border transition-colors duration-300 bg-[#121418] border-[#121418]">
           <InfoCard isOpen={!!isInfoOpen} onClose={onInfoClick ?? (() => {})} />
         </div>
       </div>
@@ -143,33 +134,20 @@ const FloatingMenu = ({
               }}
               style={{ marginRight: "9px" }}
             >
-              <div
-                className={`h-full rounded-[12px] overflow-hidden border transition-colors duration-300 ${
-                  isDark
-                    ? "bg-white border-gray-200"
-                    : "bg-[#121418] border-[#121418]"
-                }`}
-              >
+              <div className="h-full rounded-[12px] overflow-hidden border transition-colors duration-300 bg-[#121418] border-[#121418]">
                 <MusicPlayer
                   trackId={currentTrack.id}
                   trackName={currentTrack.name}
                   artistName={currentTrack.artist}
                   albumArt={currentTrack.albumArt}
                   onStop={onStopTrack ?? (() => {})}
-                  isDark={isDark}
                 />
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <div
-          className={`relative z-10 flex items-center rounded-[12px] border transition-colors duration-300 ${
-            isDark
-              ? "bg-white border-gray-200"
-              : "bg-[#121418] border-white/15"
-          }`}
-        >
+        <div className="relative z-10 flex items-center rounded-[12px] border transition-colors duration-300 bg-[#121418] border-white/15">
           <div className="h-[48px] px-2 py-1 flex flex-row gap-2">
             {menuItems.map((item) => (
               <div
@@ -183,11 +161,7 @@ const FloatingMenu = ({
                   onMouseLeave={() => setHoveredItem(null)}
                   className={`shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all group border ${
                     isActive(item.path)
-                      ? isDark
-                        ? "bg-gray-100 border-gray-200 text-gray-900"
-                        : "bg-[#1f2228] border-[#1f2228] text-white"
-                      : isDark
-                      ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
+                      ? "bg-[#1f2228] border-[#1f2228] text-white"
                       : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
                   }`}
                 >
@@ -198,22 +172,14 @@ const FloatingMenu = ({
                     hoveredItem === item.id
                   )}`}
                 >
-                  <h1
-                    className={`text-sm font-medium whitespace-nowrap ${
-                      isDark ? "text-gray-900" : "text-[#e1e1e1]"
-                    }`}
-                  >
+                  <h1 className="text-sm font-medium whitespace-nowrap text-[#e1e1e1]">
                     {item.label}
                   </h1>
                 </div>
               </div>
             ))}
 
-            <div
-              className={`shrink-0 w-[1px] my-1.5 ${
-                isDark ? "bg-gray-200" : "bg-[#515151]"
-              }`}
-            />
+            <div className="shrink-0 w-[1px] my-1.5 bg-[#515151]" />
 
             <div className="relative flex items-center">
               <button
@@ -225,11 +191,7 @@ const FloatingMenu = ({
                     setTimeout(() => playClick(), 50);
                   }
                 }}
-                className={`cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
-                  isDark
-                    ? "text-gray-500 hover:text-gray-900 hover:bg-gray-100 border-transparent hover:border-gray-200"
-                    : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
-                }`}
+                className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
                 aria-label={isSoundOn ? "Mute Sound" : "Unmute Sound"}
               >
                 {isSoundOn ? <SoundOnIcon /> : <SoundOffIcon />}
@@ -240,16 +202,11 @@ const FloatingMenu = ({
                   hoveredItem === "sound"
                 )}`}
               >
-                <h1
-                  className={`text-sm font-medium whitespace-nowrap ${
-                    isDark ? "text-gray-900" : "text-[#c5c5c5]"
-                  }`}
-                >
+                <h1 className="text-sm font-medium whitespace-nowrap text-[#c5c5c5]">
                   {isSoundOn ? "Mute" : "Unmute"}
                 </h1>
               </div>
             </div>
-
           </div>
         </div>
       </div>

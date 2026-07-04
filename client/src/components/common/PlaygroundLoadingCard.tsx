@@ -1,18 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-interface PlaygroundLoadingCardProps {
-  isDark: boolean;
-}
-
-const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
+const PlaygroundLoadingCard = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
-      className={`relative w-[200px] h-[200px] rounded-lg overflow-hidden border ${
-        isDark ? "bg-white border-gray-200" : "bg-[#121418] border-[#2a2d35]"
-      }`}
+      className="relative w-[200px] h-[200px] rounded-lg overflow-hidden border bg-[#121418] border-[#2a2d35]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ scale: 1.02 }}
@@ -20,7 +14,7 @@ const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
     >
       <AnimatePresence mode="wait">
         {isHovered ? (
-          <MiniLoadingScreen key="loading" isDark={isDark} />
+          <MiniLoadingScreen key="loading" />
         ) : (
           <motion.div
             key="placeholder"
@@ -31,20 +25,10 @@ const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
             className="flex items-center justify-center h-full"
           >
             <div className="text-center space-y-2">
-              <p
-                className={`text-sm font-medium ${
-                  isDark ? "text-gray-900" : "text-gray-100"
-                }`}
-              >
+              <p className="text-sm font-medium text-gray-100">
                 Loading Animation
               </p>
-              <p
-                className={`text-xs ${
-                  isDark ? "text-gray-500" : "text-gray-400"
-                }`}
-              >
-                Hover to preview
-              </p>
+              <p className="text-xs text-gray-400">Hover to preview</p>
             </div>
           </motion.div>
         )}
@@ -53,7 +37,7 @@ const PlaygroundLoadingCard = ({ isDark }: PlaygroundLoadingCardProps) => {
   );
 };
 
-const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
+const MiniLoadingScreen = () => {
   const targetWord = "BRAY";
   const [displayChars, setDisplayChars] = useState(
     Array(targetWord.length)
@@ -113,22 +97,14 @@ const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className={`absolute inset-0 flex items-center justify-center px-2 ${
-        isDark ? "bg-[#f5f5f5]" : "bg-[#0f1115]"
-      }`}
+      className="absolute inset-0 flex items-center justify-center px-2 bg-[#0f1115]"
     >
       <div className="flex gap-0.5 text-sm font-extrabold tracking-tight">
         {displayChars.map((charObj) => (
           <motion.span
             key={charObj.id}
             className={`inline-block w-[12px] relative text-center ${
-              !isAnimating
-                ? isDark
-                  ? "text-black"
-                  : "text-white"
-                : isDark
-                ? "text-gray-600"
-                : "text-gray-400"
+              !isAnimating ? "text-white" : "text-gray-400"
             }`}
             initial={{ opacity: 0, y: 5 }}
             animate={{
@@ -150,9 +126,7 @@ const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
             {charObj.char || ""}
 
             <motion.div
-              className={`absolute inset-0 ${
-                isDark ? "bg-[#f5f5f5]" : "bg-[#0f1115]"
-              } origin-top`}
+              className="absolute inset-0 bg-[#0f1115] origin-top"
               initial={{ scaleY: 0 }}
               animate={{
                 scaleY: isClosing ? 0.5 : 0,
@@ -164,9 +138,7 @@ const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
             />
 
             <motion.div
-              className={`absolute inset-0 ${
-                isDark ? "bg-[#f5f5f5]" : "bg-[#0f1115]"
-              } origin-bottom`}
+              className="absolute inset-0 bg-[#0f1115] origin-bottom"
               initial={{ scaleY: 0 }}
               animate={{
                 scaleY: isClosing ? 0.5 : 0,
@@ -191,11 +163,7 @@ const MiniLoadingScreen = ({ isDark }: { isDark: boolean }) => {
           repeatDelay: 0.8,
         }}
       >
-        <div
-          className={`w-full h-full ${
-            isDark ? "bg-black" : "bg-white"
-          } mix-blend-screen`}
-        />
+        <div className="w-full h-full bg-white mix-blend-screen" />
       </motion.div>
     </motion.div>
   );

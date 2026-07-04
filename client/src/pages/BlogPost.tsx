@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { useTheme } from "../hooks/useTheme";
 import { useSound } from "../hooks/useSound";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import FloatingMenu from "../components/common/FloatingMenu";
@@ -10,7 +9,7 @@ import { blogPosts } from "../data/blogPosts";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-const renderContent = (paragraph: string, isDark: boolean) => {
+const renderContent = (paragraph: string) => {
   const lines = paragraph.split("\n");
 
   const renderInline = (text: string) => {
@@ -18,14 +17,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
     return parts.map((part) => {
       if (part.startsWith("**") && part.endsWith("**")) {
         return (
-          <strong
-            key={`${part}`}
-            className={
-              isDark
-                ? "text-gray-800 font-semibold"
-                : "text-gray-200 font-semibold"
-            }
-          >
+          <strong key={`${part}`} className="text-gray-200 font-semibold">
             {part.slice(2, -2)}
           </strong>
         );
@@ -34,7 +26,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
         return (
           <code
             key={`${part}`}
-            className={`text-[12px] px-1 py-0.5 rounded font-mono ${isDark ? "bg-gray-100 text-gray-700" : "bg-[#1f2228] text-sky-400"}`}
+            className="text-[12px] px-1 py-0.5 rounded font-mono bg-[#1f2228] text-sky-400"
           >
             {part.slice(1, -1)}
           </code>
@@ -50,11 +42,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className={
-              isDark
-                ? "text-sky-600 underline underline-offset-2"
-                : "text-sky-400 underline underline-offset-2"
-            }
+            className="text-sky-400 underline underline-offset-2"
           >
             {label}
           </a>
@@ -66,9 +54,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
 
   if (paragraph.startsWith("## ")) {
     return (
-      <h2
-        className={`text-[14px] font-semibold mt-2 ${isDark ? "text-gray-800" : "text-white"}`}
-      >
+      <h2 className="text-[14px] font-semibold mt-2 text-white">
         {paragraph.replace("## ", "")}
       </h2>
     );
@@ -91,18 +77,14 @@ const renderContent = (paragraph: string, isDark: boolean) => {
           item.type === "text" ? (
             <p
               key={item.content}
-              className={`text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] ${isDark ? "text-gray-600" : "text-gray-400"}`}
+              className="text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] text-gray-400"
             >
               {renderInline(item.content)}
             </p>
           ) : (
             <div key={item.content} className="flex items-start gap-2">
-              <span
-                className={`mt-[6px] shrink-0 w-1 h-1 rounded-full ${isDark ? "bg-gray-400" : "bg-gray-500"}`}
-              />
-              <p
-                className={`text-[14px]  md:text-[15px] leading-normal tracking-[0.01em] ${isDark ? "text-gray-600" : "text-gray-400"}`}
-              >
+              <span className="mt-[6px] shrink-0 w-1 h-1 rounded-full bg-gray-500" />
+              <p className="text-[14px]  md:text-[15px] leading-normal tracking-[0.01em] text-gray-400">
                 {renderInline(item.content)}
               </p>
             </div>
@@ -113,9 +95,7 @@ const renderContent = (paragraph: string, isDark: boolean) => {
   }
 
   return (
-    <p
-      className={`text-[14px] md:text-[15px] leading-normal tracking-[0.01em] whitespace-pre-line ${isDark ? "text-gray-600" : "text-gray-400"}`}
-    >
+    <p className="text-[14px] md:text-[15px] leading-normal tracking-[0.01em] whitespace-pre-line text-gray-400">
       {renderInline(paragraph)}
     </p>
   );
@@ -130,7 +110,6 @@ const BlogPost = () => {
   };
 
   const { slug } = useParams<{ slug: string }>();
-  const { isDarkMode: isDark } = useTheme();
   const { isSoundOn, toggleSound } = useSound();
   const { stop, currentTrack, setVolume } = useGlobalAudio();
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
@@ -175,60 +154,30 @@ const BlogPost = () => {
       )}
 
       <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">
-        <MatTexture isDark={isDark} />
+        <MatTexture />
 
         <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-start z-10">
-          <div
-            className={`w-full max-w-[600px] mx-auto rounded-lg shadow-lg border p-5 transition-colors duration-300 ${
-              isDark
-                ? "bg-white border-gray-200"
-                : "bg-[#121418] border-[#2a2d35]"
-            }`}
-          >
+          <div className="w-full max-w-[600px] mx-auto rounded-lg shadow-lg border p-5 transition-colors duration-300 bg-[#121418] border-[#2a2d35]">
             {post ? (
               <>
                 {/* Header */}
                 <div className="mb-5">
-                  <h1
-                    className={`text-[16px] md:text-[18px] font-semibold ${
-                      isDark ? "text-gray-900" : "text-white"
-                    }`}
-                  >
+                  <h1 className="text-[16px] md:text-[18px] font-semibold text-white">
                     {post.title}
                   </h1>
                   <div className="flex items-center gap-2 mt-1.5">
-                    <span
-                      className={`text-[11.50px] ${
-                        isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
-                    >
+                    <span className="text-[11.50px] text-gray-500">
                       {post.date}
                     </span>
-                    <span
-                      className={`text-[11.50px] ${
-                        isDark ? "text-gray-300" : "text-gray-600"
-                      }`}
-                    >
-                      ·
-                    </span>
-                    <span
-                      className={`text-[11px] ${
-                        isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
-                    >
+                    <span className="text-[11.50px] text-gray-600">·</span>
+                    <span className="text-[11px] text-gray-500">
                       {post.readTime}
                     </span>
                   </div>
                 </div>
 
                 {/* Divider */}
-                <div
-                  className={`h-[1px] w-full mb-5 ${
-                    isDark
-                      ? "border-t border-dashed border-gray-200"
-                      : "border-t border-dashed border-[#2a2d35]"
-                  }`}
-                />
+                <div className="h-[1px] w-full mb-5 border-t border-dashed border-[#2a2d35]" />
 
                 {/* Content */}
                 <div className="space-y-4">
@@ -251,42 +200,22 @@ const BlogPost = () => {
                       return (
                         <div
                           key={`${block.label ?? ""}-${block.code.slice(0, 20)}`}
-                          className={`rounded-md overflow-hidden border text-[12px] font-mono ${
-                            isDark
-                              ? "bg-gray-50 border-gray-200"
-                              : "bg-[#1a1d22] border-[#2a2d35]"
-                          }`}
+                          className="rounded-md overflow-hidden border text-[12px] font-mono bg-[#1a1d22] border-[#2a2d35]"
                         >
-                          <div
-                            className={`flex items-center justify-between px-3 py-1.5 text-[11px] border-b ${
-                              isDark
-                                ? "text-gray-400 border-gray-200 bg-gray-100"
-                                : "text-gray-500 border-[#2a2d35] bg-[#22262e]"
-                            }`}
-                          >
+                          <div className="flex items-center justify-between px-3 py-1.5 text-[11px] border-b text-gray-500 border-[#2a2d35] bg-[#22262e]">
                             <span>{block.label ?? ""}</span>
                             <button
                               onClick={() => {
                                 handleCopy(block.code, blockKey);
                                 playClick();
                               }}
-                              className={`cursor-pointer transition text-[10px] ${
-                                isDark
-                                  ? "hover:text-gray-700"
-                                  : "hover:text-white"
-                              }`}
+                              className="cursor-pointer transition text-[10px] hover:text-white"
                             >
                               {copiedKey === blockKey ? "Copied!" : "Copy"}
                             </button>
                           </div>
                           <pre className="p-3 overflow-x-auto leading-relaxed">
-                            <code
-                              className={
-                                isDark ? "text-gray-700" : "text-gray-300"
-                              }
-                            >
-                              {block.code}
-                            </code>
+                            <code className="text-gray-300">{block.code}</code>
                           </pre>
                         </div>
                       );
@@ -296,9 +225,7 @@ const BlogPost = () => {
                       return (
                         <h2
                           key={block}
-                          className={`text-[14px] font-semibold mt-2 ${
-                            isDark ? "text-gray-800" : "text-white"
-                          }`}
+                          className="text-[14px] font-semibold mt-2 text-white"
                         >
                           {block.replace("## ", "")}
                         </h2>
@@ -307,7 +234,7 @@ const BlogPost = () => {
 
                     return (
                       <div key={(block as string).slice(0, 40)}>
-                        {renderContent(block as string, isDark)}
+                        {renderContent(block as string)}
                       </div>
                     );
                   })}
@@ -318,12 +245,8 @@ const BlogPost = () => {
                   <span
                     className={`text-[10px] px-2 py-0.5 rounded-sm font-medium ${
                       post.category === "technical"
-                        ? isDark
-                          ? "text-sky-600 bg-sky-50"
-                          : "text-sky-400 bg-sky-400/10"
-                        : isDark
-                          ? "text-emerald-600 bg-emerald-50"
-                          : "text-emerald-400 bg-emerald-400/10"
+                        ? "text-sky-400 bg-sky-400/10"
+                        : "text-emerald-400 bg-emerald-400/10"
                     }`}
                   >
                     {post.category === "technical"
@@ -333,11 +256,7 @@ const BlogPost = () => {
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className={`text-[11px] px-2 py-0.5 rounded-sm ${
-                        isDark
-                          ? "text-gray-600 bg-gray-100"
-                          : "text-gray-400 bg-[#1f2228]"
-                      }`}
+                      className="text-[11px] px-2 py-0.5 rounded-sm text-gray-400 bg-[#1f2228]"
                     >
                       {tag}
                     </span>
@@ -345,22 +264,12 @@ const BlogPost = () => {
                 </div>
 
                 {/* Divider */}
-                <div
-                  className={`h-[1px] w-full mt-5 mb-4 ${
-                    isDark
-                      ? "border-t border-dashed border-gray-200"
-                      : "border-t border-dashed border-[#2a2d35]"
-                  }`}
-                />
+                <div className="h-[1px] w-full mt-5 mb-4 border-t border-dashed border-[#2a2d35]" />
 
                 {/* Back link */}
                 <Link
                   to="/blog"
-                  className={`inline-flex items-center gap-1 text-[12px] group transition ${
-                    isDark
-                      ? "text-gray-400 hover:text-gray-900"
-                      : "text-gray-500 hover:text-white"
-                  }`}
+                  className="inline-flex items-center gap-1 text-[12px] group transition text-gray-500 hover:text-white"
                 >
                   <span className="inline-block group-hover:-translate-x-0.5 transition-transform">
                     ←
@@ -371,20 +280,10 @@ const BlogPost = () => {
             ) : (
               /* 404 state */
               <div className="py-8 text-center">
-                <p
-                  className={`text-[13px] mb-4 ${
-                    isDark ? "text-gray-500" : "text-gray-400"
-                  }`}
-                >
-                  Post not found.
-                </p>
+                <p className="text-[13px] mb-4 text-gray-400">Post not found.</p>
                 <Link
                   to="/blog"
-                  className={`text-[12px] transition ${
-                    isDark
-                      ? "text-gray-400 hover:text-gray-900"
-                      : "text-gray-500 hover:text-white"
-                  }`}
+                  className="text-[12px] transition text-gray-500 hover:text-white"
                 >
                   ← All posts
                 </Link>

@@ -2,7 +2,6 @@ import { useState, useRef, MouseEvent, useEffect } from "react";
 import FloatingMenu from "../components/common/FloatingMenu";
 import MusicGallery from "../components/common/MusicGallery";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
-import { useTheme } from "../hooks/useTheme";
 import MatTexture from "../components/common/MatTexture";
 import { useSound } from "../hooks/useSound";
 import PlaygroundLoadingCard from "../components/common/PlaygroundLoadingCard";
@@ -17,7 +16,6 @@ const Playground = () => {
   const [scrollStart, setScrollStart] = useState({ left: 0, top: 0 });
 
   const { play, stop, setVolume, currentTrack } = useGlobalAudio();
-  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     setVolume(isSoundOn ? 1 : 0);
@@ -140,7 +138,7 @@ const Playground = () => {
         }}
       >
         <div className="relative w-[2400px] h-[2400px]">
-          <MatTexture isDark={isDarkMode} />
+          <MatTexture />
 
           {/* Canvas Border */}
           <div className="pointer-events-none absolute inset-0 z-30">
@@ -158,10 +156,10 @@ const Playground = () => {
           </div>
 
           {/* Playground Header  */}
-          <PlaygroundHeader isDark={isDarkMode} />
+          <PlaygroundHeader />
 
           <div className="absolute top-[400px] left-[400px] z-20">
-            <PlaygroundLoadingCard isDark={isDarkMode} />
+            <PlaygroundLoadingCard />
           </div>
 
           <div className="relative z-10 flex h-full">
@@ -189,26 +187,16 @@ const Playground = () => {
   );
 };
 
-const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
+const PlaygroundHeader = () => (
   <div
     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
     style={{ position: "absolute" }}
   >
-    <div
-      className={`select-none flex flex-col gap-3 sm:gap-4 rounded-lg w-[calc(100vw-32px)] max-w-[400px] sm:max-w-[480px] shadow-lg p-5 sm:p-6 transition-colors duration-300 ${
-        isDark
-          ? "bg-white border border-gray-200"
-          : "bg-[#121418] border border-[#2a2d35]"
-      }`}
-    >
+    <div className="select-none flex flex-col gap-3 sm:gap-4 rounded-lg w-[calc(100vw-32px)] max-w-[400px] sm:max-w-[480px] shadow-lg p-5 sm:p-6 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
       {/* Header Row */}
       <div className="flex gap-3 items-center">
         {/* Icon/Logo */}
-        <div
-          className={`size-10 sm:size-12 rounded-lg flex items-center justify-center ${
-            isDark ? "bg-gray-100" : "bg-[#1f2228]"
-          }`}
-        >
+        <div className="size-10 sm:size-12 rounded-lg flex items-center justify-center bg-[#1f2228]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -219,7 +207,7 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={isDark ? "text-gray-700" : "text-gray-300"}
+            className="text-gray-300"
           >
             <polygon points="12 2 2 7 12 12 22 7 12 2" />
             <polyline points="2 17 12 22 22 17" />
@@ -230,42 +218,22 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
         {/* Title & Subtitle */}
         <div className="flex flex-1 flex-col">
           <div className="flex items-center gap-2">
-            <h1
-              className={`text-base space-mono-regular  ${
-                isDark ? "text-gray-900" : "text-white"
-              }`}
-            >
+            <h1 className="text-base space-mono-regular  text-white">
               Playground
             </h1>
-            <div
-              className={`w-2 h-2 rounded-full animate-pulse ${
-                isDark ? "bg-green-500" : "bg-green-400"
-              }`}
-            />
+            <div className="w-2 h-2 rounded-full animate-pulse bg-green-400" />
           </div>
-          <p
-            className={`text-sm ${isDark ? "text-gray-500" : "text-gray-400"}`}
-          >
+          <p className="text-sm text-gray-400">
             Micro components & explorations
           </p>
         </div>
       </div>
 
       {/* Divider */}
-      <div
-        className={`h-[1px] w-full ${
-          isDark
-            ? "border-t border-dashed border-gray-200"
-            : "border-t border-dashed border-[#2a2d35]"
-        }`}
-      />
+      <div className="h-[1px] w-full border-t border-dashed border-[#2a2d35]" />
 
       {/* Description */}
-      <p
-        className={`text-sm leading-relaxed ${
-          isDark ? "text-gray-600" : "text-gray-300"
-        }`}
-      >
+      <p className="text-sm leading-relaxed text-gray-300">
         A space where I keep my <em>UI experiments</em>, interaction studies,
         and design system components. Drag to explore the canvas.
       </p>
@@ -275,11 +243,7 @@ const PlaygroundHeader = ({ isDark }: { isDark: boolean }) => (
         {["Components", "Animations", "Interactions"].map((tag) => (
           <span
             key={tag}
-            className={`inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium ${
-              isDark
-                ? "bg-gray-100 text-gray-600 border border-gray-200"
-                : "bg-[#1f2228] text-gray-400 border border-[#2a2d35]"
-            }`}
+            className="inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium bg-[#1f2228] text-gray-400 border border-[#2a2d35]"
           >
             {tag}
           </span>

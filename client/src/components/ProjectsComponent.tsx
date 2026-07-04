@@ -1,10 +1,6 @@
 import { logEvent } from "../utils/analytics";
 
-interface ProjectsComponentProps {
-  isDark: boolean;
-}
-
-const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
+const ProjectsComponent = () => {
   const projects = [
     {
       name: "NotifyKit",
@@ -39,20 +35,10 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
   ];
 
   return (
-    <div
-      className={`relative select-none rounded-lg w-full max-w-[500px] mx-auto shadow-lg p-5 transition-colors duration-300 ${
-        isDark
-          ? "bg-white border border-gray-200"
-          : "bg-[#121418] border border-[#2a2d35]"
-      }`}
-    >
+    <div className="relative select-none rounded-lg w-full max-w-[500px] mx-auto shadow-lg p-5 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h2
-          className={`text-[15px] font-semibold tracking-wide ${
-            isDark ? "text-gray-900" : "text-white"
-          }`}
-        >
+        <h2 className="text-[15px] font-semibold tracking-wide text-white">
           Projects
         </h2>
         <a
@@ -60,11 +46,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("github_click", { location: "projects" })}
-          className={`inline-flex items-center gap-1 text-[12px] group transition ${
-            isDark
-              ? "text-gray-500 hover:text-gray-900"
-              : "text-gray-500 hover:text-white"
-          }`}
+          className="inline-flex items-center gap-1 text-[12px] group transition text-gray-500 hover:text-white"
         >
           <span>GitHub</span>
           <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
@@ -74,24 +56,14 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
       </div>
 
       {/* Divider */}
-      <div
-        className={`h-[1px] w-full mb-4 ${
-          isDark
-            ? "border-t border-dashed border-gray-200"
-            : "border-t border-dashed border-[#2a2d35]"
-        }`}
-      />
+      <div className="h-[1px] w-full mb-4 border-t border-dashed border-[#2a2d35]" />
 
       {/* Projects List */}
       <div className="space-y-4">
         {projects.map((proj, index) => (
           <div key={proj.name}>
             <div className="flex gap-4">
-              <span
-                className={`text-[11px] font-mono mt-0.5 shrink-0 w-5 text-right ${
-                  isDark ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
+              <span className="text-[11px] font-mono mt-0.5 shrink-0 w-5 text-right text-gray-600">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="flex-1 min-w-0">
@@ -103,9 +75,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`font-display inline-flex items-center gap-1.5 text-[14px] font-semibold group transition ${
-                    isDark ? "text-gray-900" : "text-white"
-                  }`}
+                  className="font-display inline-flex items-center gap-1.5 text-[14px] font-semibold group transition text-white"
                 >
                   {proj.name}
                   <svg
@@ -118,11 +88,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`shrink-0 transition-colors duration-200 ${
-                      isDark
-                        ? "text-gray-300 group-hover:text-gray-700"
-                        : "text-gray-600 group-hover:text-gray-300"
-                    }`}
+                    className="shrink-0 transition-colors duration-200 text-gray-600 group-hover:text-gray-300"
                   >
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                     <polyline points="15 3 21 3 21 9" />
@@ -131,11 +97,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                 </a>
 
                 {/* Description */}
-                <p
-                  className={`mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] ${
-                    isDark ? "text-gray-500" : "text-gray-300"
-                  }`}
-                >
+                <p className="mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] text-gray-300">
                   {proj.desc}
                 </p>
 
@@ -144,11 +106,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
                   {proj.stack.map((tech) => (
                     <span
                       key={tech}
-                      className={`text-[11px] px-2 py-0.5 rounded-sm ${
-                        isDark
-                          ? "text-gray-600 bg-gray-100"
-                          : "text-gray-400 bg-[#1f2228]"
-                      }`}
+                      className="text-[11px] px-2 py-0.5 rounded-sm text-gray-400 bg-[#1f2228]"
                     >
                       {tech}
                     </span>
@@ -158,13 +116,7 @@ const ProjectsComponent = ({ isDark }: ProjectsComponentProps) => {
             </div>
 
             {index < projects.length - 1 && (
-              <div
-                className={`h-[1px] w-full mt-4 ${
-                  isDark
-                    ? "border-t border-dashed border-gray-200"
-                    : "border-t border-dashed border-[#2a2d35]"
-                }`}
-              />
+              <div className="h-[1px] w-full mt-4 border-t border-dashed border-[#2a2d35]" />
             )}
           </div>
         ))}

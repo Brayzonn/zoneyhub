@@ -6,11 +6,7 @@ import {
 } from "../assets/icons";
 import { logEvent } from "../utils/analytics";
 
-interface HeroProps {
-  isDark: boolean;
-}
-
-const Hero = ({ isDark }: HeroProps) => {
+const Hero = () => {
   const socials = [
     {
       name: "Twitter",
@@ -32,28 +28,14 @@ const Hero = ({ isDark }: HeroProps) => {
   const frontendTech = ["React", "TypeScript", "Tailwind CSS", "JavaScript"];
   const backendTech = ["NestJS", "Go", "PostgreSQL", "MongoDB", "Express.js"];
   return (
-    <div
-      className={`relative select-none rounded-lg max-w-[500px] mx-auto shadow-lg p-4 transition-colors duration-300 ${
-        isDark
-          ? "bg-white border border-gray-200"
-          : "bg-[#121418] border border-[#2a2d35]"
-      }`}
-    >
+    <div className="relative select-none rounded-lg max-w-[500px] mx-auto shadow-lg p-4 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
       {/* Hero */}
       <section className="flex justify-between items-center">
         <div className="">
-          <h1
-            className={`tracking-wide text-[17px] font-bold ${
-              isDark ? "text-gray-900" : "text-white"
-            }`}
-          >
+          <h1 className="tracking-wide text-[17px] font-bold text-white">
             Eyinda Bright
           </h1>
-          <p
-            className={`font-editorial italic tracking-wide text-[14px] ${
-              isDark ? "text-gray-500" : "text-gray-300"
-            }`}
-          >
+          <p className="font-editorial italic tracking-wide text-[14px] text-gray-300">
             Software Developer
           </p>
         </div>
@@ -66,13 +48,9 @@ const Hero = ({ isDark }: HeroProps) => {
               location: "hero",
             })
           }
-          className={`tracking-[0.020em] text-[12px] inline-flex items-center gap-2 px-3 py-2 rounded-full transition ${
-            isDark
-              ? "border border-gray-200 hover:bg-gray-100"
-              : "border border-[#2a2d35] hover:bg-[#1f2228]"
-          }`}
+          className="tracking-[0.020em] text-[12px] inline-flex items-center gap-2 px-3 py-2 rounded-full transition border border-[#2a2d35] hover:bg-[#1f2228]"
         >
-          <span className={isDark ? "text-gray-900" : "text-white"}>
+          <span className="text-white">
             Available for work{" "}
             <span className="inline-block group-hover:translate-x-0.5 transition-transform">
               ↗
@@ -86,29 +64,15 @@ const Hero = ({ isDark }: HeroProps) => {
 
       {/* Intro */}
       <section className="text-center">
-        <p
-          className={`tracking-[0.020em] text-[14px] text-left leading-relaxed ${
-            isDark ? "text-gray-600" : "text-gray-300"
-          }`}
-        >
+        <p className="tracking-[0.020em] text-[14px] text-left leading-relaxed text-gray-300">
           Hi! I&apos;m{" "}
-          <span
-            className={`font-semibold ${
-              isDark ? "text-gray-900" : "text-white"
-            }`}
-          >
-            Eyinda Bright
-          </span>
-          , a software developer with experience building reliable backend
-          systems and frontend applications, taking products from design and
-          development through deployment and maintenance.
+          <span className="font-semibold text-white">Eyinda Bright</span>, a
+          software developer with experience building reliable backend systems
+          and frontend applications, taking products from design and development
+          through deployment and maintenance.
         </p>
 
-        <p
-          className={`tracking-[0.020em] text-[14px] text-left leading-relaxed mt-3 ${
-            isDark ? "text-gray-600" : "text-gray-300"
-          }`}
-        >
+        <p className="tracking-[0.020em] text-[14px] text-left leading-relaxed mt-3 text-gray-300">
           I write code for a living and apparently can&apos;t stop doing it for
           fun either. Most recently that&apos;s meant building{" "}
           <a
@@ -116,17 +80,9 @@ const Hero = ({ isDark }: HeroProps) => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => logEvent("notifykit_click", { location: "intro" })}
-            className={`inline-flex items-center gap-1 group transition ${
-              isDark ? "text-gray-900" : "text-white"
-            }`}
+            className="inline-flex items-center gap-1 group transition text-white"
           >
-            <span
-              className={`underline ${
-                isDark
-                  ? "decoration-gray-400 group-hover:decoration-gray-900"
-                  : "decoration-gray-500 group-hover:decoration-white"
-              } transition-colors`}
-            >
+            <span className="underline decoration-gray-500 group-hover:decoration-white transition-colors">
               NotifyKit
             </span>
             <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
@@ -137,44 +93,18 @@ const Hero = ({ isDark }: HeroProps) => {
           webhook delivery simple, reliable, and observable
         </p>
 
-        <p
-          className={`tracking-[0.020em] text-[14px] text-left   leading-relaxed mt-4 ${
-            isDark ? "text-gray-600" : "text-gray-300"
-          }`}
-        >
+        <p className="tracking-[0.020em] text-[14px] text-left   leading-relaxed mt-4 text-gray-300">
           I&apos;m open to{" "}
-          <span
-            className={`font-medium ${isDark ? "text-gray-900" : "text-white"}`}
-          >
-            full-time
-          </span>
-          ,{" "}
-          <span
-            className={`font-medium ${isDark ? "text-gray-900" : "text-white"}`}
-          >
-            part-time
-          </span>
-          , or{" "}
-          <span
-            className={`font-medium ${isDark ? "text-gray-900" : "text-white"}`}
-          >
-            contract
-          </span>{" "}
-          roles. You can reach my{" "}
+          <span className="font-medium text-white">full-time</span>,{" "}
+          <span className="font-medium text-white">part-time</span>, or{" "}
+          <span className="font-medium text-white">contract</span> roles. You
+          can reach my{" "}
           <a
             onClick={() => logEvent("email_click", { location: "intro" })}
             href="mailto:b.eyindaa@gmail.com"
-            className={`inline-flex items-center gap-1 group transition ${
-              isDark ? "text-gray-900" : "text-white"
-            }`}
+            className="inline-flex items-center gap-1 group transition text-white"
           >
-            <span
-              className={` underline ${
-                isDark
-                  ? "decoration-gray-400 group-hover:decoration-gray-900"
-                  : "decoration-gray-500 group-hover:decoration-white"
-              } transition-colors`}
-            >
+            <span className=" underline decoration-gray-500 group-hover:decoration-white transition-colors">
               email
             </span>
             <span className="inline-block group-hover:translate-x-0.5 transition-transform">
@@ -184,28 +114,16 @@ const Hero = ({ isDark }: HeroProps) => {
           to discuss potential opportunities.
         </p>
 
-        <p
-          className={`tracking-[0.020em] text-left  text-[14px]  leading-relaxed mt-4 ${
-            isDark ? "text-gray-600" : "text-gray-300"
-          }`}
-        >
+        <p className="tracking-[0.020em] text-left  text-[14px]  leading-relaxed mt-4 text-gray-300">
           Outside work, I enjoy curating{" "}
           <a
             href="https://spotify.link/TmIHSnEFGXb"
             onClick={() => logEvent("spotify_click", { location: "intro" })}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-1 group transition ${
-              isDark ? "text-gray-900" : "text-white"
-            }`}
+            className="inline-flex items-center gap-1 group transition text-white"
           >
-            <span
-              className={`underline ${
-                isDark
-                  ? "decoration-gray-400 group-hover:decoration-gray-900"
-                  : "decoration-gray-500 group-hover:decoration-white"
-              } transition-colors`}
-            >
+            <span className="underline decoration-gray-500 group-hover:decoration-white transition-colors">
               playlists
             </span>
             <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
@@ -230,11 +148,7 @@ const Hero = ({ isDark }: HeroProps) => {
                 location: "hero",
               })
             }
-            className={`inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-md text-[12px] font-medium transition ${
-              isDark
-                ? "bg-gray-100 text-gray-600 border border-gray-200 hover:bg-gray-200"
-                : "bg-[#1f2228] text-gray-400 border border-[#2a2d35] hover:bg-[#2a2d35]"
-            }`}
+            className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-md text-[12px] font-medium transition bg-[#1f2228] text-gray-400 border border-[#2a2d35] hover:bg-[#2a2d35]"
           >
             {item.icon}
             <span className="hidden sm:inline">{item.name}</span>
@@ -243,21 +157,11 @@ const Hero = ({ isDark }: HeroProps) => {
       </div>
 
       {/* Divider */}
-      <div
-        className={`h-[1px] w-full my-4 ${
-          isDark
-            ? "border-t border-dashed border-gray-200"
-            : "border-t border-dashed border-[#2a2d35]"
-        }`}
-      />
+      <div className="h-[1px] w-full my-4 border-t border-dashed border-[#2a2d35]" />
 
       {/* Tech Stack */}
       <section className="mt-4">
-        <h2
-          className={`text-[14px] font-semibold mb-3 ${
-            isDark ? "text-gray-900" : "text-white"
-          }`}
-        >
+        <h2 className="text-[14px] font-semibold mb-3 text-white">
           Tech Stack
         </h2>
 
@@ -267,22 +171,14 @@ const Hero = ({ isDark }: HeroProps) => {
             { title: "Backend", items: backendTech },
           ].map((cat) => (
             <div key={cat.title} className="flex items-center gap-2 flex-wrap">
-              <span
-                className={`text-[11px] font-medium w-16 shrink-0 ${
-                  isDark ? "text-gray-500" : "text-gray-500"
-                }`}
-              >
+              <span className="text-[11px] font-medium w-16 shrink-0 text-gray-500">
                 {cat.title}
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {cat.items.map((tech) => (
                   <span
                     key={tech}
-                    className={`text-[11px] px-2 py-0.5 rounded-full ${
-                      isDark
-                        ? "text-gray-600 bg-gray-100"
-                        : "text-gray-400 bg-[#1f2228]"
-                    }`}
+                    className="text-[11px] px-2 py-0.5 rounded-full text-gray-400 bg-[#1f2228]"
                   >
                     {tech}
                   </span>
