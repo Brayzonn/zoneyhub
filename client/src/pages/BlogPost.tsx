@@ -1,10 +1,7 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect } from "react";
 import { useSound } from "../hooks/useSound";
-import { useGlobalAudio } from "../hooks/useGlobalAudio";
-import FloatingMenu from "../components/common/FloatingMenu";
 import { useSoundEffects } from "../hooks/useSoundEffects";
-import MatTexture from "../components/common/MatTexture";
+import PageLayout from "../components/PageLayout";
 import { blogPosts } from "../data/blogPosts";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -110,21 +107,15 @@ const BlogPost = () => {
   };
 
   const { slug } = useParams<{ slug: string }>();
-  const { isSoundOn, toggleSound } = useSound();
-  const { stop, currentTrack, setVolume } = useGlobalAudio();
-  const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
+  const { isSoundOn } = useSound();
 
   const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
-
-  useEffect(() => {
-    setVolume(isSoundOn ? 1 : 0);
-  }, [isSoundOn, setVolume]);
 
   const post = blogPosts.find((p) => p.slug === slug);
   const url = `https://zoneyhub.com/blog/${slug}`;
 
   return (
-    <>
+    <PageLayout align="start">
       {post && (
         <Helmet>
           <title>{post.title} | Eyinda Bright</title>
@@ -153,11 +144,7 @@ const BlogPost = () => {
         </Helmet>
       )}
 
-      <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">
-        <MatTexture />
-
-        <main className="px-3 py-[5rem] relative min-h-screen w-full flex justify-center items-start z-10">
-          <div className="w-full max-w-[600px] mx-auto rounded-lg shadow-lg border p-5 transition-colors duration-300 bg-[#121418] border-[#2a2d35]">
+      <div className="w-full max-w-[600px] mx-auto rounded-lg shadow-lg border p-5 transition-colors duration-300 bg-[#121418] border-[#2a2d35]">
             {post ? (
               <>
                 {/* Header */}
@@ -289,21 +276,8 @@ const BlogPost = () => {
                 </Link>
               </div>
             )}
-          </div>
-        </main>
-
-        <div className="fixed z-20 top-2 left-1/2 -translate-x-1/2">
-          <FloatingMenu
-            onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
-            isInfoOpen={isInfoCardOpen}
-            isSoundOn={isSoundOn}
-            onSoundToggle={toggleSound}
-            currentTrack={currentTrack}
-            onStopTrack={stop}
-          />
-        </div>
       </div>
-    </>
+    </PageLayout>
   );
 };
 
