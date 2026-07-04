@@ -1,32 +1,7 @@
-import {
-  GithubIconSmall,
-  LinkedInIconSmall,
-  MailIconSmall,
-  TwitterIconSmall,
-} from "../assets/icons";
 import { logEvent } from "../utils/analytics";
+import { socials, frontendTech, backendTech } from "../data/profile";
 
 const Hero = () => {
-  const socials = [
-    {
-      name: "Twitter",
-      link: "https://x.com/brayzoney",
-      icon: TwitterIconSmall,
-    },
-    {
-      name: "LinkedIn",
-      link: "https://linkedin.com/in/eyinda-bright",
-      icon: LinkedInIconSmall,
-    },
-    {
-      name: "GitHub",
-      link: "https://github.com/brayzonn",
-      icon: GithubIconSmall,
-    },
-    { name: "Mail", link: "mailto:b.eyindaa@gmail.com", icon: MailIconSmall },
-  ];
-  const frontendTech = ["React", "TypeScript", "Tailwind CSS", "JavaScript"];
-  const backendTech = ["NestJS", "Go", "PostgreSQL", "MongoDB", "Express.js"];
   return (
     <div className="relative select-none rounded-lg max-w-[500px] mx-auto shadow-lg p-4 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
       {/* Hero */}
