@@ -6,12 +6,19 @@ import Projects from "./pages/Projects";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import { SoundProvider } from "./contexts/Soundprovider";
+import { useAnalytics } from "./hooks/useAnalytics";
+
+function AnalyticsListener() {
+  useAnalytics();
+  return null;
+}
 
 function App() {
   return (
     <SoundProvider>
       <AudioProvider>
         <Router>
+          <AnalyticsListener />
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="*" element={<Landing />} />

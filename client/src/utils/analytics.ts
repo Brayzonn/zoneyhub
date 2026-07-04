@@ -14,11 +14,11 @@ export const initGA = (): void => {
   isInitialized = true;
 };
 
-export const logPageView = (): void => {
+export const logPageView = (page?: string): void => {
   if (!isInitialized) return;
 
-  const page: string = window.location.pathname + window.location.search;
-  ReactGA.send({ hitType: "pageview", page });
+  const path = page ?? window.location.pathname + window.location.search;
+  ReactGA.send({ hitType: "pageview", page: path });
 };
 
 export const logEvent = (
