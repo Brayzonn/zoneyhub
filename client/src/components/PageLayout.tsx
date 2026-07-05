@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, ReactNode } from "react";
 import FloatingMenu from "./common/FloatingMenu";
 import MatTexture from "./common/MatTexture";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
@@ -12,17 +12,12 @@ interface PageLayoutProps {
 
 /**
  * Shared page shell: matte-textured background, centered content area, and the
- * fixed floating navigation menu wired to the sound/audio contexts. Keeps the
- * sound-on → volume behaviour in one place so pages only provide their content.
+ * fixed floating navigation menu wired to the sound/audio contexts.
  */
 const PageLayout = ({ children, align = "center" }: PageLayoutProps) => {
   const { isSoundOn, toggleSound } = useSound();
-  const { stop, currentTrack, setVolume } = useGlobalAudio();
+  const { stop, currentTrack } = useGlobalAudio();
   const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
-
-  useEffect(() => {
-    setVolume(isSoundOn ? 1 : 0);
-  }, [isSoundOn, setVolume]);
 
   return (
     <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">

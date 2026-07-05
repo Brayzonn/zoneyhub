@@ -3,7 +3,7 @@ import MatTexture from "../components/common/MatTexture";
 import Hero from "../components/Hero";
 import LoadingScreen from "../components/common/LoadingScreen";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSound } from "../hooks/useSound";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,11 +14,7 @@ const Landing = () => {
     return !sessionStorage.getItem("hasSeenLoading");
   });
 
-  const { stop, currentTrack, setVolume } = useGlobalAudio();
-
-  useEffect(() => {
-    setVolume(isSoundOn ? 1 : 0);
-  }, [isSoundOn, setVolume]);
+  const { stop, currentTrack } = useGlobalAudio();
 
   const handleTrackStop = () => {
     stop();

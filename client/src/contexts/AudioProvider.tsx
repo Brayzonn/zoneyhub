@@ -1,13 +1,14 @@
 import { useRef, useState, useEffect, useCallback, ReactNode } from "react";
 import { AudioContext, CurrentTrack } from "./AudioContext";
+import { useSound } from "../hooks/useSound";
 
 export const AudioProvider = ({ children }: { children: ReactNode }) => {
+  const { isSoundOn } = useSound();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const audio = new Audio();
@@ -55,29 +56,12 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     setCurrentTrack(null);
   }, []);
 
-  const setVolume = useCallback(
-    (volume: number) => {
-      const audio = audioRef.current;
-      if (!audio) return;
-
-      if (volume === 0 && isPlaying) {
-        audio.pause();
-        setIsPlaying(false);
-      } else if (volume > 0 && !isPlaying && currentTrack) {
-        audio.play().catch(console.error);
-        setIsPlaying(true);
-      }
-
-      audio.volume = Math.max(0, Math.min(1, volume));
-    },
-    [currentTrack, isPlaying]
-  );
-
-  const toggleMute = useCallback(() => {
-    if (!audioRef.current) return;
-    audioRef.current.muted = !audioRef.current.muted;
-    setIsMuted(audioRef.current.muted);
-  }, []);
+  // The global sound toggle is a true mute: playback (and the track's
+  // position) continues silently, so unmuting picks up where the music is.
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) audio.muted = !isSoundOn;
+  }, [isSoundOn]);
 
   return (
     <AudioContext.Provider
@@ -88,9 +72,6 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
         currentTrack,
         currentTime,
         duration,
-        setVolume,
-        isMuted,
-        toggleMute,
       }}
     >
       {children}

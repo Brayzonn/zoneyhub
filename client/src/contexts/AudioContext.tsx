@@ -15,9 +15,6 @@ export interface AudioContextType {
   currentTrack: CurrentTrack | null;
   currentTime: number;
   duration: number;
-  setVolume: (volume: number) => void;
-  isMuted: boolean;
-  toggleMute: () => void;
 }
 
 export const AudioContext = createContext<AudioContextType | undefined>(

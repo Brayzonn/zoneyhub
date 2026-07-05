@@ -15,11 +15,7 @@ const Playground = () => {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [scrollStart, setScrollStart] = useState({ left: 0, top: 0 });
 
-  const { play, stop, setVolume, currentTrack } = useGlobalAudio();
-
-  useEffect(() => {
-    setVolume(isSoundOn ? 1 : 0);
-  }, [isSoundOn, setVolume]);
+  const { play, stop, currentTrack } = useGlobalAudio();
 
   const handleTrackPlay = (track: {
     id: string;
