@@ -1,13 +1,22 @@
 import { useState } from "react";
 import type { ContentBlock } from "../data/blogPosts";
 
+/**
+ * Blog content is static module data — blocks, list items, and inline parts
+ * are never reordered or edited at runtime — so array position is a stable
+ * React key. (The previous content-derived keys could collide: two blocks
+ * sharing a 40-char prefix, or the same `code` span twice in a paragraph.)
+ */
+const keyed = <T,>(items: readonly T[]) =>
+  items.map((item, key) => ({ key, item }));
+
 /** Renders inline markdown: **bold**, `code`, and [label](href) links. */
 const renderInline = (text: string) => {
   const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
-  return parts.map((part) => {
+  return keyed(parts).map(({ key, item: part }) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
-        <strong key={`${part}`} className="text-gray-200 font-semibold">
+        <strong key={key} className="text-gray-200 font-semibold">
           {part.slice(2, -2)}
         </strong>
       );
@@ -15,7 +24,7 @@ const renderInline = (text: string) => {
     if (part.startsWith("`") && part.endsWith("`")) {
       return (
         <code
-          key={`${part}`}
+          key={key}
           className="text-[12px] px-1 py-0.5 rounded font-mono bg-[#1f2228] text-sky-400"
         >
           {part.slice(1, -1)}
@@ -27,7 +36,7 @@ const renderInline = (text: string) => {
       const href = part.match(/\((.+)\)/)?.[1];
       return (
         <a
-          key={part}
+          key={key}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
@@ -57,16 +66,16 @@ const renderParagraph = (paragraph: string) => {
     }
     return (
       <div className="space-y-2">
-        {items.map((item) =>
+        {keyed(items).map(({ key, item }) =>
           item.type === "text" ? (
             <p
-              key={item.content}
+              key={key}
               className="text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] text-gray-400"
             >
               {renderInline(item.content)}
             </p>
           ) : (
-            <div key={item.content} className="flex items-start gap-2">
+            <div key={key} className="flex items-start gap-2">
               <span className="mt-[6px] shrink-0 w-1 h-1 rounded-full bg-gray-500" />
               <p className="text-[14px]  md:text-[15px] leading-normal tracking-[0.01em] text-gray-400">
                 {renderInline(item.content)}
@@ -131,13 +140,10 @@ interface PostContentProps {
 /** Renders a blog post's content blocks: diagrams, code, headings, and prose. */
 const PostContent = ({ content, onCopyClick }: PostContentProps) => (
   <div className="space-y-4">
-    {content.map((block) => {
+    {keyed(content).map(({ key, item: block }) => {
       if (typeof block === "object" && block.type === "diagram") {
         return (
-          <div
-            key={block.svg.slice(0, 40)}
-            className="my-4 rounded-md overflow-hidden"
-          >
+          <div key={key} className="my-4 rounded-md overflow-hidden">
             <div dangerouslySetInnerHTML={{ __html: block.svg }} />
           </div>
         );
@@ -146,7 +152,7 @@ const PostContent = ({ content, onCopyClick }: PostContentProps) => (
       if (typeof block === "object" && block.type === "code") {
         return (
           <CodeBlock
-            key={`${block.label ?? ""}-${block.code.slice(0, 20)}`}
+            key={key}
             label={block.label}
             code={block.code}
             onCopy={onCopyClick}
@@ -156,13 +162,13 @@ const PostContent = ({ content, onCopyClick }: PostContentProps) => (
 
       if (block.startsWith("## ")) {
         return (
-          <h2 key={block} className="text-[14px] font-semibold mt-2 text-white">
+          <h2 key={key} className="text-[14px] font-semibold mt-2 text-white">
             {block.replace("## ", "")}
           </h2>
         );
       }
 
-      return <div key={block.slice(0, 40)}>{renderParagraph(block)}</div>;
+      return <div key={key}>{renderParagraph(block)}</div>;
     })}
   </div>
 );
