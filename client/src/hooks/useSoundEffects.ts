@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 interface UseSoundEffectsProps {
   isSoundOn: boolean;
@@ -11,11 +11,6 @@ const CLICK_URL = "/sounds/click.wav";
 let sharedCtx: AudioContext | null = null;
 let clickBuffer: AudioBuffer | null = null;
 let decodePromise: Promise<AudioBuffer> | null = null;
-
-const bytesPromise: Promise<ArrayBuffer> | null =
-  typeof window === "undefined"
-    ? null
-    : fetch(CLICK_URL).then((r) => r.arrayBuffer());
 
 const getCtx = (): AudioContext | null => {
   if (sharedCtx) return sharedCtx;
@@ -34,13 +29,17 @@ const getCtx = (): AudioContext | null => {
 const loadClickBuffer = (ctx: AudioContext): Promise<AudioBuffer> => {
   if (clickBuffer) return Promise.resolve(clickBuffer);
   if (decodePromise) return decodePromise;
-  if (!bytesPromise) return Promise.reject(new Error("no fetch"));
 
-  decodePromise = bytesPromise
-    .then((bytes) => ctx.decodeAudioData(bytes.slice(0)))
+  decodePromise = fetch(CLICK_URL)
+    .then((r) => r.arrayBuffer())
+    .then((bytes) => ctx.decodeAudioData(bytes))
     .then((buf) => {
       clickBuffer = buf;
       return buf;
+    })
+    .catch((err) => {
+      decodePromise = null;
+      throw err;
     });
   return decodePromise;
 };
@@ -52,19 +51,30 @@ const playBuffer = (ctx: AudioContext, buf: AudioBuffer) => {
   src.start(ctx.currentTime + 0.005);
 };
 
-if (typeof window !== "undefined") {
-  const prewarm = () => {
-    const ctx = getCtx();
-    if (ctx) loadClickBuffer(ctx).catch(() => {});
-  };
-  const opts = { once: true, capture: true } as const;
-  window.addEventListener("pointermove", prewarm, opts);
-  window.addEventListener("pointerdown", prewarm, opts);
-  window.addEventListener("keydown", prewarm, opts);
-  window.addEventListener("touchstart", prewarm, opts);
-}
+const PREWARM_EVENTS = [
+  "pointermove",
+  "pointerdown",
+  "keydown",
+  "touchstart",
+] as const;
 
 export const useSoundEffects = ({ isSoundOn }: UseSoundEffectsProps) => {
+  useEffect(() => {
+    if (clickBuffer || decodePromise) return;
+
+    const prewarm = () => {
+      const ctx = getCtx();
+      if (ctx) loadClickBuffer(ctx).catch(() => {});
+    };
+    const opts = { once: true, capture: true } as const;
+    PREWARM_EVENTS.forEach((e) => window.addEventListener(e, prewarm, opts));
+    return () => {
+      PREWARM_EVENTS.forEach((e) =>
+        window.removeEventListener(e, prewarm, opts),
+      );
+    };
+  }, []);
+
   const playClick = useCallback(() => {
     if (!isSoundOn) return;
     const ctx = getCtx();
