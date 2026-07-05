@@ -6,13 +6,16 @@ import PostContent from "../components/PostContent";
 import { blogPosts } from "../data/blogPosts";
 import { Helmet } from "react-helmet-async";
 
+const SITE_URL = import.meta.env.VITE_SITE_URL ?? "https://zoneyhub.com";
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { isSoundOn } = useSound();
   const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
 
   const post = blogPosts.find((p) => p.slug === slug);
-  const url = `https://zoneyhub.com/blog/${slug}`;
+  const url = `${SITE_URL}/blog/${slug}`;
+  const ogImage = `${SITE_URL}/og-image.webp`;
 
   return (
     <PageLayout align="start">
@@ -25,10 +28,7 @@ const BlogPost = () => {
           {/* Open Graph */}
           <meta property="og:title" content={post.title} />
           <meta property="og:description" content={post.description} />
-          <meta
-            property="og:image"
-            content="https://zoneyhub.com/og-image.webp"
-          />
+          <meta property="og:image" content={ogImage} />
           <meta property="og:type" content="article" />
 
           <meta property="og:url" content={url} />
@@ -37,10 +37,7 @@ const BlogPost = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={post.title} />
           <meta name="twitter:description" content={post.description} />
-          <meta
-            name="twitter:image"
-            content="https://zoneyhub.com/og-image.webp"
-          />
+          <meta name="twitter:image" content={ogImage} />
         </Helmet>
       )}
 
