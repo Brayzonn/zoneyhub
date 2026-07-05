@@ -1,17 +1,26 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { AudioProvider } from "./contexts/AudioProvider";
 import Landing from "./pages/Landing";
-import Playground from "./pages/Playground";
-import Projects from "./pages/Projects";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
 import { SoundProvider } from "./contexts/Soundprovider";
 import { useAnalytics } from "./hooks/useAnalytics";
+
+// Landing is the initial + wildcard route, so it stays in the main bundle.
+// Secondary routes are code-split so their weight (drag canvas, blog rendering,
+// etc.) only loads when visited.
+const Playground = lazy(() => import("./pages/Playground"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 
 function AnalyticsListener() {
   useAnalytics();
   return null;
 }
+
+const RouteFallback = () => (
+  <div className="min-h-svh w-full bg-[var(--color-primary-bg-color)]" />
+);
 
 function App() {
   return (
@@ -19,14 +28,16 @@ function App() {
       <AudioProvider>
         <Router>
           <AnalyticsListener />
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="*" element={<Landing />} />
-            <Route path="/playground" element={<Playground />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-          </Routes>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="*" element={<Landing />} />
+              <Route path="/playground" element={<Playground />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+            </Routes>
+          </Suspense>
         </Router>
       </AudioProvider>
     </SoundProvider>
