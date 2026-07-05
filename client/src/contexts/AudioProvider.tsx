@@ -56,6 +56,19 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     setCurrentTrack(null);
   }, []);
 
+  const togglePlayPause = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio || !currentTrack) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play().catch(console.error);
+      setIsPlaying(true);
+    }
+  }, [currentTrack, isPlaying]);
+
   // The global sound toggle is a true mute: playback (and the track's
   // position) continues silently, so unmuting picks up where the music is.
   useEffect(() => {
@@ -68,6 +81,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       value={{
         play,
         stop,
+        togglePlayPause,
         isPlaying,
         currentTrack,
         currentTime,

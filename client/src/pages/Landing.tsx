@@ -9,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Landing = () => {
   const { isSoundOn, toggleSound } = useSound();
-  const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(() => {
     return !sessionStorage.getItem("hasSeenLoading");
   });
@@ -48,8 +47,6 @@ const Landing = () => {
 
             <div className="fixed z-50 top-2 left-1/2 -translate-x-1/2">
               <FloatingMenu
-                onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
-                isInfoOpen={isInfoCardOpen}
                 isSoundOn={isSoundOn}
                 onSoundToggle={toggleSound}
                 currentTrack={currentTrack}

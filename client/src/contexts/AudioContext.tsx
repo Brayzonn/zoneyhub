@@ -11,6 +11,8 @@ export interface CurrentTrack {
 export interface AudioContextType {
   play: (track: CurrentTrack) => void;
   stop: () => void;
+  /** Pause/resume the current track; no-op when nothing is loaded. */
+  togglePlayPause: () => void;
   isPlaying: boolean;
   currentTrack: CurrentTrack | null;
   currentTime: number;

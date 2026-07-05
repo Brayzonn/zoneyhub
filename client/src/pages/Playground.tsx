@@ -7,7 +7,6 @@ import { useSound } from "../hooks/useSound";
 import PlaygroundLoadingCard from "../components/common/PlaygroundLoadingCard";
 
 const Playground = () => {
-  const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
   const { isSoundOn, toggleSound } = useSound();
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -171,8 +170,6 @@ const Playground = () => {
       {/* Navigation Menu */}
       <div className="fixed z-20 top-2 left-1/2 -translate-x-1/2 ">
         <FloatingMenu
-          onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
-          isInfoOpen={isInfoCardOpen}
           isSoundOn={isSoundOn}
           onSoundToggle={toggleSound}
           currentTrack={currentTrack}

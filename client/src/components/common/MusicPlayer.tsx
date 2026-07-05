@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useGlobalAudio } from "../../hooks/useGlobalAudio";
 
 interface MusicPlayerProps {
   trackId: string;
@@ -14,8 +15,10 @@ const MusicPlayer = ({
   albumArt,
   onStop,
 }: MusicPlayerProps) => {
+  const { isPlaying, togglePlayPause } = useGlobalAudio();
+
   return (
-    <div className="flex h-[48px] w-[200px] items-center justify-center gap-3 px-3">
+    <div className="flex h-[48px] w-[232px] items-center justify-center gap-3 px-3">
       {/* Album Art */}
       <motion.div
         className="w-7 h-7 rounded-md overflow-hidden flex-shrink-0 shadow-sm"
@@ -64,10 +67,47 @@ const MusicPlayer = ({
         </p>
       </motion.div>
 
+      {/* Play/Pause Button */}
+      <motion.button
+        onClick={togglePlayPause}
+        className="cursor-pointer w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-colors text-gray-300 hover:text-white hover:bg-[#1f2228]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.2 }}
+        aria-label={isPlaying ? "Pause" : "Play"}
+      >
+        {isPlaying ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        )}
+      </motion.button>
+
       {/* Stop Button */}
       <div className="relative flex items-center justify-center flex-shrink-0">
-        {/* Rotating ring */}
-        <div className="absolute w-7 h-7 animate-[spin_1.5s_linear_infinite]">
+        {/* Rotating ring (spins only while playing) */}
+        <div
+          className={`absolute w-7 h-7 ${
+            isPlaying ? "animate-[spin_1.5s_linear_infinite]" : ""
+          }`}
+        >
           <svg viewBox="0 0 28 28" className="w-full h-full">
             <defs>
               <linearGradient

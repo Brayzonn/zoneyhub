@@ -1,4 +1,4 @@
-import { useState, ReactNode } from "react";
+import { ReactNode } from "react";
 import FloatingMenu from "./common/FloatingMenu";
 import MatTexture from "./common/MatTexture";
 import { useGlobalAudio } from "../hooks/useGlobalAudio";
@@ -17,7 +17,6 @@ interface PageLayoutProps {
 const PageLayout = ({ children, align = "center" }: PageLayoutProps) => {
   const { isSoundOn, toggleSound } = useSound();
   const { stop, currentTrack } = useGlobalAudio();
-  const [isInfoCardOpen, setIsInfoCardOpen] = useState(false);
 
   return (
     <div className="relative bg-[var(--color-primary-bg-color)] text-[var(--color-primary-text-color)] min-h-screen w-full">
@@ -33,8 +32,6 @@ const PageLayout = ({ children, align = "center" }: PageLayoutProps) => {
 
       <div className="fixed z-20 top-2 left-1/2 -translate-x-1/2">
         <FloatingMenu
-          onInfoClick={() => setIsInfoCardOpen(!isInfoCardOpen)}
-          isInfoOpen={isInfoCardOpen}
           isSoundOn={isSoundOn}
           onSoundToggle={toggleSound}
           currentTrack={currentTrack}
