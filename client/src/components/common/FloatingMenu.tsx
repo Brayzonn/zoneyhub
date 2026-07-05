@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import InfoCard from "./InfoCard";
-import MusicPlayer from "./Musicplayer";
+import MusicPlayer from "./MusicPlayer";
 import { useSoundEffects } from "../../hooks/useSoundEffects";
 import {
   HomeIcon,
