@@ -12,6 +12,20 @@ export const HomeIcon = () => (
   </svg>
 );
 
+export const NowPlayingIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    className="h-5 w-5 shrink-0 transition-colors"
+  >
+    <path
+      fill="currentColor"
+      d="M6 17a1 1 0 1 1-2 0V7a1 1 0 1 1 2 0zm7 3a1 1 0 1 1-2 0V4a1 1 0 1 1 2 0zm7-6a1 1 0 1 1-2 0V10a1 1 0 1 1 2 0z"
+    />
+  </svg>
+);
+
 export const MusicIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

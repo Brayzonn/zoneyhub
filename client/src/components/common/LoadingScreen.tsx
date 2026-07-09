@@ -16,7 +16,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [displayChars, setDisplayChars] = useState<CharDisplay[]>(
     Array(targetWord.length)
       .fill("")
-      .map((_, i) => ({ id: `char-${i}`, char: "", position: i }))
+      .map((_, i) => ({ id: `char-${i}`, char: "", position: i })),
   );
   const [isAnimating, setIsAnimating] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
@@ -37,7 +37,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               id: `char-${i}`,
               char: randomChars[Math.floor(Math.random() * randomChars.length)],
               position: i,
-            }))
+            })),
         );
         iterations++;
       } else {
@@ -46,7 +46,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             id: `char-${i}`,
             char,
             position: i,
-          }))
+          })),
         );
         setIsAnimating(false);
         clearInterval(interval);

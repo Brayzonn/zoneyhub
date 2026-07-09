@@ -10,6 +10,7 @@ import {
   BlogIcon,
   SoundOnIcon,
   SoundOffIcon,
+  NowPlayingIcon,
 } from "../../assets/icons";
 
 interface MenuItem {
@@ -106,7 +107,7 @@ const FloatingMenu = ({
             initial={{ width: 0, x: 200 }}
             animate={{
               width: 240,
-              x: 0,
+              x: 13,
               transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
             }}
             exit={{
@@ -132,10 +133,7 @@ const FloatingMenu = ({
       <div className="relative z-10 flex items-center rounded-[12px] border transition-colors duration-300 bg-[#121418] border-white/15">
         <div className="h-[48px] px-2 py-1 flex flex-row gap-2">
           {menuItems.map((item) => (
-            <div
-              key={item.id}
-              className="relative flex items-center space-x-1"
-            >
+            <div key={item.id} className="relative flex items-center space-x-1">
               <Link
                 to={item.path}
                 onClick={playClick}
@@ -151,7 +149,7 @@ const FloatingMenu = ({
               </Link>
               <div
                 className={`${getLabelClasses()} ${getLabelVisibilityClasses(
-                  hoveredItem === item.id
+                  hoveredItem === item.id,
                 )}`}
               >
                 <h1 className="text-sm font-medium whitespace-nowrap text-[#e1e1e1]">
@@ -174,6 +172,33 @@ const FloatingMenu = ({
                 }
               }}
               className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
+              aria-label="Now Playing"
+            >
+              <NowPlayingIcon />
+            </button>
+
+            <div
+              className={`${getLabelClasses()} ${getLabelVisibilityClasses(
+                hoveredItem === "Now Playing",
+              )}`}
+            >
+              <h1 className="text-sm font-medium whitespace-nowrap text-[#c5c5c5]">
+                Now Playing
+              </h1>
+            </div>
+          </div>
+
+          <div className="relative flex items-center">
+            <button
+              onMouseEnter={() => setHoveredItem("sound")}
+              onMouseLeave={() => setHoveredItem(null)}
+              onClick={() => {
+                onSoundToggle?.();
+                if (!isSoundOn) {
+                  setTimeout(() => playClick(), 50);
+                }
+              }}
+              className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
               aria-label={isSoundOn ? "Mute Sound" : "Unmute Sound"}
             >
               {isSoundOn ? <SoundOnIcon /> : <SoundOffIcon />}
@@ -181,7 +206,7 @@ const FloatingMenu = ({
 
             <div
               className={`${getLabelClasses()} ${getLabelVisibilityClasses(
-                hoveredItem === "sound"
+                hoveredItem === "sound",
               )}`}
             >
               <h1 className="text-sm font-medium whitespace-nowrap text-[#c5c5c5]">
