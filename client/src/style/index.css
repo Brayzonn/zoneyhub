@@ -123,6 +123,12 @@
 }
 
 /* Global styles */
+/* On html too so iOS Safari samples the right color for the status bar /
+   Dynamic Island area before body styles and React paint. */
+html {
+  background-color: var(--color-bg);
+}
+
 body {
   overscroll-behavior: none;
   font-family: var(--font-sans);

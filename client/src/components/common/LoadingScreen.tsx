@@ -76,7 +76,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-white"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-bg"
       initial={{ opacity: 1 }}
       animate={{ opacity: isFadingOut ? 0 : 1 }}
       transition={{ duration: 0.5 }}
@@ -109,7 +109,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               {charObj.char || ""}
 
               <motion.div
-                className="absolute inset-0 bg-white origin-top"
+                className="absolute inset-0 bg-bg origin-top"
                 initial={{ scaleY: 0 }}
                 animate={{
                   scaleY: isClosing ? 0.5 : 0,
@@ -121,7 +121,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               />
 
               <motion.div
-                className="absolute inset-0 bg-white origin-bottom"
+                className="absolute inset-0 bg-bg origin-bottom"
                 initial={{ scaleY: 0 }}
                 animate={{
                   scaleY: isClosing ? 0.5 : 0,
