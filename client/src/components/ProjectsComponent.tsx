@@ -40,7 +40,7 @@ const ProjectsComponent = () => {
                 {proj.name}
               </a>
             </h2>
-            <p className="text-body text-ink-muted m-0">{proj.desc}</p>
+            <p className="text-body text-ink m-0">{proj.desc}</p>
             <MetaRow items={proj.stack} className="mt-3" dotted />
           </article>
         ))}

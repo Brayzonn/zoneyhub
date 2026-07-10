@@ -69,7 +69,7 @@ const BlogComponent = () => {
               ]}
               className="mb-3"
             />
-            <p className="text-body text-ink-muted m-0">{post.excerpt}</p>
+            <p className="text-body text-ink m-0">{post.excerpt}</p>
             <MetaRow items={post.tags} pilled className="mt-3" />
           </Link>
         ))}

@@ -87,7 +87,7 @@ const BlogPost = () => {
         ) : (
           /* 404 state */
           <div className="py-8">
-            <p className="text-body text-ink-muted mb-4">Post not found.</p>
+            <p className="text-body text-ink mb-4">Post not found.</p>
             <Link to="/blog" className={backLinkClasses}>
               ← All posts
             </Link>

@@ -17,7 +17,7 @@ const SectionHeader = ({
       {title}
     </h1>
     {children && (
-      <p className="text-body text-ink-muted mt-3 mb-0">{children}</p>
+      <p className="text-body text-ink mt-3 mb-0">{children}</p>
     )}
   </header>
 );
