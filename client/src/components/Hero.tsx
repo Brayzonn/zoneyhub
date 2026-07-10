@@ -32,7 +32,7 @@ const Hero = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("nestra_click", { location: "intro" })}
-          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
         >
           Nestra
         </a>
@@ -43,7 +43,7 @@ const Hero = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("notifykit_click", { location: "intro" })}
-          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
         >
           NotifyKit
         </a>
@@ -56,7 +56,7 @@ const Hero = () => {
         <a
           href="mailto:hello@zoneyhub.com"
           onClick={() => logEvent("email_click", { location: "intro" })}
-          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
         >
           reach my email
         </a>{" "}
@@ -70,7 +70,7 @@ const Hero = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("spotify_click", { location: "intro" })}
-          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
         >
           curate playlists
         </a>

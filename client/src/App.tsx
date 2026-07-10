@@ -1,13 +1,17 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
 import { AudioProvider } from "./contexts/AudioProvider";
 import Landing from "./pages/Landing";
 import { SoundProvider } from "./contexts/SoundProvider";
+import { ThemeProvider } from "./contexts/ThemeProvider";
 import { useAnalytics } from "./hooks/useAnalytics";
 
-// Landing is the initial + wildcard route, so it stays in the main bundle.
-// Secondary routes are code-split so their weight (drag canvas, blog rendering,
-// etc.) only loads when visited.
+// Secondary routes are code-split; Landing stays in the main bundle
 const Playground = lazy(() => import("./pages/Playground"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -18,13 +22,25 @@ function AnalyticsListener() {
   return null;
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
+  return null;
+}
+
 const RouteFallback = () => <div className="min-h-svh w-full bg-bg" />;
 
 function App() {
   return (
-    <SoundProvider>
-      <AudioProvider>
+    <ThemeProvider>
+      <SoundProvider>
+        <AudioProvider>
         <Router>
+          <ScrollToTop />
           <AnalyticsListener />
           <Suspense fallback={<RouteFallback />}>
             <Routes>
@@ -38,8 +54,9 @@ function App() {
             </Routes>
           </Suspense>
         </Router>
-      </AudioProvider>
-    </SoundProvider>
+        </AudioProvider>
+      </SoundProvider>
+    </ThemeProvider>
   );
 }
 

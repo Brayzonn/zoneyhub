@@ -18,7 +18,7 @@ const Chip = ({ to, onClick, active = false, muted = false, children }: ChipProp
     "inline-flex items-center rounded-full border px-[0.9rem] py-[0.4rem] text-chip backdrop-blur-[6px] transition-all duration-150 hover:-translate-y-px hover:shadow-lift",
     active
       ? "bg-ink text-bg border-ink"
-      : `border-line bg-surface/60 hover:bg-surface hover:border-black/10 ${
+      : `border-line bg-surface/60 hover:bg-surface hover:border-ink/10 ${
           muted ? "text-ink-muted hover:text-ink" : "text-ink"
         }`,
   ].join(" ");

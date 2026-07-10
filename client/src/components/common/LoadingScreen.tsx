@@ -87,7 +87,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
             <motion.span
               key={charObj.id}
               className={`inline-block w-[20px] ssm:w-[28px] st:w-[40px] no-underline relative text-center ${
-                !isAnimating ? "text-black" : "text-gray-400"
+                !isAnimating ? "text-ink" : "text-gray-400"
               }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{
