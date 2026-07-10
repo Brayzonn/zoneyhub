@@ -67,6 +67,7 @@ const VinylDisc = ({
                     <div className="absolute inset-0 bg-gray-800 animate-pulse rounded-full" />
                   )}
                   <img
+                    draggable={false}
                     src={albumArt}
                     alt={trackName}
                     onLoad={() => setCenterLoaded(true)}
@@ -106,6 +107,7 @@ const VinylDisc = ({
                 <div className="absolute inset-0 bg-gray-700 animate-pulse" />
               )}
               <img
+                draggable={false}
                 src={albumArt}
                 alt={trackName}
                 onLoad={() => setCoverLoaded(true)}

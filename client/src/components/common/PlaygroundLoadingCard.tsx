@@ -6,7 +6,7 @@ const PlaygroundLoadingCard = () => {
 
   return (
     <motion.div
-      className="relative w-[200px] h-[200px] rounded-lg overflow-hidden border bg-[#121418] border-[#2a2d35]"
+      className="relative w-[200px] h-[200px] rounded-lg overflow-hidden border-2 bg-bg border-ink/30 transition-colors duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ scale: 1.02 }}
@@ -25,10 +25,10 @@ const PlaygroundLoadingCard = () => {
             className="flex items-center justify-center h-full"
           >
             <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-gray-100">
+              <p className="text-sm font-medium text-ink">
                 Loading Animation
               </p>
-              <p className="text-xs text-gray-400">Hover to preview</p>
+              <p className="text-xs text-ink-muted">Hover to preview</p>
             </div>
           </motion.div>
         )}
@@ -97,14 +97,14 @@ const MiniLoadingScreen = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="absolute inset-0 flex items-center justify-center px-2 bg-[#0f1115]"
+      className="absolute inset-0 flex items-center justify-center px-2 bg-bg"
     >
       <div className="flex gap-0.5 text-sm font-extrabold tracking-tight">
         {displayChars.map((charObj) => (
           <motion.span
             key={charObj.id}
             className={`inline-block w-[12px] relative text-center ${
-              !isAnimating ? "text-white" : "text-gray-400"
+              !isAnimating ? "text-ink" : "text-ink-muted"
             }`}
             initial={{ opacity: 0, y: 5 }}
             animate={{
@@ -126,7 +126,7 @@ const MiniLoadingScreen = () => {
             {charObj.char || ""}
 
             <motion.div
-              className="absolute inset-0 bg-[#0f1115] origin-top"
+              className="absolute inset-0 bg-bg origin-top"
               initial={{ scaleY: 0 }}
               animate={{
                 scaleY: isClosing ? 0.5 : 0,
@@ -138,7 +138,7 @@ const MiniLoadingScreen = () => {
             />
 
             <motion.div
-              className="absolute inset-0 bg-[#0f1115] origin-bottom"
+              className="absolute inset-0 bg-bg origin-bottom"
               initial={{ scaleY: 0 }}
               animate={{
                 scaleY: isClosing ? 0.5 : 0,

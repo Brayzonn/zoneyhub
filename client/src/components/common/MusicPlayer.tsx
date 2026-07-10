@@ -59,10 +59,10 @@ const MusicPlayer = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.2 }}
       >
-        <h3 className="text-[13px] font-medium truncate max-w-[120px] text-[#e1e1e1]">
+        <h3 className="text-[13px] font-medium truncate max-w-[120px] text-ink">
           {trackName}
         </h3>
-        <p className="text-[11px] truncate max-w-[120px] text-[#c5c5c5]">
+        <p className="text-[11px] truncate max-w-[120px] text-ink-muted">
           {artistName}
         </p>
       </motion.div>
@@ -70,7 +70,7 @@ const MusicPlayer = ({
       {/* Play/Pause Button */}
       <motion.button
         onClick={togglePlayPause}
-        className="cursor-pointer w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-colors text-gray-300 hover:text-white hover:bg-[#1f2228]"
+        className="cursor-pointer w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-colors text-ink-muted hover:text-ink hover:bg-ink/10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.2 }}
@@ -137,7 +137,7 @@ const MusicPlayer = ({
         {/* Stop button */}
         <motion.button
           onClick={onStop}
-          className="cursor-pointer w-5 h-5 rounded-full flex items-center justify-center transition-colors z-10 bg-white hover:bg-gray-200"
+          className="cursor-pointer w-5 h-5 rounded-full flex items-center justify-center transition-colors z-10 bg-ink hover:opacity-80"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.2 }}
@@ -145,7 +145,7 @@ const MusicPlayer = ({
           whileTap={{ scale: 0.95 }}
           aria-label="Stop"
         >
-          <div className="w-2 h-2 rounded-[1px] bg-[#121418]" />
+          <div className="w-2 h-2 rounded-[1px] bg-bg" />
         </motion.button>
       </div>
     </div>

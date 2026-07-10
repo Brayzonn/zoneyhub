@@ -1,34 +1,14 @@
+/* 40px grid, 1px lines at 40% — line color themes via --mat-line */
 const MatTexture = () => (
   <div
-    className="fixed inset-0 overflow-hidden pointer-events-none z-0"
+    className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-40"
     style={{
       backgroundImage: `
-        linear-gradient(to right, rgb(0 0 0 / 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(0 0 0 / 0.06) 1px, transparent 1px),
-        linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px),
-        linear-gradient(
-          45deg,
-          transparent 0,
-          transparent calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% + 0.5px),
-          transparent calc(50% + 0.5px),
-          transparent 100%
-        ),
-        linear-gradient(
-          -45deg,
-          transparent 0,
-          transparent calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% - 0.5px),
-          rgb(0 0 0 / 0.08) calc(50% + 0.5px),
-          transparent calc(50% + 0.5px),
-          transparent 100%
-        )
+        linear-gradient(to right, rgb(var(--mat-line)) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(var(--mat-line)) 1px, transparent 1px)
       `,
-      backgroundSize:
-        "16px 16px, 16px 16px, 80px 80px, 80px 80px, 80px 80px, 80px 80px",
-      backgroundPosition: "0 0",
+      backgroundSize: "40px 40px",
+      backgroundPosition: "center",
     }}
   />
 );

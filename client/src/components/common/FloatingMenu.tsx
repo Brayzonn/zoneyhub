@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import MusicPlayer from "./MusicPlayer";
 import { useSoundEffects } from "../../hooks/useSoundEffects";
+import { useTheme } from "../../hooks/useTheme";
 import {
   HomeIcon,
   ProjectsIcon,
@@ -11,6 +12,8 @@ import {
   SoundOnIcon,
   SoundOffIcon,
   NowPlayingIcon,
+  SunIcon,
+  MoonIcon,
 } from "../../assets/icons";
 
 interface MenuItem {
@@ -43,15 +46,22 @@ const FloatingMenu = ({
   labelPosition = "bottom",
 }: FloatingMenuProps) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [isPlayerOpen, setIsPlayerOpen] = useState(true);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
+
+  // Reopen the player pill whenever a new track starts
+  useEffect(() => {
+    if (currentTrack) setIsPlayerOpen(true);
+  }, [currentTrack]);
 
   const isActive = (path: string) => location.pathname === path;
 
   const getLabelClasses = () => {
     const baseClasses =
-      "absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border bg-[#121418] border-[#121418]";
+      "absolute left-1/2 -translate-x-1/2 px-2 py-1 rounded-[7px] transition-all duration-300 border bg-ink border-ink";
 
     const positionClasses =
       labelPosition === "top" ? "bottom-full mb-2" : "top-full mt-2";
@@ -101,7 +111,7 @@ const FloatingMenu = ({
   return (
     <div className="relative flex items-center">
       <AnimatePresence>
-        {currentTrack && (
+        {currentTrack && isPlayerOpen && (
           <motion.div
             className="absolute right-full top-0 flex items-center overflow-hidden"
             initial={{ width: 0, x: 200 }}
@@ -117,7 +127,7 @@ const FloatingMenu = ({
             }}
             style={{ marginRight: "9px" }}
           >
-            <div className="h-full rounded-[12px] overflow-hidden border transition-colors duration-300 bg-[#121418] border-[#121418]">
+            <div className="h-full rounded-[12px] overflow-hidden border-2 transition-colors duration-300 bg-bg border-ink/20">
               <MusicPlayer
                 trackId={currentTrack.id}
                 trackName={currentTrack.name}
@@ -130,8 +140,8 @@ const FloatingMenu = ({
         )}
       </AnimatePresence>
 
-      <div className="relative z-10 flex items-center rounded-[12px] border transition-colors duration-300 bg-[#121418] border-white/15">
-        <div className="h-[48px] px-2 py-1 flex flex-row gap-2">
+      <div className="relative z-10 flex items-center rounded-[12px] border-2 transition-colors duration-300 bg-bg border-ink/20">
+        <div className="h-[48px] px-2 py-1 flex flex-row gap-4">
           {menuItems.map((item) => (
             <div key={item.id} className="relative flex items-center space-x-1">
               <Link
@@ -141,8 +151,8 @@ const FloatingMenu = ({
                 onMouseLeave={() => setHoveredItem(null)}
                 className={`shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all group border ${
                   isActive(item.path)
-                    ? "bg-[#1f2228] border-[#1f2228] text-white"
-                    : "text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
+                    ? "bg-ink/10 border-ink/10 text-ink"
+                    : "text-ink-muted hover:text-ink hover:bg-ink/10 border-transparent hover:border-ink/10"
                 }`}
               >
                 <div>{item.icon}</div>
@@ -152,38 +162,50 @@ const FloatingMenu = ({
                   hoveredItem === item.id,
                 )}`}
               >
-                <h1 className="text-sm font-medium whitespace-nowrap text-[#e1e1e1]">
+                <h1 className="text-sm font-medium whitespace-nowrap text-bg">
                   {item.label}
                 </h1>
               </div>
             </div>
           ))}
 
-          <div className="shrink-0 w-[1px] my-1.5 bg-[#515151]" />
+          <div className="shrink-0 w-[1px] my-1.5 bg-ink/25" />
 
           <div className="relative flex items-center">
             <button
-              onMouseEnter={() => setHoveredItem("sound")}
+              onMouseEnter={() => setHoveredItem("now-playing")}
               onMouseLeave={() => setHoveredItem(null)}
               onClick={() => {
-                onSoundToggle?.();
-                if (!isSoundOn) {
-                  setTimeout(() => playClick(), 50);
-                }
+                if (!currentTrack) return;
+                playClick();
+                setIsPlayerOpen((prev) => !prev);
               }}
-              className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
-              aria-label="Now Playing"
+              disabled={!currentTrack}
+              className={`shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border ${
+                !currentTrack
+                  ? "text-ink/25 border-transparent cursor-default"
+                  : isPlayerOpen
+                    ? "cursor-pointer bg-ink/10 border-ink/10 text-ink"
+                    : "cursor-pointer text-ink-muted hover:text-ink hover:bg-ink/10 border-transparent hover:border-ink/10"
+              }`}
+              aria-label={
+                currentTrack && isPlayerOpen ? "Hide player" : "Show player"
+              }
             >
               <NowPlayingIcon />
             </button>
 
             <div
               className={`${getLabelClasses()} ${getLabelVisibilityClasses(
-                hoveredItem === "Now Playing",
+                hoveredItem === "now-playing",
               )}`}
             >
-              <h1 className="text-sm font-medium whitespace-nowrap text-[#c5c5c5]">
-                Now Playing
+              <h1 className="text-sm font-medium whitespace-nowrap text-bg">
+                {!currentTrack
+                  ? "Now Playing"
+                  : isPlayerOpen
+                    ? "Hide Player"
+                    : "Show Player"}
               </h1>
             </div>
           </div>
@@ -198,7 +220,7 @@ const FloatingMenu = ({
                   setTimeout(() => playClick(), 50);
                 }
               }}
-              className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-gray-500 hover:text-white hover:bg-[#1f2228] border-transparent hover:border-[#1f2228]"
+              className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-ink-muted hover:text-ink hover:bg-ink/10 border-transparent hover:border-ink/10"
               aria-label={isSoundOn ? "Mute Sound" : "Unmute Sound"}
             >
               {isSoundOn ? <SoundOnIcon /> : <SoundOffIcon />}
@@ -209,8 +231,37 @@ const FloatingMenu = ({
                 hoveredItem === "sound",
               )}`}
             >
-              <h1 className="text-sm font-medium whitespace-nowrap text-[#c5c5c5]">
+              <h1 className="text-sm font-medium whitespace-nowrap text-bg">
                 {isSoundOn ? "Mute" : "Unmute"}
+              </h1>
+            </div>
+          </div>
+
+          <div className="relative flex items-center">
+            <button
+              onMouseEnter={() => setHoveredItem("theme")}
+              onMouseLeave={() => setHoveredItem(null)}
+              onClick={() => {
+                playClick();
+                toggleTheme();
+              }}
+              className="cursor-pointer shrink-0 w-8 h-8 rounded-[8px] flex items-center justify-center transition-all border text-ink-muted hover:text-ink hover:bg-ink/10 border-transparent hover:border-ink/10"
+              aria-label={
+                theme === "light"
+                  ? "Switch to dark theme"
+                  : "Switch to light theme"
+              }
+            >
+              {theme === "light" ? <MoonIcon /> : <SunIcon />}
+            </button>
+
+            <div
+              className={`${getLabelClasses()} ${getLabelVisibilityClasses(
+                hoveredItem === "theme",
+              )}`}
+            >
+              <h1 className="text-sm font-medium whitespace-nowrap text-bg">
+                {theme === "light" ? "Dark Mode" : "Light Mode"}
               </h1>
             </div>
           </div>
