@@ -1,7 +1,6 @@
 import ReactGA from "react-ga4";
 
-// Falls back to the production ID so a build without env vars still works;
-// override with VITE_GA_MEASUREMENT_ID for staging/other environments.
+// Production ID fallback; override with VITE_GA_MEASUREMENT_ID
 const GA_MEASUREMENT_ID =
   import.meta.env.VITE_GA_MEASUREMENT_ID ?? "G-02YZV44RB1";
 

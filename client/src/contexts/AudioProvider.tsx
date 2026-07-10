@@ -69,8 +69,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [currentTrack, isPlaying]);
 
-  // The global sound toggle is a true mute: playback (and the track's
-  // position) continues silently, so unmuting picks up where the music is.
+  // True mute: playback continues silently so unmuting keeps position
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) audio.muted = !isSoundOn;
