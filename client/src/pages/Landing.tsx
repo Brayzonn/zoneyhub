@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import JournalLayout from "../components/JournalLayout";
+import SiteLayout from "../components/SiteLayout";
 import LoadingScreen from "../components/common/LoadingScreen";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
@@ -20,16 +20,16 @@ const Landing = () => {
       {isPageLoading ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
-        <JournalLayout>
+        <SiteLayout>
           <Helmet>
-            <title>Eyinda Bright | Software Developer Portfolio</title>
+            <title>Eyinda Bright | Software Developer </title>
             <meta
               name="description"
               content="Eyinda Bright is a software developer building reliable backend systems and frontend applications."
             />
           </Helmet>
           <Hero />
-        </JournalLayout>
+        </SiteLayout>
       )}
     </AnimatePresence>
   );

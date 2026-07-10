@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import JournalLayout from "../components/JournalLayout";
+import SiteLayout from "../components/SiteLayout";
 import BlogComponent from "../components/BlogComponent";
 
 const Blog = () => (
-  <JournalLayout>
+  <SiteLayout>
     <Helmet>
       <title>Blog | Eyinda Bright</title>
       <meta
@@ -12,7 +12,7 @@ const Blog = () => (
       />
     </Helmet>
     <BlogComponent />
-  </JournalLayout>
+  </SiteLayout>
 );
 
 export default Blog;

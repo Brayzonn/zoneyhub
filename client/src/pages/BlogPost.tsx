@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useSound } from "../hooks/useSound";
 import { useSoundEffects } from "../hooks/useSoundEffects";
-import JournalLayout from "../components/JournalLayout";
+import SiteLayout from "../components/SiteLayout";
 import PostContent from "../components/PostContent";
 import MetaRow from "../components/ui/MetaRow";
 import { blogPosts } from "../data/blogPosts";
@@ -22,7 +22,7 @@ const BlogPost = () => {
   const ogImage = `${SITE_URL}/og-image.webp`;
 
   return (
-    <JournalLayout>
+    <SiteLayout>
       {post && (
         <Helmet>
           <title>{post.title} | Eyinda Bright</title>
@@ -59,7 +59,7 @@ const BlogPost = () => {
                 ]}
                 className="mb-3"
               />
-              <h1 className="font-serif font-medium text-title max-md:text-title-sm m-0 text-ink">
+              <h1 className="font-serif font-medium text-page-title max-md:text-page-title-sm m-0 text-ink">
                 {post.title}
               </h1>
             </header>
@@ -85,7 +85,7 @@ const BlogPost = () => {
           </div>
         )}
       </article>
-    </JournalLayout>
+    </SiteLayout>
   );
 };
 

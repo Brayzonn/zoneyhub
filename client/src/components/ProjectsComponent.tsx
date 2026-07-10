@@ -7,8 +7,8 @@ const ProjectsComponent = () => {
   return (
     <section className="max-w-[960px] mx-auto">
       <SectionHeader kicker="Projects" title="Things I've Built">
-        A few things I&rsquo;ve designed, built, and shipped — from
-        notification infrastructure to browser games. More on{" "}
+        Highlighted projects I&rsquo;ve designed, built, and shipped, from
+        workflow tools to production SaaS. More on{" "}
         <a
           href="https://github.com/brayzonn"
           target="_blank"
@@ -35,9 +35,9 @@ const ProjectsComponent = () => {
                 onClick={() =>
                   logEvent("project_click", { project_name: proj.name })
                 }
-                className="text-inherit hover:text-ink-muted transition-colors duration-150"
+                className="text-inherit border-b border-black/20 hover:border-ink hover:text-ink-muted transition-colors duration-150"
               >
-                {proj.name} <span className="text-[1rem]">↗</span>
+                {proj.name}
               </a>
             </h2>
             <p className="text-body text-ink-muted m-0">{proj.desc}</p>

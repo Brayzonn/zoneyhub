@@ -13,6 +13,18 @@ export const projects: Project[] = [
     stack: ["NestJS", "PostgreSQL", "React", "Typescript"],
   },
   {
+    name: "Nestra",
+    desc: "A portfolio hub that gives creatives a single online identity.",
+    link: "https://nestra.me",
+    stack: ["React", "NestJS", "PostgreSQL", "Docker", "Typescript"],
+  },
+  {
+    name: "Deploy Agent",
+    desc: "A Go binary that deploys projects to a VPS on every GitHub push, handling clone, build, nginx, SSL, health checks, and automatic rollback on failure.",
+    link: "https://github.com/Brayzonn/deploy-agent",
+    stack: ["Go", "nginx", "Docker", "PM2"],
+  },
+  {
     name: "Mines",
     desc: "Multi-mode browser-based mines game with real-time multiplayer leaderboards.",
     link: "https://mines.zoneyhub.com",
@@ -29,11 +41,5 @@ export const projects: Project[] = [
     desc: "Real estate web app featuring interactive Google Maps integration for property visualization.",
     link: "https://realestate-platform-alpha.vercel.app/",
     stack: ["React", "Tailwind CSS", "MongoDB", "Express"],
-  },
-  {
-    name: "Linkly",
-    desc: "A secure, seamless URL shortener for simplifying long links.",
-    link: "https://linklyy.vercel.app/",
-    stack: ["React", "Node.js", "MongoDB", "Javascript"],
   },
 ];

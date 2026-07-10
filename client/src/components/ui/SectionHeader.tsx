@@ -13,7 +13,7 @@ const SectionHeader = ({
 }) => (
   <header className="mb-8">
     <Kicker className="mb-3">{kicker}</Kicker>
-    <h1 className="font-serif font-medium text-title max-md:text-title-sm text-ink m-0">
+    <h1 className="font-serif font-medium text-page-title max-md:text-page-title-sm text-ink m-0">
       {title}
     </h1>
     {children && (

@@ -11,10 +11,10 @@ const navItems = [
 ];
 
 /**
- * Shared shell for the journal-style redesign: quiet paper background, sticky
- * blurred header with the script site title, and the icon footer.
+ * Shared shell for every page: quiet paper background, sticky blurred
+ * header with the script site title, and the icon footer.
  */
-const JournalLayout = ({ children }: { children: ReactNode }) => {
+const SiteLayout = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation();
 
   return (
@@ -86,4 +86,4 @@ const JournalLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default JournalLayout;
+export default SiteLayout;

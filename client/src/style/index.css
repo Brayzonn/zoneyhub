@@ -63,12 +63,16 @@
   --text-body--line-height: 1.7;
   --text-prose: 1rem; /* article body */
   --text-prose--line-height: 1.8;
-  --text-heading: 1.4rem; /* list titles, article h2 */
+  --text-heading: 1.15rem; /* list titles, article h2 */
   --text-heading--line-height: 1.3;
-  --text-title: 2.3rem; /* page titles */
+  --text-title: 2.3rem; /* hero name headline */
   --text-title--line-height: 1.25;
-  --text-title-sm: 2rem; /* page titles below md */
+  --text-title-sm: 2rem; /* hero name headline below md */
   --text-title-sm--line-height: 1.25;
+  --text-page-title: 1.75rem; /* section/article headers: Projects, Blog, post title */
+  --text-page-title--line-height: 1.25;
+  --text-page-title-sm: 1.5rem; /* section/article headers below md */
+  --text-page-title-sm--line-height: 1.3;
 
   /* Letterspacing roles */
   --tracking-label: 0.18em; /* kickers */
