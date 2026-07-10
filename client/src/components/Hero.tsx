@@ -18,14 +18,14 @@ const Hero = () => {
         sometimes just for fun.
       </h1>
 
-      <p className="text-body text-ink">
+      <p className="body-copy">
         I primarily work within the TypeScript and Go ecosystems, building
         secure APIs, forward-compatible schemas, and modular systems. I enjoy
         creating software that&apos;s easy to extend, pleasant to maintain, and
         reliable under real-world use.
       </p>
 
-      <p className="text-body text-ink mt-6">
+      <p className="body-copy mt-6">
         Outside client work, I build the fun ideas that come to my head, and
         tools that make my workflow easier. Lately, that has meant building{" "}
         <a
@@ -33,7 +33,7 @@ const Hero = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("nestra_click", { location: "intro" })}
-          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
+          className="inline-link"
         >
           Nestra
         </a>
@@ -43,7 +43,7 @@ const Hero = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("notifykit_click", { location: "intro" })}
-          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
+          className="inline-link"
         >
           NotifyKit
         </a>
@@ -51,20 +51,20 @@ const Hero = () => {
         delivery with built-in observability.
       </p>
 
-      <p className="text-body text-ink mt-6">
+      <p className="body-copy mt-6">
         I&rsquo;m open to full-time, part-time, and contract opportunities. If
         you&apos;d like to work together or discuss a project, I&apos;d love to
         hear from you.
       </p>
 
-      <p className="text-body text-ink mt-6">
+      <p className="body-copy mt-6">
         Outside work, I{" "}
         <a
           href="https://spotify.link/TmIHSnEFGXb"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("spotify_click", { location: "intro" })}
-          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
+          className="inline-link"
         >
           curate playlists
         </a>

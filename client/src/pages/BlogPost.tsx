@@ -71,9 +71,7 @@ const BlogPost = () => {
                   dark
                 />
               </div>
-              <h1 className="font-serif font-medium text-page-title max-md:text-page-title-sm leading-[1.55] m-0 text-ink">
-                {post.title}
-              </h1>
+              <h1 className="page-title">{post.title}</h1>
             </header>
 
             <PostContent content={post.content} onCopyClick={playClick} />
@@ -87,7 +85,7 @@ const BlogPost = () => {
         ) : (
           /* 404 state */
           <div className="py-8">
-            <p className="text-body text-ink mb-4">Post not found.</p>
+            <p className="body-copy mb-4">Post not found.</p>
             <Link to="/blog" className={backLinkClasses}>
               ← All posts
             </Link>

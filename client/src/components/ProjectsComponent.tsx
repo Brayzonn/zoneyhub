@@ -14,7 +14,7 @@ const ProjectsComponent = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("github_click", { location: "projects" })}
-          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
+          className="inline-link"
         >
           GitHub
         </a>
@@ -27,7 +27,7 @@ const ProjectsComponent = () => {
             key={proj.name}
             className="border-b border-line last:border-b-0 py-6 transition-colors duration-150 hover:bg-ink/[0.01]"
           >
-            <h2 className="font-serif font-medium text-heading m-0 mb-2 text-ink">
+            <h2 className="item-title">
               <a
                 href={proj.link}
                 target="_blank"
@@ -40,7 +40,7 @@ const ProjectsComponent = () => {
                 {proj.name}
               </a>
             </h2>
-            <p className="text-body text-ink m-0">{proj.desc}</p>
+            <p className="body-copy">{proj.desc}</p>
             <MetaRow items={proj.stack} className="mt-3" dotted />
           </article>
         ))}
