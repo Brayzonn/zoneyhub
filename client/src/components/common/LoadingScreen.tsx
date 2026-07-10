@@ -32,7 +32,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           settleDelayMs={300}
           closeMs={200}
           riseFrom={20}
-          className="gap-1 ssm:gap-1.5 st:gap-2 text-2xl ssm:text-3xl st:text-4xl tracking-wide"
+          className="gap-1 ssm:gap-1.5 st:gap-2 text-2xl ssm:text-3xl st:text-4xl tracking-wide overflow-hidden"
           charClassName="w-[20px] ssm:w-[28px] st:w-[40px]"
           onSettled={handleSettled}
         />

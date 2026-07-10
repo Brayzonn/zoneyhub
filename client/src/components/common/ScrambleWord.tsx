@@ -14,7 +14,7 @@ interface ScrambleWordProps {
   closeMs: number;
   /** Distance each char rises from on entry. */
   riseFrom: number;
-  /** Char row: gap, text size, tracking. */
+  /** Char row: gap, text size, tracking, optional overflow clip. */
   className?: string;
   /** Per-char box width. */
   charClassName?: string;
@@ -86,7 +86,7 @@ const ScrambleWord = ({
 
   return (
     <>
-      <div className={`flex font-extrabold overflow-hidden ${className}`}>
+      <div className={`flex font-extrabold ${className}`}>
         {chars.map(({ id, char }, i) => (
           <motion.span
             key={id}
