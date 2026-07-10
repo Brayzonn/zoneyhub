@@ -4,7 +4,7 @@ import { ThemeContext, Theme } from "./ThemeContext";
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   // Reads back what the pre-paint script in index.html applied
   const [theme, setTheme] = useState<Theme>(() =>
-    document.documentElement.dataset.theme === "dark" ? "dark" : "light"
+    document.documentElement.dataset.theme === "dark" ? "dark" : "light",
   );
 
   const toggleTheme = () => {

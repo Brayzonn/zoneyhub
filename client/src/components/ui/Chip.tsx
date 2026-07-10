@@ -13,7 +13,13 @@ interface ChipProps {
 }
 
 /** Pill chip: navigation links and filter buttons. */
-const Chip = ({ to, onClick, active = false, muted = false, children }: ChipProps) => {
+const Chip = ({
+  to,
+  onClick,
+  active = false,
+  muted = false,
+  children,
+}: ChipProps) => {
   const className = [
     "inline-flex items-center rounded-full border px-[0.9rem] py-[0.4rem] text-chip backdrop-blur-[6px] transition-all duration-150 hover:-translate-y-px hover:shadow-lift",
     active
@@ -31,7 +37,11 @@ const Chip = ({ to, onClick, active = false, muted = false, children }: ChipProp
     );
   }
   return (
-    <button type="button" onClick={onClick} className={`cursor-pointer ${className}`}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`cursor-pointer ${className}`}
+    >
       {children}
     </button>
   );

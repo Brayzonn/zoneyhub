@@ -28,7 +28,14 @@ const TapeSticker = () => (
 
 const SmileySticker = () => (
   <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
-    <circle cx="36" cy="36" r="33" fill="#f2c94c" stroke="#111" strokeWidth="3" />
+    <circle
+      cx="36"
+      cy="36"
+      r="33"
+      fill="#f2c94c"
+      stroke="#111"
+      strokeWidth="3"
+    />
     <circle cx="25" cy="30" r="4" fill="#111" />
     <circle cx="47" cy="30" r="4" fill="#111" />
     <path
@@ -108,18 +115,52 @@ const NoteSticker = () => (
     />
     <line x1="21" y1="50" x2="21" y2="13" stroke="#111" strokeWidth="3" />
     <line x1="47" y1="44" x2="47" y2="7" stroke="#111" strokeWidth="3" />
-    <ellipse cx="14" cy="50" rx="8" ry="6" fill="#e8734a" stroke="#111" strokeWidth="2.5" />
-    <ellipse cx="40" cy="44" rx="8" ry="6" fill="#e8734a" stroke="#111" strokeWidth="2.5" />
+    <ellipse
+      cx="14"
+      cy="50"
+      rx="8"
+      ry="6"
+      fill="#e8734a"
+      stroke="#111"
+      strokeWidth="2.5"
+    />
+    <ellipse
+      cx="40"
+      cy="44"
+      rx="8"
+      ry="6"
+      fill="#e8734a"
+      stroke="#111"
+      strokeWidth="2.5"
+    />
   </svg>
 );
 
 const artStickers = [
-  { id: "smiley", node: <SmileySticker />, left: "76%", top: "-4%", rotation: 14 },
+  {
+    id: "smiley",
+    node: <SmileySticker />,
+    left: "76%",
+    top: "-4%",
+    rotation: 14,
+  },
   { id: "arrow", node: <ArrowSticker />, left: "6%", top: "46%", rotation: -6 },
   { id: "star", node: <StarSticker />, left: "56%", top: "101%", rotation: 10 },
   { id: "bolt", node: <BoltSticker />, left: "-16%", top: "24%", rotation: 10 },
-  { id: "squiggle", node: <SquiggleSticker />, left: "-8%", top: "106%", rotation: 6 },
-  { id: "note", node: <NoteSticker />, left: "116%", top: "124%", rotation: 12 },
+  {
+    id: "squiggle",
+    node: <SquiggleSticker />,
+    left: "-8%",
+    top: "106%",
+    rotation: 6,
+  },
+  {
+    id: "note",
+    node: <NoteSticker />,
+    left: "116%",
+    top: "124%",
+    rotation: 12,
+  },
 ];
 
 /* Ghost cards behind the main one — offsets from hey.milo.gg's stack */

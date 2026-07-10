@@ -10,12 +10,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
   const [isFadingOut, setIsFadingOut] = useState(false);
 
   const handleSettled = () => {
-    setTimeout(() => {
-      setIsFadingOut(true);
-      if (onComplete) {
-        setTimeout(onComplete, 400);
-      }
-    }, 200);
+    setTimeout(() => setIsFadingOut(true), 200);
   };
 
   return (
@@ -24,6 +19,9 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
       initial={{ opacity: 1 }}
       animate={{ opacity: isFadingOut ? 0 : 1 }}
       transition={{ duration: 0.5 }}
+      onAnimationComplete={() => {
+        if (isFadingOut) onComplete?.();
+      }}
     >
       <div className="relative px-4">
         <ScrambleWord

@@ -116,14 +116,14 @@ const ScrambleWord = ({
               className="absolute inset-0 bg-bg origin-top"
               initial={{ scaleY: 0 }}
               animate={{ scaleY: isClosing ? 0.5 : 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: closeMs / 1000, ease: "easeInOut" }}
             />
 
             <motion.div
               className="absolute inset-0 bg-bg origin-bottom"
               initial={{ scaleY: 0 }}
               animate={{ scaleY: isClosing ? 0.5 : 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: closeMs / 1000, ease: "easeInOut" }}
             />
           </motion.span>
         ))}

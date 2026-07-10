@@ -14,9 +14,7 @@ const SectionHeader = ({
   <header className="mb-8">
     <Kicker className="mb-3">{kicker}</Kicker>
     <h1 className="page-title">{title}</h1>
-    {children && (
-      <p className="body-copy mt-3">{children}</p>
-    )}
+    {children && <p className="body-copy mt-3">{children}</p>}
   </header>
 );
 

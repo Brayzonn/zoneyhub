@@ -27,7 +27,7 @@ export const logPageView = (page?: string): void => {
 
 export const logEvent = (
   eventName: string,
-  eventParams?: Record<string, string | number | boolean>
+  eventParams?: Record<string, string | number | boolean>,
 ): void => {
   if (!isInitialized) return;
 

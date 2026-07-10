@@ -20,5 +20,5 @@ export interface AudioContextType {
 }
 
 export const AudioContext = createContext<AudioContextType | undefined>(
-  undefined
+  undefined,
 );

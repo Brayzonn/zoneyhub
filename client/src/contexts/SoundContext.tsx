@@ -6,5 +6,5 @@ interface SoundContextType {
 }
 
 export const SoundContext = createContext<SoundContextType | undefined>(
-  undefined
+  undefined,
 );

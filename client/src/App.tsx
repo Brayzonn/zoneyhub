@@ -39,21 +39,21 @@ function App() {
     <ThemeProvider>
       <SoundProvider>
         <AudioProvider>
-        <Router>
-          <ScrollToTop />
-          <AnalyticsListener />
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/playground" element={<Playground />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              {/* Fallback: unknown paths render the landing page */}
-              <Route path="*" element={<Landing />} />
-            </Routes>
-          </Suspense>
-        </Router>
+          <Router>
+            <ScrollToTop />
+            <AnalyticsListener />
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/playground" element={<Playground />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                {/* Fallback: unknown paths render the landing page */}
+                <Route path="*" element={<Landing />} />
+              </Routes>
+            </Suspense>
+          </Router>
         </AudioProvider>
       </SoundProvider>
     </ThemeProvider>

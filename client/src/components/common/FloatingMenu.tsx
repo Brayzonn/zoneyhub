@@ -128,9 +128,7 @@ const FloatingMenu = ({
                 ? "absolute top-full left-1/2 flex items-center"
                 : "absolute right-full top-0 flex items-center overflow-hidden"
             }
-            initial={
-              isMobile ? { x: "-50%", y: -52 } : { width: 0, x: 200 }
-            }
+            initial={isMobile ? { x: "-50%", y: -52 } : { width: 0, x: 200 }}
             animate={
               isMobile
                 ? {
