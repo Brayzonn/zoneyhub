@@ -161,7 +161,6 @@ const FloatingMenu = ({
           >
             <div className="h-full rounded-[12px] overflow-hidden border-2 transition-colors duration-300 bg-bg border-ink/20">
               <MusicPlayer
-                trackId={currentTrack.id}
                 trackName={currentTrack.name}
                 artistName={currentTrack.artist}
                 albumArt={currentTrack.albumArt}

@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useGlobalAudio } from "../../hooks/useGlobalAudio";
 
 interface MusicPlayerProps {
-  trackId: string;
   trackName: string;
   artistName: string;
   albumArt?: string;
