@@ -56,24 +56,21 @@ const BlogComponent = () => {
             to={`/blog/${post.slug}`}
             className="group block border-b border-line last:border-b-0 py-6 text-inherit transition-colors duration-150 hover:bg-ink/[0.01]"
           >
-            <h2 className="font-serif font-medium text-heading m-0 mb-3 text-ink transition-colors duration-150 group-hover:text-ink-muted">
+            <h2 className="font-serif font-medium text-heading m-0 mb-2 text-ink transition-colors duration-150 group-hover:text-ink-muted">
               <span className="border-b border-ink/20 group-hover:border-ink-muted transition-colors duration-150">
                 {post.title}
               </span>
             </h2>
+            <MetaRow
+              items={[
+                post.date,
+                post.readTime,
+                post.category === "technical" ? "Technical" : "Non-Technical",
+              ]}
+              className="mb-3"
+            />
             <p className="text-body text-ink-muted m-0">{post.excerpt}</p>
-            <div className="flex flex-wrap items-center gap-3 mt-3">
-              <MetaRow
-                items={[
-                  post.date,
-                  post.readTime,
-                  post.category === "technical"
-                    ? "Technical"
-                    : "Non-Technical",
-                ]}
-              />
-              <MetaRow items={post.tags} pilled />
-            </div>
+            <MetaRow items={post.tags} pilled className="mt-3" />
           </Link>
         ))}
       </div>

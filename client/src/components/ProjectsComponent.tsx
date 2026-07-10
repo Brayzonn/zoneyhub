@@ -41,7 +41,7 @@ const ProjectsComponent = () => {
               </a>
             </h2>
             <p className="text-body text-ink-muted m-0">{proj.desc}</p>
-            <MetaRow items={proj.stack} className="mt-3" pilled />
+            <MetaRow items={proj.stack} className="mt-3" dotted />
           </article>
         ))}
       </div>
