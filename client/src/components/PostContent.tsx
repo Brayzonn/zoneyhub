@@ -81,18 +81,18 @@ const CodeBlock = ({
   };
 
   return (
-    <div className="rounded-block overflow-hidden border font-mono text-[0.8rem] bg-ink border-ink shadow-lift">
-      <div className="flex items-center justify-between px-4 py-2 text-[0.72rem] uppercase tracking-[0.08em] border-b border-white/10 text-bg/50 bg-black/20">
+    <div className="rounded-block overflow-hidden border font-mono text-[0.8rem] bg-code-bg border-code-bg shadow-lift">
+      <div className="flex items-center justify-between px-4 py-2 text-[0.72rem] uppercase tracking-[0.08em] border-b border-white/10 text-code-ink/50 bg-black/20">
         <span>{label ?? ""}</span>
         <button
           onClick={handleCopy}
-          className="cursor-pointer normal-case tracking-normal transition-colors duration-150 hover:text-bg"
+          className="cursor-pointer normal-case tracking-normal transition-colors duration-150 hover:text-code-ink"
         >
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
       <pre className="p-4 overflow-x-auto leading-relaxed m-0">
-        <code className="text-bg/90">{code}</code>
+        <code className="text-code-ink/90">{code}</code>
       </pre>
     </div>
   );
