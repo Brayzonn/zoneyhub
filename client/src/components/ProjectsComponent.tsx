@@ -14,7 +14,7 @@ const ProjectsComponent = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("github_click", { location: "projects" })}
-          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
         >
           GitHub
         </a>
@@ -25,7 +25,7 @@ const ProjectsComponent = () => {
         {projects.map((proj) => (
           <article
             key={proj.name}
-            className="border-b border-line last:border-b-0 py-6 transition-colors duration-150 hover:bg-black/[0.01]"
+            className="border-b border-line last:border-b-0 py-6 transition-colors duration-150 hover:bg-ink/[0.01]"
           >
             <h2 className="font-serif font-medium text-heading m-0 mb-2 text-ink">
               <a
@@ -35,13 +35,13 @@ const ProjectsComponent = () => {
                 onClick={() =>
                   logEvent("project_click", { project_name: proj.name })
                 }
-                className="text-inherit border-b border-black/20 hover:border-ink hover:text-ink-muted transition-colors duration-150"
+                className="text-inherit border-b border-ink/20 hover:border-ink hover:text-ink-muted transition-colors duration-150"
               >
                 {proj.name}
               </a>
             </h2>
             <p className="text-body text-ink-muted m-0">{proj.desc}</p>
-            <MetaRow items={proj.stack} className="mt-3" />
+            <MetaRow items={proj.stack} className="mt-3" pilled />
           </article>
         ))}
       </div>

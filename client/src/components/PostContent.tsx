@@ -1,17 +1,11 @@
 import { useState } from "react";
 import type { ContentBlock } from "../data/blogPosts";
 
-/**
- * Blog content is static module data — blocks, list items, and inline parts
- * are never reordered or edited at runtime — so array position is a stable
- * React key. (The previous content-derived keys could collide: two blocks
- * sharing a 40-char prefix, or the same `code` span twice in a paragraph.)
- */
+/** Array position is a stable React key: blog content is static module data. */
 const keyed = <T,>(items: readonly T[]) =>
   items.map((item, key) => ({ key, item }));
 
-/** Renders inline markdown: **bold**, `code`, and [label](href) links.
-    Visual styling comes from the `.prose` container styles. */
+/** Renders inline markdown: **bold**, `code`, and [label](href) links. */
 const renderInline = (text: string) => {
   const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
   return keyed(parts).map(({ key, item: part }) => {
@@ -87,18 +81,18 @@ const CodeBlock = ({
   };
 
   return (
-    <div className="rounded-block overflow-hidden border font-mono text-[0.8rem] bg-surface border-line shadow-lift">
-      <div className="flex items-center justify-between px-4 py-2 text-[0.72rem] uppercase tracking-[0.08em] border-b text-ink-muted border-line bg-bg">
+    <div className="rounded-block overflow-hidden border font-mono text-[0.8rem] bg-ink border-ink shadow-lift">
+      <div className="flex items-center justify-between px-4 py-2 text-[0.72rem] uppercase tracking-[0.08em] border-b border-white/10 text-bg/50 bg-black/20">
         <span>{label ?? ""}</span>
         <button
           onClick={handleCopy}
-          className="cursor-pointer normal-case tracking-normal transition-colors duration-150 hover:text-ink"
+          className="cursor-pointer normal-case tracking-normal transition-colors duration-150 hover:text-bg"
         >
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
       <pre className="p-4 overflow-x-auto leading-relaxed m-0">
-        <code className="text-ink">{code}</code>
+        <code className="text-bg/90">{code}</code>
       </pre>
     </div>
   );

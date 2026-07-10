@@ -21,12 +21,16 @@ const BlogComponent = () => {
       ? blogPosts
       : blogPosts.filter((p) => p.category === activeFilter);
 
+  const countFor = (value: Filter) =>
+    value === "all"
+      ? blogPosts.length
+      : blogPosts.filter((p) => p.category === value).length;
+
   return (
     <section className="max-w-[960px] mx-auto">
       <SectionHeader kicker="Blog" title="Ideas & Notes">
         Writing on things I&rsquo;ve built, problems I&rsquo;ve debugged, and
-        whatever else has been on my mind — {filtered.length}{" "}
-        {filtered.length === 1 ? "post" : "posts"}.
+        whatever else has been on my mind.
       </SectionHeader>
 
       <div className="flex flex-wrap gap-2 mb-8">
@@ -38,6 +42,9 @@ const BlogComponent = () => {
             muted
           >
             {f.label}
+            <span className="ml-1.5 inline-flex items-center justify-center w-[1.15rem] h-[1.15rem] rounded-full text-[0.65rem] bg-current/10 text-current">
+              {countFor(f.value)}
+            </span>
           </Chip>
         ))}
       </div>
@@ -47,21 +54,26 @@ const BlogComponent = () => {
           <Link
             key={post.slug}
             to={`/blog/${post.slug}`}
-            className="group block border-b border-line last:border-b-0 py-6 text-inherit transition-colors duration-150 hover:bg-black/[0.01]"
+            className="group block border-b border-line last:border-b-0 py-6 text-inherit transition-colors duration-150 hover:bg-ink/[0.01]"
           >
-            <h2 className="font-serif font-medium text-heading m-0 mb-2 text-ink transition-colors duration-150 group-hover:text-ink-muted">
-              {post.title}
+            <h2 className="font-serif font-medium text-heading m-0 mb-3 text-ink transition-colors duration-150 group-hover:text-ink-muted">
+              <span className="border-b border-ink/20 group-hover:border-ink-muted transition-colors duration-150">
+                {post.title}
+              </span>
             </h2>
             <p className="text-body text-ink-muted m-0">{post.excerpt}</p>
-            <MetaRow
-              items={[
-                post.date,
-                post.readTime,
-                post.category === "technical" ? "Technical" : "Non-Technical",
-                ...post.tags,
-              ]}
-              className="mt-3"
-            />
+            <div className="flex flex-wrap items-center gap-3 mt-3">
+              <MetaRow
+                items={[
+                  post.date,
+                  post.readTime,
+                  post.category === "technical"
+                    ? "Technical"
+                    : "Non-Technical",
+                ]}
+              />
+              <MetaRow items={post.tags} pilled />
+            </div>
           </Link>
         ))}
       </div>

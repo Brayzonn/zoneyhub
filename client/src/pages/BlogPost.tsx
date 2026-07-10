@@ -45,21 +45,33 @@ const BlogPost = () => {
         </Helmet>
       )}
 
+      {post && (
+        <Link
+          to="/blog"
+          aria-label="Back to all posts"
+          className="fixed z-20 bottom-6 left-6 max-sm:bottom-4 max-sm:left-4 inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/90 backdrop-blur-[6px] px-4 py-2 text-chip text-ink-muted shadow-lift transition-all duration-150 hover:-translate-y-px hover:text-ink hover:border-black/10"
+        >
+          ← All posts
+        </Link>
+      )}
+
       <article className="max-w-[960px] mx-auto">
         {post ? (
           <>
-            <header className="mb-8">
-              <MetaRow
-                items={[
-                  post.date,
-                  post.readTime,
-                  post.category === "technical"
-                    ? "Technical"
-                    : "Non-Technical",
-                ]}
-                className="mb-3"
-              />
-              <h1 className="font-serif font-medium text-page-title max-md:text-page-title-sm m-0 text-ink">
+            <header className="mb-5">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <MetaRow items={[post.date, post.readTime]} />
+                <MetaRow
+                  items={[
+                    post.category === "technical"
+                      ? "Technical"
+                      : "Non-Technical",
+                  ]}
+                  pilled
+                  dark
+                />
+              </div>
+              <h1 className="font-serif font-medium text-page-title max-md:text-page-title-sm leading-[1.55] m-0 text-ink">
                 {post.title}
               </h1>
             </header>
@@ -69,11 +81,8 @@ const BlogPost = () => {
             <MetaRow
               items={post.tags}
               className="mt-10 pt-6 border-t border-line"
+              pilled
             />
-
-            <Link to="/blog" className={`${backLinkClasses} mt-6`}>
-              ← All posts
-            </Link>
           </>
         ) : (
           /* 404 state */
