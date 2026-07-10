@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import ScrambleWord from "./ScrambleWord";
 
 const PlaygroundLoadingCard = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -14,7 +15,24 @@ const PlaygroundLoadingCard = () => {
     >
       <AnimatePresence mode="wait">
         {isHovered ? (
-          <MiniLoadingScreen key="loading" />
+          <motion.div
+            key="loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 flex items-center justify-center px-2 bg-bg"
+          >
+            <ScrambleWord
+              word="BRAY"
+              ticks={12}
+              settleDelayMs={800}
+              closeMs={400}
+              riseFrom={5}
+              className="gap-0.5 text-sm tracking-tight"
+              charClassName="w-[12px]"
+            />
+          </motion.div>
         ) : (
           <motion.div
             key="placeholder"
@@ -25,146 +43,12 @@ const PlaygroundLoadingCard = () => {
             className="flex items-center justify-center h-full"
           >
             <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-ink">
-                Loading Animation
-              </p>
+              <p className="text-sm font-medium text-ink">Loading Animation</p>
               <p className="text-xs text-ink-muted">Hover to preview</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
-  );
-};
-
-const MiniLoadingScreen = () => {
-  const targetWord = "BRAY";
-  const [displayChars, setDisplayChars] = useState(
-    Array(targetWord.length)
-      .fill("")
-      .map((_, i) => ({ id: `char-${i}`, char: "", position: i })),
-  );
-  const [isAnimating, setIsAnimating] = useState(true);
-  const [isClosing, setIsClosing] = useState(false);
-
-  const randomChars = "国家間に友好関係の人間は人間が暴政と";
-
-  useEffect(() => {
-    let iterations = 0;
-    const maxIterations = 12;
-
-    const interval = setInterval(() => {
-      if (iterations < maxIterations) {
-        setDisplayChars(
-          Array(targetWord.length)
-            .fill("")
-            .map((_, i) => ({
-              id: `char-${i}`,
-              char: randomChars[Math.floor(Math.random() * randomChars.length)],
-              position: i,
-            })),
-        );
-        iterations++;
-      } else {
-        setDisplayChars(
-          targetWord.split("").map((char, i) => ({
-            id: `char-${i}`,
-            char,
-            position: i,
-          })),
-        );
-        setIsAnimating(false);
-        clearInterval(interval);
-
-        const blinkDuration = 200;
-        const bounceDuration = 600;
-
-        setTimeout(() => {
-          setIsClosing(true);
-          setTimeout(() => {
-            setIsClosing(false);
-          }, 400);
-        }, blinkDuration + bounceDuration);
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="absolute inset-0 flex items-center justify-center px-2 bg-bg"
-    >
-      <div className="flex gap-0.5 text-sm font-extrabold tracking-tight">
-        {displayChars.map((charObj) => (
-          <motion.span
-            key={charObj.id}
-            className={`inline-block w-[12px] relative text-center ${
-              !isAnimating ? "text-ink" : "text-ink-muted"
-            }`}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{
-              opacity: !isAnimating ? [1, 0, 1, 0, 1] : 1,
-              y: 0,
-            }}
-            transition={{
-              opacity: !isAnimating
-                ? {
-                    duration: 0.2,
-                    times: [0, 0.25, 0.5, 0.75, 1],
-                    ease: "linear",
-                    delay: 0,
-                  }
-                : { duration: 0.2, delay: charObj.position * 0.05 },
-              y: { duration: 0.2, delay: charObj.position * 0.05 },
-            }}
-          >
-            {charObj.char || ""}
-
-            <motion.div
-              className="absolute inset-0 bg-bg origin-top"
-              initial={{ scaleY: 0 }}
-              animate={{
-                scaleY: isClosing ? 0.5 : 0,
-              }}
-              transition={{
-                duration: 0.4,
-                ease: "easeInOut",
-              }}
-            />
-
-            <motion.div
-              className="absolute inset-0 bg-bg origin-bottom"
-              initial={{ scaleY: 0 }}
-              animate={{
-                scaleY: isClosing ? 0.5 : 0,
-              }}
-              transition={{
-                duration: 0.4,
-                ease: "easeInOut",
-              }}
-            />
-          </motion.span>
-        ))}
-      </div>
-
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        animate={{
-          opacity: isAnimating ? [0, 0.1, 0] : 0,
-        }}
-        transition={{
-          duration: 0.15,
-          repeat: isAnimating ? Infinity : 0,
-          repeatDelay: 0.8,
-        }}
-      >
-        <div className="w-full h-full bg-white mix-blend-screen" />
-      </motion.div>
     </motion.div>
   );
 };
