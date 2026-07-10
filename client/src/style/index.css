@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* dark: utilities follow the data-theme attribute, not the OS setting */
+@custom-variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
+
 @theme {
   /* Breakpoints */
   --breakpoint-ssm: 305px;
@@ -87,11 +90,12 @@
 
 /* Dark theme — --color-bg hex is mirrored in the index.html pre-paint script */
 html[data-theme="dark"] {
-  --color-bg: #161513; /* page ground */
-  --color-surface: #201f1c; /* cards, code blocks, figures */
-  --color-ink: #e8e6e1; /* primary text */
-  --color-ink-muted: #99968f; /* secondary text, labels */
-  --color-line: #2b2a26; /* hairline borders */
+  --mat-line: 51 51 51;
+  --color-bg: #000000; /* page ground */
+  --color-surface: #111111; /* cards, code blocks, figures */
+  --color-ink: #ededed; /* primary text */
+  --color-ink-muted: #a8a8a8; /* secondary text, labels */
+  --color-line: #262626; /* hairline borders */
   --shadow-lift: 0 10px 30px rgb(0 0 0 / 0.5);
 }
 
@@ -123,6 +127,13 @@ html[data-theme="dark"] {
   font-display: swap;
 }
 
+/* Die-cut sticker look: white outline hugging the silhouette + soft lift */
+.sticker-cut {
+  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+    drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+    drop-shadow(0 6px 12px rgb(0 0 0 / 0.35));
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -135,6 +146,7 @@ html[data-theme="dark"] {
 /* Global styles — html bg included: iOS samples it for the status bar */
 html {
   background-color: var(--color-bg);
+  --mat-line: 204 204 204; /* playground grid-line ink (rgb triplet) */
 }
 
 body {
