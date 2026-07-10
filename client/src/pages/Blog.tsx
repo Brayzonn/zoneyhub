@@ -1,10 +1,18 @@
-import PageLayout from "../components/PageLayout";
+import { Helmet } from "react-helmet-async";
+import JournalLayout from "../components/JournalLayout";
 import BlogComponent from "../components/BlogComponent";
 
 const Blog = () => (
-  <PageLayout>
+  <JournalLayout>
+    <Helmet>
+      <title>Blog | Eyinda Bright</title>
+      <meta
+        name="description"
+        content="Writing by Eyinda Bright on software he's built, problems he's debugged, and whatever else has been on his mind."
+      />
+    </Helmet>
     <BlogComponent />
-  </PageLayout>
+  </JournalLayout>
 );
 
 export default Blog;

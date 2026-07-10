@@ -1,95 +1,51 @@
 import { logEvent } from "../utils/analytics";
 import { projects } from "../data/projects";
+import SectionHeader from "./ui/SectionHeader";
+import MetaRow from "./ui/MetaRow";
 
 const ProjectsComponent = () => {
   return (
-    <div className="relative select-none rounded-lg w-full max-w-[500px] mx-auto shadow-lg p-5 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-[15px] font-semibold tracking-wide text-white">
-          Projects
-        </h2>
+    <section className="max-w-[960px] mx-auto">
+      <SectionHeader kicker="Projects" title="Things I've Built">
+        A few things I&rsquo;ve designed, built, and shipped — from
+        notification infrastructure to browser games. More on{" "}
         <a
           href="https://github.com/brayzonn"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => logEvent("github_click", { location: "projects" })}
-          className="inline-flex items-center gap-1 text-[12px] group transition text-gray-500 hover:text-white"
+          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
         >
-          <span>GitHub</span>
-          <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-            ↗
-          </span>
+          GitHub
         </a>
-      </div>
+        .
+      </SectionHeader>
 
-      {/* Divider */}
-      <div className="h-[1px] w-full mb-4 border-t border-dashed border-[#2a2d35]" />
-
-      {/* Projects List */}
-      <div className="space-y-4">
-        {projects.map((proj, index) => (
-          <div key={proj.name}>
-            <div className="flex gap-4">
-              <span className="text-[11px] font-mono mt-0.5 shrink-0 w-5 text-right text-gray-600">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="flex-1 min-w-0">
-                {/* Name */}
-                <a
-                  href={proj.link}
-                  onClick={() =>
-                    logEvent("project_click", { project_name: proj.name })
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-display inline-flex items-center gap-1.5 text-[14px] font-semibold group transition text-white"
-                >
-                  {proj.name}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="11"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="shrink-0 transition-colors duration-200 text-gray-600 group-hover:text-gray-300"
-                  >
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </a>
-
-                {/* Description */}
-                <p className="mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] text-gray-300">
-                  {proj.desc}
-                </p>
-
-                {/* Stack */}
-                <div className="flex flex-wrap gap-1.5 mt-2.5">
-                  {proj.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[11px] px-2 py-0.5 rounded-sm text-gray-400 bg-[#1f2228]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {index < projects.length - 1 && (
-              <div className="h-[1px] w-full mt-4 border-t border-dashed border-[#2a2d35]" />
-            )}
-          </div>
+      <div className="flex flex-col">
+        {projects.map((proj) => (
+          <article
+            key={proj.name}
+            className="border-b border-line last:border-b-0 py-6 transition-colors duration-150 hover:bg-black/[0.01]"
+          >
+            <h2 className="font-serif font-medium text-heading m-0 mb-2 text-ink">
+              <a
+                href={proj.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  logEvent("project_click", { project_name: proj.name })
+                }
+                className="text-inherit hover:text-ink-muted transition-colors duration-150"
+              >
+                {proj.name} <span className="text-[1rem]">↗</span>
+              </a>
+            </h2>
+            <p className="text-body text-ink-muted m-0">{proj.desc}</p>
+            <MetaRow items={proj.stack} className="mt-3" />
+          </article>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

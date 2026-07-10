@@ -10,38 +10,22 @@ import type { ContentBlock } from "../data/blogPosts";
 const keyed = <T,>(items: readonly T[]) =>
   items.map((item, key) => ({ key, item }));
 
-/** Renders inline markdown: **bold**, `code`, and [label](href) links. */
+/** Renders inline markdown: **bold**, `code`, and [label](href) links.
+    Visual styling comes from the `.prose` container styles. */
 const renderInline = (text: string) => {
   const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g);
   return keyed(parts).map(({ key, item: part }) => {
     if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong key={key} className="text-gray-200 font-semibold">
-          {part.slice(2, -2)}
-        </strong>
-      );
+      return <strong key={key}>{part.slice(2, -2)}</strong>;
     }
     if (part.startsWith("`") && part.endsWith("`")) {
-      return (
-        <code
-          key={key}
-          className="text-[12px] px-1 py-0.5 rounded font-mono bg-[#1f2228] text-sky-400"
-        >
-          {part.slice(1, -1)}
-        </code>
-      );
+      return <code key={key}>{part.slice(1, -1)}</code>;
     }
     if (part.match(/^\[.+\]\(.+\)$/)) {
       const label = part.match(/\[(.+)\]/)?.[1];
       const href = part.match(/\((.+)\)/)?.[1];
       return (
-        <a
-          key={key}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sky-400 underline underline-offset-2"
-        >
+        <a key={key} href={href} target="_blank" rel="noopener noreferrer">
           {label}
         </a>
       );
@@ -68,18 +52,11 @@ const renderParagraph = (paragraph: string) => {
       <div className="space-y-2">
         {keyed(items).map(({ key, item }) =>
           item.type === "text" ? (
-            <p
-              key={key}
-              className="text-[14px] text-justify md:text-[15px] leading-normal tracking-[0.01em] text-gray-400"
-            >
-              {renderInline(item.content)}
-            </p>
+            <p key={key}>{renderInline(item.content)}</p>
           ) : (
-            <div key={key} className="flex items-start gap-2">
-              <span className="mt-[6px] shrink-0 w-1 h-1 rounded-full bg-gray-500" />
-              <p className="text-[14px]  md:text-[15px] leading-normal tracking-[0.01em] text-gray-400">
-                {renderInline(item.content)}
-              </p>
+            <div key={key} className="flex items-start gap-3">
+              <span className="mt-[0.7rem] shrink-0 w-1 h-1 rounded-full bg-ink-muted" />
+              <p>{renderInline(item.content)}</p>
             </div>
           ),
         )}
@@ -87,11 +64,7 @@ const renderParagraph = (paragraph: string) => {
     );
   }
 
-  return (
-    <p className="text-[14px] md:text-[15px] leading-normal tracking-[0.01em] whitespace-pre-line text-gray-400">
-      {renderInline(paragraph)}
-    </p>
-  );
+  return <p className="whitespace-pre-line">{renderInline(paragraph)}</p>;
 };
 
 /** A code block with its own copy-to-clipboard state. */
@@ -114,18 +87,18 @@ const CodeBlock = ({
   };
 
   return (
-    <div className="rounded-md overflow-hidden border text-[12px] font-mono bg-[#1a1d22] border-[#2a2d35]">
-      <div className="flex items-center justify-between px-3 py-1.5 text-[11px] border-b text-gray-500 border-[#2a2d35] bg-[#22262e]">
+    <div className="rounded-block overflow-hidden border font-mono text-[0.8rem] bg-surface border-line shadow-lift">
+      <div className="flex items-center justify-between px-4 py-2 text-[0.72rem] uppercase tracking-[0.08em] border-b text-ink-muted border-line bg-bg">
         <span>{label ?? ""}</span>
         <button
           onClick={handleCopy}
-          className="cursor-pointer transition text-[10px] hover:text-white"
+          className="cursor-pointer normal-case tracking-normal transition-colors duration-150 hover:text-ink"
         >
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
-      <pre className="p-3 overflow-x-auto leading-relaxed">
-        <code className="text-gray-300">{code}</code>
+      <pre className="p-4 overflow-x-auto leading-relaxed m-0">
+        <code className="text-ink">{code}</code>
       </pre>
     </div>
   );
@@ -139,13 +112,13 @@ interface PostContentProps {
 
 /** Renders a blog post's content blocks: diagrams, code, headings, and prose. */
 const PostContent = ({ content, onCopyClick }: PostContentProps) => (
-  <div className="space-y-4">
+  <div className="prose">
     {keyed(content).map(({ key, item: block }) => {
       if (typeof block === "object" && block.type === "diagram") {
         return (
-          <div key={key} className="my-4 rounded-md overflow-hidden">
+          <figure key={key}>
             <div dangerouslySetInnerHTML={{ __html: block.svg }} />
-          </div>
+          </figure>
         );
       }
 
@@ -161,11 +134,7 @@ const PostContent = ({ content, onCopyClick }: PostContentProps) => (
       }
 
       if (block.startsWith("## ")) {
-        return (
-          <h2 key={key} className="text-[14px] font-semibold mt-2 text-white">
-            {block.replace("## ", "")}
-          </h2>
-        );
+        return <h2 key={key}>{block.replace("## ", "")}</h2>;
       }
 
       return <div key={key}>{renderParagraph(block)}</div>;

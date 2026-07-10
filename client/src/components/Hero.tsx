@@ -1,169 +1,94 @@
 import { logEvent } from "../utils/analytics";
-import { socials, frontendTech, backendTech } from "../data/profile";
+import Kicker from "./ui/Kicker";
+import Chip from "./ui/Chip";
+
+const journeyChips = [
+  { label: "what I've built → projects", path: "/projects" },
+  { label: "ideas & notes → blog", path: "/blog" },
+  { label: "toys & experiments → playground", path: "/playground" },
+];
 
 const Hero = () => {
   return (
-    <div className="relative select-none rounded-lg max-w-[500px] mx-auto shadow-lg p-4 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
-      {/* Hero */}
-      <section className="flex justify-between items-center">
-        <div className="">
-          <h1 className="tracking-wide text-[17px] font-bold text-white">
-            Eyinda Bright
-          </h1>
-          <p className="font-editorial italic tracking-wide text-[14px] text-gray-300">
-            Software Developer
-          </p>
-        </div>
+    <section className="max-w-[960px] mx-auto pt-8 pb-8 max-sm:pt-2">
+      <Kicker className="mb-3">Software Developer</Kicker>
 
+      <h1 className="font-serif font-medium text-title max-md:text-title-sm mb-[1.2rem] text-ink">
+        I&rsquo;m Eyinda Bright. I build software, mostly for other people,
+        sometimes just for fun.
+      </h1>
+
+      <p className="text-body text-ink-muted">
+        On the engineering side, I mostly work within the TypeScript and Go
+        ecosystems, with an eye for forward-compatible schema, secure APIs, and
+        modular code.
+      </p>
+
+      <p className="text-body text-ink-muted mt-6">
+        In my spare time, I build the fun ideas that come to my head, and
+        software that makes my workflow easier. Lately, that has meant building{" "}
         <a
-          href="mailto:b.eyindaa@gmail.com"
-          onClick={() =>
-            logEvent("contact_click", {
-              type: "available_for_work",
-              location: "hero",
-            })
-          }
-          className="tracking-[0.020em] text-[12px] inline-flex items-center gap-2 px-3 py-2 rounded-full transition border border-[#2a2d35] hover:bg-[#1f2228]"
+          href="https://nestra.me"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => logEvent("nestra_click", { location: "intro" })}
+          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
         >
-          <span className="text-white">
-            Available for work{" "}
-            <span className="inline-block group-hover:translate-x-0.5 transition-transform">
-              ↗
-            </span>
-          </span>
+          Nestra
         </a>
-      </section>
+        , a portfolio hub that gives creatives a single online identity,
+        and{" "}
+        <a
+          href="https://notifykit.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => logEvent("notifykit_click", { location: "intro" })}
+          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+        >
+          NotifyKit
+        </a>
+        , a notification infrastructure service that makes email and webhook
+        delivery simple, reliable, and observable.
+      </p>
 
-      {/* Divider */}
-      <div className="h-[1px] w-full my-3 " />
+      <p className="text-body text-ink-muted mt-6">
+        I&rsquo;m open to full-time, part-time, or contract roles —{" "}
+        <a
+          href="mailto:hello@zoneyhub.com"
+          onClick={() => logEvent("email_click", { location: "intro" })}
+          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+        >
+          reach my email
+        </a>{" "}
+        to discuss potential opportunities.
+      </p>
 
-      {/* Intro */}
-      <section className="text-center">
-        <p className="tracking-[0.020em] text-[14px] text-left leading-relaxed text-gray-300">
-          Hi! I&apos;m{" "}
-          <span className="font-semibold text-white">Eyinda Bright</span>, a
-          software developer with experience building reliable backend systems
-          and frontend applications, taking products from design and development
-          through deployment and maintenance.
-        </p>
+      <p className="text-body text-ink-muted mt-6">
+        Outside work, I{" "}
+        <a
+          href="https://spotify.link/TmIHSnEFGXb"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => logEvent("spotify_click", { location: "intro" })}
+          className="text-ink border-b border-black/20 hover:border-ink transition-colors duration-150"
+        >
+          curate playlists
+        </a>
+        , play video games, and lately I&rsquo;ve been teaching myself music
+        production.
+      </p>
 
-        <p className="tracking-[0.020em] text-[14px] text-left leading-relaxed mt-3 text-gray-300">
-          I write code for a living and apparently can&apos;t stop doing it for
-          fun either. Most recently that&apos;s meant building{" "}
-          <a
-            href="https://notifykit.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => logEvent("notifykit_click", { location: "intro" })}
-            className="inline-flex items-center gap-1 group transition text-white"
-          >
-            <span className="underline decoration-gray-500 group-hover:decoration-white transition-colors">
-              NotifyKit
-            </span>
-            <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-              ↗
-            </span>
-          </a>
-          , a notification infrastructure service built to make email and
-          webhook delivery simple, reliable, and observable
-        </p>
-
-        <p className="tracking-[0.020em] text-[14px] text-left   leading-relaxed mt-4 text-gray-300">
-          I&apos;m open to{" "}
-          <span className="font-medium text-white">full-time</span>,{" "}
-          <span className="font-medium text-white">part-time</span>, or{" "}
-          <span className="font-medium text-white">contract</span> roles. You
-          can reach my{" "}
-          <a
-            onClick={() => logEvent("email_click", { location: "intro" })}
-            href="mailto:b.eyindaa@gmail.com"
-            className="inline-flex items-center gap-1 group transition text-white"
-          >
-            <span className=" underline decoration-gray-500 group-hover:decoration-white transition-colors">
-              email
-            </span>
-            <span className="inline-block group-hover:translate-x-0.5 transition-transform">
-              ↗
-            </span>
-          </a>{" "}
-          to discuss potential opportunities.
-        </p>
-
-        <p className="tracking-[0.020em] text-left  text-[14px]  leading-relaxed mt-4 text-gray-300">
-          Outside work, I enjoy curating{" "}
-          <a
-            href="https://spotify.link/TmIHSnEFGXb"
-            onClick={() => logEvent("spotify_click", { location: "intro" })}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 group transition text-white"
-          >
-            <span className="underline decoration-gray-500 group-hover:decoration-white transition-colors">
-              playlists
-            </span>
-            <span className="inline-block group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-              ↗
-            </span>
-          </a>
-          , building and playing games, and watching classic films.
-        </p>
-      </section>
-
-      {/* Social Links */}
-      <div className="flex flex-row gap-2 mt-4">
-        {socials.map((item) => (
-          <a
-            key={item.name}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() =>
-              logEvent("social_click", {
-                platform: item.name,
-                location: "hero",
-              })
-            }
-            className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-md text-[12px] font-medium transition bg-[#1f2228] text-gray-400 border border-[#2a2d35] hover:bg-[#2a2d35]"
-          >
-            {item.icon}
-            <span className="hidden sm:inline">{item.name}</span>
-          </a>
-        ))}
-      </div>
-
-      {/* Divider */}
-      <div className="h-[1px] w-full my-4 border-t border-dashed border-[#2a2d35]" />
-
-      {/* Tech Stack */}
-      <section className="mt-4">
-        <h2 className="text-[14px] font-semibold mb-3 text-white">
-          Tech Stack
-        </h2>
-
-        <div className="flex flex-col gap-2">
-          {[
-            { title: "Frontend", items: frontendTech },
-            { title: "Backend", items: backendTech },
-          ].map((cat) => (
-            <div key={cat.title} className="flex items-center gap-2 flex-wrap">
-              <span className="text-[11px] font-medium w-16 shrink-0 text-gray-500">
-                {cat.title}
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {cat.items.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] px-2 py-0.5 rounded-full text-gray-400 bg-[#1f2228]"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
+      <div className="mt-10">
+        <Kicker className="mb-[0.65rem]">Follow my journey</Kicker>
+        <div className="flex flex-wrap gap-3">
+          {journeyChips.map((chip) => (
+            <Chip key={chip.path} to={chip.path}>
+              {chip.label}
+            </Chip>
           ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

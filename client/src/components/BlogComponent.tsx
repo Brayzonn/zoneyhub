@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { blogPosts } from "../data/blogPosts";
+import SectionHeader from "./ui/SectionHeader";
+import MetaRow from "./ui/MetaRow";
+import Chip from "./ui/Chip";
 
 type Filter = "all" | "technical" | "non-technical";
 
@@ -19,96 +22,50 @@ const BlogComponent = () => {
       : blogPosts.filter((p) => p.category === activeFilter);
 
   return (
-    <div className="relative select-none rounded-lg w-full max-w-[500px] mx-auto shadow-lg p-5 transition-colors duration-300 bg-[#121418] border border-[#2a2d35]">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-[15px] font-semibold tracking-wide text-white">
-          Blog
-        </h2>
-        <span className="text-[12px] text-gray-500">
-          {filtered.length} {filtered.length === 1 ? "post" : "posts"}
-        </span>
-      </div>
+    <section className="max-w-[960px] mx-auto">
+      <SectionHeader kicker="Blog" title="Ideas & Notes">
+        Writing on things I&rsquo;ve built, problems I&rsquo;ve debugged, and
+        whatever else has been on my mind — {filtered.length}{" "}
+        {filtered.length === 1 ? "post" : "posts"}.
+      </SectionHeader>
 
-      {/* Filter Tabs */}
-      <div className="flex gap-1 p-1 rounded-[8px] mb-4 bg-[#1a1d23]">
+      <div className="flex flex-wrap gap-2 mb-8">
         {filters.map((f) => (
-          <button
+          <Chip
             key={f.value}
             onClick={() => setActiveFilter(f.value)}
-            className={`cursor-pointer flex-1 text-[12px] font-medium py-1 px-2 rounded-[6px] transition-all duration-200 ${
-              activeFilter === f.value
-                ? "bg-[#2a2d35] text-white"
-                : "text-gray-500 hover:text-gray-300"
-            }`}
+            active={activeFilter === f.value}
+            muted
           >
             {f.label}
-          </button>
+          </Chip>
         ))}
       </div>
 
-      {/* Divider */}
-      <div className="h-[1px] w-full mb-4 border-t border-dashed border-[#2a2d35]" />
-
-      {/* Posts List */}
-      <div className="space-y-4">
-        {filtered.map((post, index) => (
-          <div key={post.slug}>
-            <div className="flex gap-4">
-              <span className="text-[11px] font-mono mt-0.5 shrink-0 w-5 text-right text-gray-600">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="flex-1 min-w-0">
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="font-display text-[14px] font-semibold transition hover:underline underline-offset-2 text-white hover:text-gray-300"
-                >
-                  {post.title}
-                </Link>
-
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-[11px] text-gray-500">{post.date}</span>
-                  <span className="text-[11px] text-gray-600">·</span>
-                  <span className="text-[11px] text-gray-500">
-                    {post.readTime}
-                  </span>
-                </div>
-
-                <p className="mt-1.5 text-[13px] leading-relaxed tracking-[0.015em] text-gray-400">
-                  {post.excerpt}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 mt-2.5">
-                  <span
-                    className={`text-[10px] px-2 py-0.5 rounded-sm font-medium ${
-                      post.category === "technical"
-                        ? "text-sky-400 bg-sky-400/10"
-                        : "text-emerald-400 bg-emerald-400/10"
-                    }`}
-                  >
-                    {post.category === "technical"
-                      ? "Technical"
-                      : "Non-Technical"}
-                  </span>
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] px-2 py-0.5 rounded-sm text-gray-400 bg-[#1f2228]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {index < filtered.length - 1 && (
-              <div className="h-[1px] w-full mt-4 border-t border-dashed border-[#2a2d35]" />
-            )}
-          </div>
+      <div className="flex flex-col">
+        {filtered.map((post) => (
+          <Link
+            key={post.slug}
+            to={`/blog/${post.slug}`}
+            className="group block border-b border-line last:border-b-0 py-6 text-inherit transition-colors duration-150 hover:bg-black/[0.01]"
+          >
+            <h2 className="font-serif font-medium text-heading m-0 mb-2 text-ink transition-colors duration-150 group-hover:text-ink-muted">
+              {post.title}
+            </h2>
+            <p className="text-body text-ink-muted m-0">{post.excerpt}</p>
+            <MetaRow
+              items={[
+                post.date,
+                post.readTime,
+                post.category === "technical" ? "Technical" : "Non-Technical",
+                ...post.tags,
+              ]}
+              className="mt-3"
+            />
+          </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

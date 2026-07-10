@@ -3,7 +3,7 @@ import {
   GithubIconSmall,
   LinkedInIconSmall,
   MailIconSmall,
-  TwitterIconSmall,
+  XIconSmall,
 } from "../assets/icons";
 
 export interface SocialLink {
@@ -14,9 +14,9 @@ export interface SocialLink {
 
 export const socials: SocialLink[] = [
   {
-    name: "Twitter",
+    name: "X",
     link: "https://x.com/brayzoney",
-    icon: TwitterIconSmall,
+    icon: XIconSmall,
   },
   {
     name: "LinkedIn",
@@ -30,11 +30,7 @@ export const socials: SocialLink[] = [
   },
   {
     name: "Mail",
-    link: "mailto:b.eyindaa@gmail.com",
+    link: "mailto:hello@zoneyhub.com",
     icon: MailIconSmall,
   },
 ];
-
-export const frontendTech = ["React", "TypeScript", "Tailwind CSS", "JavaScript"];
-
-export const backendTech = ["NestJS", "Go", "PostgreSQL", "MongoDB", "Express.js"];

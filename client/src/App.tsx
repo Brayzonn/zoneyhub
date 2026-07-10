@@ -18,9 +18,7 @@ function AnalyticsListener() {
   return null;
 }
 
-const RouteFallback = () => (
-  <div className="min-h-svh w-full bg-[var(--color-primary-bg-color)]" />
-);
+const RouteFallback = () => <div className="min-h-svh w-full bg-bg" />;
 
 function App() {
   return (

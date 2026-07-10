@@ -10,16 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^5.2.8",
+    "@fontsource/lora": "^5.2.8",
+    "@fontsource/reenie-beanie": "^5.2.8",
     "framer-motion": "^12.40.0",
-    "jwt-decode": "^3.1.2",
-    "lucide-react": "^0.546.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
     "react-helmet-async": "^3.0.0",
     "react-router-dom": "^7.4.0",
-    "tailwindcss": "^4.0.15",
-    "web-vitals": "^2.1.4"
+    "tailwindcss": "^4.0.15"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.15",
