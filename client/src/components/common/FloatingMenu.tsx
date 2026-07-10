@@ -194,9 +194,9 @@ const FloatingMenu = ({
                   hoveredItem === item.id,
                 )}`}
               >
-                <h1 className="text-sm font-medium whitespace-nowrap text-bg">
+                <span className="text-sm font-medium whitespace-nowrap text-bg">
                   {item.label}
-                </h1>
+                </span>
               </div>
             </div>
           ))}
@@ -232,13 +232,13 @@ const FloatingMenu = ({
                 hoveredItem === "now-playing",
               )}`}
             >
-              <h1 className="text-sm font-medium whitespace-nowrap text-bg">
+              <span className="text-sm font-medium whitespace-nowrap text-bg">
                 {!currentTrack
                   ? "Now Playing"
                   : isPlayerOpen
                     ? "Hide Player"
                     : "Show Player"}
-              </h1>
+              </span>
             </div>
           </div>
 
@@ -263,9 +263,9 @@ const FloatingMenu = ({
                 hoveredItem === "sound",
               )}`}
             >
-              <h1 className="text-sm font-medium whitespace-nowrap text-bg">
+              <span className="text-sm font-medium whitespace-nowrap text-bg">
                 {isSoundOn ? "Mute" : "Unmute"}
-              </h1>
+              </span>
             </div>
           </div>
 
@@ -292,9 +292,9 @@ const FloatingMenu = ({
                 hoveredItem === "theme",
               )}`}
             >
-              <h1 className="text-sm font-medium whitespace-nowrap text-bg">
+              <span className="text-sm font-medium whitespace-nowrap text-bg">
                 {theme === "light" ? "Dark Mode" : "Light Mode"}
-              </h1>
+              </span>
             </div>
           </div>
         </div>
