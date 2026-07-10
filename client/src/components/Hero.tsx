@@ -19,14 +19,15 @@ const Hero = () => {
       </h1>
 
       <p className="text-body text-ink-muted">
-        On the engineering side, I mostly work within the TypeScript and Go
-        ecosystems, with an eye for forward-compatible schema, secure APIs, and
-        modular code.
+        I primarily work within the TypeScript and Go ecosystems, building
+        secure APIs, forward-compatible schemas, and modular systems. I enjoy
+        creating software that&apos;s easy to extend, pleasant to maintain, and
+        reliable under real-world use.
       </p>
 
       <p className="text-body text-ink-muted mt-6">
-        In my spare time, I build the fun ideas that come to my head, and
-        software that makes my workflow easier. Lately, that has meant building{" "}
+        Outside client work, I build the fun ideas that come to my head, and
+        tools that make my workflow easier. Lately, that has meant building{" "}
         <a
           href="https://nestra.me"
           target="_blank"
@@ -36,8 +37,7 @@ const Hero = () => {
         >
           Nestra
         </a>
-        , a portfolio hub that gives creatives a single online identity,
-        and{" "}
+        , a portfolio hub that gives creatives a single online identity, and{" "}
         <a
           href="https://notifykit.dev"
           target="_blank"
@@ -47,20 +47,14 @@ const Hero = () => {
         >
           NotifyKit
         </a>
-        , a notification infrastructure service that makes email and webhook
-        delivery simple, reliable, and observable.
+        , a notification infrastructure service for reliable email and webhook
+        delivery with built-in observability.
       </p>
 
       <p className="text-body text-ink-muted mt-6">
-        I&rsquo;m open to full-time, part-time, or contract roles —{" "}
-        <a
-          href="mailto:hello@zoneyhub.com"
-          onClick={() => logEvent("email_click", { location: "intro" })}
-          className="text-ink border-b border-ink/20 hover:border-ink transition-colors duration-150"
-        >
-          reach my email
-        </a>{" "}
-        to discuss potential opportunities.
+        I&rsquo;m open to full-time, part-time, and contract opportunities. If
+        you&apos;d like to work together or discuss a project, I&apos;d love to
+        hear from you.
       </p>
 
       <p className="text-body text-ink-muted mt-6">

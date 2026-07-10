@@ -8,7 +8,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     name: "NotifyKit",
-    desc: "A notification infrastructure service focused on reliable email and webhook delivery at scale.",
+    desc: "A notification infrastructure service for reliable email and webhook delivery.",
     link: "https://notifykit.dev",
     stack: ["NestJS", "PostgreSQL", "React", "Typescript"],
   },
@@ -20,7 +20,7 @@ export const projects: Project[] = [
   },
   {
     name: "Deploy Agent",
-    desc: "A Go binary that deploys projects to a VPS on every GitHub push, handling clone, build, nginx, SSL, health checks, and automatic rollback on failure.",
+    desc: "Go binary that deploys projects to a VPS on every GitHub push, handling clone, build, nginx, SSL, health checks, and automatic rollback on failure.",
     link: "https://github.com/Brayzonn/deploy-agent",
     stack: ["Go", "nginx", "Docker", "PM2"],
   },
@@ -40,6 +40,6 @@ export const projects: Project[] = [
     name: "B-Estates",
     desc: "Real estate web app featuring interactive Google Maps integration for property visualization.",
     link: "https://realestate-platform-alpha.vercel.app/",
-    stack: ["React", "Tailwind CSS", "MongoDB", "Express"],
+    stack: ["React", "Tailwind CSS"],
   },
 ];
