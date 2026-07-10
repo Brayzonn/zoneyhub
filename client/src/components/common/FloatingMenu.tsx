@@ -47,8 +47,18 @@ const FloatingMenu = ({
 }: FloatingMenuProps) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isPlayerOpen, setIsPlayerOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+
+  // Track mobile viewport for the player slide direction
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const { playClick } = useSoundEffects({ isSoundOn: isSoundOn ?? true });
 
@@ -113,19 +123,41 @@ const FloatingMenu = ({
       <AnimatePresence>
         {currentTrack && isPlayerOpen && (
           <motion.div
-            className="absolute right-full top-0 flex items-center overflow-hidden"
-            initial={{ width: 0, x: 200 }}
-            animate={{
-              width: 240,
-              x: 13,
-              transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
-            }}
-            exit={{
-              width: 0,
-              x: 200,
-              transition: { duration: 0.9, ease: [0.2, 0, 0.4, 1] },
-            }}
-            style={{ marginRight: "9px" }}
+            className={
+              isMobile
+                ? "absolute top-full left-1/2 flex items-center"
+                : "absolute right-full top-0 flex items-center overflow-hidden"
+            }
+            initial={
+              isMobile ? { x: "-50%", y: -52 } : { width: 0, x: 200 }
+            }
+            animate={
+              isMobile
+                ? {
+                    x: "-50%",
+                    y: 9,
+                    transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
+                  }
+                : {
+                    width: 240,
+                    x: 13,
+                    transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
+                  }
+            }
+            exit={
+              isMobile
+                ? {
+                    x: "-50%",
+                    y: -52,
+                    transition: { duration: 0.9, ease: [0.2, 0, 0.4, 1] },
+                  }
+                : {
+                    width: 0,
+                    x: 200,
+                    transition: { duration: 0.9, ease: [0.2, 0, 0.4, 1] },
+                  }
+            }
+            style={isMobile ? undefined : { marginRight: "9px" }}
           >
             <div className="h-full rounded-[12px] overflow-hidden border-2 transition-colors duration-300 bg-bg border-ink/20">
               <MusicPlayer
