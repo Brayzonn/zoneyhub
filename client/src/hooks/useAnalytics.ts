@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { initGA, logPageView } from "../utils/analytics";
 
-/**
- * Initializes Google Analytics once, then logs a pageview on every client-side
- * route change. Must be rendered inside a react-router <Router>.
- */
+/** Init GA once, then log a pageview per route change; must sit inside <Router>. */
 export const useAnalytics = () => {
   const location = useLocation();
 

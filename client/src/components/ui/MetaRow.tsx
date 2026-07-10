@@ -1,5 +1,4 @@
-/** Quiet uppercase metadata row: dates, read times, tags, tech stacks.
-    Items double as their React keys, so a row shouldn't repeat a label. */
+/** Quiet uppercase metadata row; items double as React keys, so don't repeat a label. */
 const MetaRow = ({
   items,
   className = "",

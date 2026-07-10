@@ -8,8 +8,7 @@ import { useGlobalAudio } from "../hooks/useGlobalAudio";
 import { useSound } from "../hooks/useSound";
 import { tracks, type Track } from "../data/tracks";
 
-/* Resting spots (% of the card box). Vinyls sit out on the canvas around
-   the card; the art pieces rest on its edges. */
+/* Resting spots (% of the card box): vinyls out on the canvas, art on the card edges */
 const vinylSpots = [
   { left: "-38%", top: "-8%", rotation: -12 },
   { left: "136%", top: "-2%", rotation: 8 },
