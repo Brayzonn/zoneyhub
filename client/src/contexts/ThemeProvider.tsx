@@ -7,9 +7,24 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.dataset.theme === "dark" ? "dark" : "light",
   );
 
+  // Persist only explicit picks so unpicked visitors keep following the OS
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) => {
+      const next = prev === "light" ? "dark" : "light";
+      localStorage.setItem("theme", next);
+      return next;
+    });
   };
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const followOS = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem("theme"))
+        setTheme(e.matches ? "dark" : "light");
+    };
+    mq.addEventListener("change", followOS);
+    return () => mq.removeEventListener("change", followOS);
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -18,7 +33,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     } else {
       delete root.dataset.theme;
     }
-    localStorage.setItem("theme", theme);
 
     // Recreating the meta tag (vs mutating) is more reliable in Safari
     const bg = getComputedStyle(root).getPropertyValue("--color-bg").trim();
