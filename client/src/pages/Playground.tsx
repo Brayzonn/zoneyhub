@@ -152,7 +152,6 @@ const Playground = () => {
                     spot={spot}
                     index={i}
                     constraintsRef={canvasRef}
-                    duckWhileCycling
                   >
                     <VinylDisc
                       trackName={track.name}

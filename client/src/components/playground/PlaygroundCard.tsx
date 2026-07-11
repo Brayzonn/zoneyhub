@@ -46,10 +46,7 @@ const PlaygroundCard = ({ children }: { children?: ReactNode }) => {
 
   return (
     <main className="relative z-10 w-full max-w-2xl px-6 sm:px-16 font-mono">
-      <div
-        className="group relative w-full aspect-[4/3] [perspective:1000px]"
-        data-cycling={tuckingId !== null || undefined}
-      >
+      <div className="group relative w-full aspect-[4/3] [perspective:1000px]">
         {faces.map(({ id, node }) => {
           const position = stack.indexOf(id);
           const slot = cardSlots[position];
@@ -64,7 +61,7 @@ const PlaygroundCard = ({ children }: { children?: ReactNode }) => {
               onAnimationComplete={
                 isTucking ? () => setTuckingId(null) : undefined
               }
-              style={{ zIndex: outId === id ? 105 : slot.z }}
+              style={{ zIndex: outId === id ? 115 : slot.z }}
               initial={{ x: 0, y: 0, scale: 1, opacity: 0 }}
               animate={
                 isTucking

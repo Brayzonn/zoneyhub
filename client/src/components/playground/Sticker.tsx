@@ -7,13 +7,11 @@ const Sticker = ({
   spot,
   index,
   constraintsRef,
-  duckWhileCycling = false,
   children,
 }: {
   spot: { left: string; top: string; rotation: number };
   index: number;
   constraintsRef: RefObject<HTMLDivElement | null>;
-  duckWhileCycling?: boolean;
   children: ReactNode;
 }) => {
   const dragged = useRef(false);
@@ -28,9 +26,7 @@ const Sticker = ({
   return (
     <div
       data-sticker
-      className={`absolute z-[110]${
-        duckWhileCycling ? " group-data-[cycling=true]:z-[70]" : ""
-      }`}
+      className="absolute z-[110]"
       style={{
         left: spot.left,
         top: spot.top,
